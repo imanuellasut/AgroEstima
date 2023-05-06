@@ -25,12 +25,14 @@ Auth::routes();
 
 //Route Untuk Admin
 Route::middleware(['auth', 'check-role:admin'])->group(function(){
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('home-admin');
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('dashboard-admin');
+    Route::get('/admin/pertanian', [AdminController::class, 'v_pertanian'])->name('pertanian-admin');
+    Route::get('/admin/prediksi', [AdminController::class, 'v_prediksi'])->name('prediksi-admin');
 });
 
 //Route Untuk Anggota
 Route::middleware(['auth', 'check-role:anggota'])->group(function(){
-    Route::get('/anggota/dashboard', [AnggotaController::class, 'index'])->name('home-anggota');
+    Route::get('/anggota/dashboard', [AnggotaController::class, 'index'])->name('dashboard-anggota');
 });
 
 

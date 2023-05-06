@@ -11,8 +11,10 @@
     <!-- start: CSS -->
     <link rel="stylesheet" href="{{ asset('Template-Dashboard/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('Template-Dashboard/css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <!-- end: CSS -->
-    <title>PERKIRAAN HASIL PANEN JAGUNG</title>
+    <link rel="icon" href="{{ asset('img/icons8-ear-of-corn-48.png') }}">
+    <title>@yield('title') | PERKIRAAN HASIL PANEN JAGUNG</title>
 </head>
 
 <body>
@@ -20,7 +22,7 @@
     <!-- start: Sidebar -->
     <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
         <div class="d-flex align-items-center p-3">
-            <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">ArgoEstima</a>
+            <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">Agroestima</a>
             <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
         </div>
         <hr>
@@ -28,24 +30,18 @@
             @yield('card-profile')
         </a>
         <ul class="sidebar-menu p-3 m-0 mb-0">
-            <li class="sidebar-menu-item active">
-                @yield('dashboard')
-            </li>
-            <li class="sidebar-menu-item ">
-                @yield('pertanian')
-            </li>
-            <li class="sidebar-menu-item ">
-                @yield('prediksi')
-            </li>
-            <li class="sidebar-menu-item ">
-                @yield('kriteria')
-            </li>
-            <li class="sidebar-menu-item">
-                @yield('data-user')
-            </li>
-            <li class="sidebar-menu-item ">
-                @yield('profile')
-            </li>
+            @yield('dashboard')
+
+            @yield('pertanian')
+
+            @yield('prediksi')
+
+            @yield('kriteria')
+
+            @yield('data-user')
+
+            @yield('profile')
+
             <hr class="hr-bottom">
             <li class="sidebar-menu-item ">
                 <a   href="{{ route('logout') }}" class="" onclick="event.preventDefault();
@@ -83,6 +79,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('Template-Dashboard/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('Template-Dashboard/js/script.js') }}"></script>
+    <script src=https://code.jquery.com/jquery-3.5.1.js""></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+    @yield('script')
     <!-- end: JS -->
 </body>
 

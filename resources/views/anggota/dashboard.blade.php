@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Dashboard')
+
 <!-- Start: Sidebar -->
 @section('card-profile')
     <div class="d-flex card-profile p-2">
@@ -7,7 +9,7 @@
             <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
         </div>
         <div class="info-profile">
-            @if (Auth::user()->role = 0)
+            @if (Auth::user()->role = 1)
                 <small>Admin</small>
             @else
                 <small>Anggota</small>
@@ -23,31 +25,39 @@
 @endsection
 
 @section('dashboard')
-    <a href="index.html">
+<li class="sidebar-menu-item active">
+    <a href="{{ route('dashboard-anggota') }}">
         <i class="ri-dashboard-fill sidebar-menu-item-icon"></i>
         Dashboard
     </a>
+</li>
 @endsection
 
 @section('pertanian')
-    <a href="data_petani.html" class="">
-        <i class="ri-file-text-fill sidebar-menu-item-icon"></i>
-        Data Pertanian
-    </a>
+    <li class="sidebar-menu-item">
+        <a href="{{ route('pertanian-admin') }}" class="">
+            <i class="ri-file-text-fill sidebar-menu-item-icon"></i>
+            Data Pertanian
+        </a>
+    </li>
 @endsection
 
 @section('prediksi')
-    <a href="prediksi.html" class="">
-        <i class="ri-file-chart-fill sidebar-menu-item-icon"></i>
-        Prediksi Panen
-    </a>
+    <li class="sidebar-menu-item ">
+        <a href="{{ route('prediksi-admin') }}" class="">
+            <i class="ri-file-chart-fill sidebar-menu-item-icon"></i>
+            Prediksi Panen
+        </a>
+    </li>
 @endsection
 
 @section('profile')
-    <a href="#" class="">
-        <i class="ri-user-settings-fill sidebar-menu-item-icon"></i>
-        Profile
-    </a>
+    <li class="sidebar-menu-item ">
+        <a href="#" class="">
+            <i class="ri-user-settings-fill sidebar-menu-item-icon"></i>
+            Profile
+        </a>
+    </li>
 @endsection
 <!-- End: Sidebar -->
 
@@ -126,8 +136,8 @@
     <!-- end: Summary -->
     <!-- start: Graph -->
     <div class="row g-3 mt-2">
-        <div class=""">
-            <div class="card border-0 shadow-sm h-100">
+        <div class="d-flex">
+            <div class="card border-0 shadow-sm h-100 col-6 col-lg-6 col-sm-6">
                 <div class="card-header bg-white">
                     Perbandingan Total Panen Jagung ( Data Aktual VS Data Prediksi)
                 </div>
@@ -136,6 +146,7 @@
                 </div>
             </div>
         </div>
+    </div>
     <!-- end: Graph -->
 @endsection
 <!--End: Content -->

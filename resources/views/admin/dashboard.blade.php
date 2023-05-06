@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Dashboard')
+
 <!-- Start: Sidebar -->
 @section('card-profile')
     <div class="d-flex card-profile p-2">
@@ -23,45 +25,57 @@
 @endsection
 
 @section('dashboard')
-    <a href="index.html">
+<li class="sidebar-menu-item active">
+    <a href="{{ route('dashboard-admin') }}">
         <i class="ri-dashboard-fill sidebar-menu-item-icon"></i>
         Dashboard
     </a>
+</li>
 @endsection
 
 @section('pertanian')
-    <a href="data_petani.html" class="">
-        <i class="ri-file-text-fill sidebar-menu-item-icon"></i>
-        Data Pertanian
-    </a>
+    <li class="sidebar-menu-item">
+        <a href="{{ route('pertanian-admin') }}" class="">
+            <i class="ri-file-text-fill sidebar-menu-item-icon"></i>
+            Data Pertanian
+        </a>
+    </li>
 @endsection
 
 @section('prediksi')
-    <a href="prediksi.html" class="">
-        <i class="ri-file-chart-fill sidebar-menu-item-icon"></i>
-        Prediksi Panen
-    </a>
+    <li class="sidebar-menu-item ">
+        <a href="{{ route('prediksi-admin') }}" class="">
+            <i class="ri-file-chart-fill sidebar-menu-item-icon"></i>
+            Prediksi Panen
+        </a>
+    </li>
 @endsection
 
 @section('kriteria')
-    <a href="#" class="">
-        <i class="ri-file-settings-fill sidebar-menu-item-icon"></i>
-        Kriteria
-    </a>
+    <li class="sidebar-menu-item ">
+        <a href="#" class="">
+            <i class="ri-file-settings-fill sidebar-menu-item-icon"></i>
+            Kriteria
+        </a>
+    </li>
 @endsection
 
 @section('data-user')
-    <a href="#" class="">
-        <i class="ri-file-user-fill sidebar-menu-item-icon"></i>
-        Data User
-    </a>
+    <li class="sidebar-menu-item">
+        <a href="#" class="">
+            <i class="ri-file-user-fill sidebar-menu-item-icon"></i>
+            Data User
+        </a>
+    </li>
 @endsection
 
 @section('profile')
-    <a href="#" class="">
-        <i class="ri-user-settings-fill sidebar-menu-item-icon"></i>
-        Profile
-    </a>
+    <li class="sidebar-menu-item ">
+        <a href="#" class="">
+            <i class="ri-user-settings-fill sidebar-menu-item-icon"></i>
+            Profile
+        </a>
+    </li>
 @endsection
 <!-- End: Sidebar -->
 

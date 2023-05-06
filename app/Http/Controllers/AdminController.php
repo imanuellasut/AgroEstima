@@ -17,6 +17,14 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('adataUsers'));
     }
 
+    public function v_pertanian() {
+        return view('admin.pertanian');
+    }
+
+    public function v_prediksi() {
+        return view('admin.prediksi');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
