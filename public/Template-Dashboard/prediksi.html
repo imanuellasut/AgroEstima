@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- start: Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- start: Icons -->
+    <!-- start: CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"> -->
+    <!-- end: CSS -->
+    <title>PERKIRAAN HASIL PANEN JAGUNG</title>
+</head>
+
+<body>
+
+    <!-- start: Sidebar -->
+    <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
+        <div class="d-flex align-items-center p-3">
+            <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">ArgoEstima</a>
+            <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
+        </div>
+        <hr>
+        <a href="#" class="to-profile">
+            <div class="d-flex card-profile p-2">
+                <div class="avatar-profile">
+                    <img src="img/profile-reggy.jpg" alt="" >
+                </div>
+                <div class="info-profile">
+                    <small>Admin</small>
+                    <br>
+                    <span>Reggy Charles</span>
+                </div>
+            </div>
+        </a>
+        <ul class="sidebar-menu p-3 m-0 mb-0">
+            <li class="sidebar-menu-item ">
+                <a href="index.html">
+                    <i class="ri-dashboard-fill sidebar-menu-item-icon"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="sidebar-menu-item ">
+                <a href="data_petani.html" class="">
+                    <i class="ri-file-text-fill sidebar-menu-item-icon"></i>
+                    Pertanian
+                </a>
+            </li>
+            <li class="sidebar-menu-item active">
+                <a href="prediksi.html" class="">
+                    <i class="ri-file-chart-fill sidebar-menu-item-icon"></i>
+                    Prediksi Panen
+                </a>
+            </li>
+            <li class="sidebar-menu-item ">
+                <a href="#" class="">
+                    <i class="ri-file-settings-fill sidebar-menu-item-icon"></i>
+                    Kriteria
+                </a>
+            </li>   
+            <li class="sidebar-menu-item">
+                <a href="#" class="">
+                    <i class="ri-file-user-fill sidebar-menu-item-icon"></i>
+                    Data User
+                </a>    
+            </li>
+            <li class="sidebar-menu-item ">
+                <a href="#" class="">
+                    <i class="ri-user-settings-fill sidebar-menu-item-icon"></i>
+                    Profile
+                </a>    
+            </li>
+            <hr class="hr-bottom">
+            <li class="sidebar-menu-item ">
+                <a href="#" class="">
+                    <i class="ri-logout-circle-fill sidebar-menu-item-icon"></i>
+                    Keluar
+                </a>    
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-overlay"></div>
+    <!-- end: Sidebar -->
+
+    <!-- start: Main -->
+    <main class="bg-light">
+        <div class="p-2">
+            <!-- start: Navbar -->
+            <nav class="px-3 py-2 bg-white rounded shadow-sm">
+                <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
+                <h5 class="fw-bold mb-0 me-auto p-1">Pertanian</h5>
+            </nav>
+            <!-- end: Navbar -->
+
+            <!-- start: Content -->
+            <div class="py-4">
+                <!-- Start Table -->
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <small class="fw-bold">Data Pertanian</small>
+                        <div class="">
+                            <a href="#" class="btn btn-primary btn-sm">Tambah Data</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive mt-0"> 
+                            <table id="example" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Id User</th>
+                                        <th>Nama</th>
+                                        <th>Tanggal Tanam</th>
+                                        <th>Luas Lahan(Ha)</th>
+                                        <th>Jumlah Bibit(Kg)</th>
+                                        <th>Perawatan</th>
+                                        <th>Cuaca</th>
+                                        <th>Hama</th>
+                                        <th>Prediksi (Ton)</th>
+                                        <th>Produksi (Ton)</th>
+                                        <th>Produktivias (Ton/Ha)</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>1</td>
+                                        <td>Markus Lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                    <!-- <div class="mt-0 table-responsive rounded-2 card-body">
+                        <div class="table-wrapper">	
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="show-entries">
+                                            <select>
+                                                <option>5</option>
+                                                <option>10</option>
+                                                <option>15</option>
+                                                <option>20</option>
+                                            </select>
+                                            <span>Data Per Halaman</span>
+                                        </div>						
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="search-box">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="ri-search-eye-line" style="margin-bottom: 10px;"></i></span>
+                                                <input type="text" class="form-control" placeholder="Nama">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Id User 
+                                            <i class="fa fa-sort"></i>
+                                        </th>
+                                        <th>Name</th>
+                                        <th>Tanggal Tanam</th>
+                                        <th>Luas Lahan(Ha)</th>
+                                        <th>Jumlah Bibit(Kg)</th>
+                                        <th>Perawatan</th>
+                                        <th>Cuaca</th>
+                                        <th>Hama</th>
+                                        <th>Prediksi (Ton) 
+                                            <i class="fa fa-sort"></i>
+                                        </th>
+                                        <th>Produksi (Ton)</th>
+                                        <th>Produktivias (Ton/Ha) 
+                                            <i class="fa fa-sort"></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>21/Jan/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>2</td>
+                                        <td>Markus Lasut</td>
+                                        <td>05/Feb/2021</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>2</td>
+                                        <td>Markus Lasut</td>
+                                        <td>07/Sep/2021</td>
+                                        <td>2</td>
+                                        <td>60</td>
+                                        <td>Sangat Baik</td>
+                                        <td>Hujan</td>
+                                        <td>Banyak</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>1</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>26/Jul/2021</td>
+                                        <td>2</td>
+                                        <td>40</td>
+                                        <td>Baik</td>
+                                        <td>Panas</td>
+                                        <td>Sedikit</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr><tr>
+                                        <td>5</td>
+                                        <td>5</td>
+                                        <td>Reggy Charles Imanuel lasut</td>
+                                        <td>01/Feb/2022</td>
+                                        <td>2</td>
+                                        <td>50</td>
+                                        <td>Baik</td>
+                                        <td>Cerah</td>
+                                        <td>Sedang</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="clearfix">
+                                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                                <ul class="pagination">
+                                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>       
+                <!-- End: Table -->
+            </div>
+            <!-- end: Content -->
+        </div>
+    </main>
+    <!-- end: Main -->
+
+    <!-- start: JS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src=https://code.jquery.com/jquery-3.5.1.js""></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+
+    <!-- end: JS -->
+</body>
+
+</html>
