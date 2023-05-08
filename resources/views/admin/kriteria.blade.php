@@ -26,7 +26,7 @@
 
 @section('dashboard')
     <li class="sidebar-menu-item ">
-        <a href="{{ route('dashboard-anggota') }}">
+        <a href="{{ route('dashboard-admin') }}">
             <i class="ri-dashboard-fill sidebar-menu-item-icon"></i>
             Dashboard
         </a>
@@ -52,7 +52,7 @@
 @endsection
 
 @section('kriteria')
-    <li class="sidebar-menu-item ">
+    <li class="sidebar-menu-item active">
         <a href="{{ route('kriteria-admin') }}" class="">
             <i class="ri-file-settings-fill sidebar-menu-item-icon"></i>
             Kriteria

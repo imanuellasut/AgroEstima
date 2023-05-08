@@ -71,7 +71,7 @@
 
 @section('profile')
     <li class="sidebar-menu-item ">
-        <a href="#" class="">
+        <a href="{{ route('profile-admin') }}" class="">
             <i class="ri-user-settings-fill sidebar-menu-item-icon"></i>
             Profile
         </a>
