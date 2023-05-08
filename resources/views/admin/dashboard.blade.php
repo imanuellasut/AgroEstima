@@ -53,7 +53,7 @@
 
 @section('kriteria')
     <li class="sidebar-menu-item ">
-        <a href="#" class="">
+        <a href="{{ route('kriteria-admin') }}" class="">
             <i class="ri-file-settings-fill sidebar-menu-item-icon"></i>
             Kriteria
         </a>
@@ -62,7 +62,7 @@
 
 @section('data-user')
     <li class="sidebar-menu-item">
-        <a href="#" class="">
+        <a href="{{ route('data-user-admin') }}" class="">
             <i class="ri-file-user-fill sidebar-menu-item-icon"></i>
             Data User
         </a>
@@ -156,8 +156,9 @@
     <div class="row g-3 mt-2">
         <div class=""">
             <div class="card border-0 shadow-sm h-100">
-                <div class="card-header bg-white">
-                    Perbandingan Total Panen Jagung ( Data Aktual VS Data Prediksi)
+                <div class="card-header bg-white text-center">
+                    Perbandingan Total Panen Jagung <br>
+                    (Data Aktual VS Data Prediksi)
                 </div>
                 <div class="card-body">
                     <canvas id="sales-chart"></canvas>

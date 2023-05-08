@@ -26,7 +26,7 @@
 
 @section('dashboard')
 <li class="sidebar-menu-item ">
-    <a href="{{ route('dashboard-admin') }}">
+    <a href="{{ route('dashboard-anggota') }}">
         <i class="ri-dashboard-fill sidebar-menu-item-icon"></i>
         Dashboard
     </a>
@@ -35,7 +35,7 @@
 
 @section('pertanian')
     <li class="sidebar-menu-item ">
-        <a href="{{ route('pertanian-admin') }}" class="">
+        <a href="{{ route('pertanian-anggota') }}" class="">
             <i class="ri-file-text-fill sidebar-menu-item-icon"></i>
             Data Pertanian
         </a>
@@ -44,7 +44,7 @@
 
 @section('prediksi')
     <li class="sidebar-menu-item active">
-        <a href="{{ route('prediksi-admin') }}" class="">
+        <a href="{{ route('prediksi-anggota') }}" class="">
             <i class="ri-file-chart-fill sidebar-menu-item-icon"></i>
             Prediksi Panen
         </a>
@@ -53,7 +53,7 @@
 
 @section('profile')
     <li class="sidebar-menu-item ">
-        <a href="#" class="">
+        <a href="{{ route('profile-anggota') }}" class="">
             <i class="ri-user-settings-fill sidebar-menu-item-icon"></i>
             Profile
         </a>

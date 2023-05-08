@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Data Pertanian')
+@section('title', 'Profile')
 
 <!-- Start: Sidebar -->
 @section('card-profile')
@@ -25,16 +25,16 @@
 @endsection
 
 @section('dashboard')
-<li class="sidebar-menu-item ">
-    <a href="{{ route('dashboard-admin') }}">
-        <i class="ri-dashboard-fill sidebar-menu-item-icon"></i>
-        Dashboard
-    </a>
-</li>
+    <li class="sidebar-menu-item ">
+        <a href="{{ route('dashboard-anggota') }}">
+            <i class="ri-dashboard-fill sidebar-menu-item-icon"></i>
+            Dashboard
+        </a>
+    </li>
 @endsection
 
 @section('pertanian')
-    <li class="sidebar-menu-item active">
+    <li class="sidebar-menu-item ">
         <a href="{{ route('pertanian-admin') }}" class="">
             <i class="ri-file-text-fill sidebar-menu-item-icon"></i>
             Data Pertanian
@@ -71,7 +71,7 @@
 
 @section('profile')
     <li class="sidebar-menu-item ">
-        <a href="#" class="">
+        <a href="{{ route('profile-admin') }}" class="">
             <i class="ri-user-settings-fill sidebar-menu-item-icon"></i>
             Profile
         </a>
@@ -82,52 +82,13 @@
 @section('navbar')
     <nav class="px-3 py-2 bg-white rounded shadow-sm">
         <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
-        <h5 class="fw-bold mb-0 me-auto p-1">Data Pertanian</h5>
+        <h5 class="fw-bold mb-0 me-auto p-1">Data Users</h5>
     </nav>
 @endsection
 
 <!-- Start: Content -->
 @section('content')
-<div class="card">
-    <small class="card-header fw-bold">Data Pertanian</small>
-    <div class="card-body">
-        <div class="table-responsive mt-0">
-            <table id="example" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Id Pertanian</th>
-                        <th>Nama</th>
-                        <th>Tanggal Tanam</th>
-                        <th>Luas Lahan(Ha)</th>
-                        <th>Produksi (Ton)</th>
-                        <th>Produktivias (Ton/Ha)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>Reggy Charles Imanuel lasut</td>
-                        <td>21-01-2021</td>
-                        <td>2</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>Juan Sebastian Umpele</td>
-                        <td>21-01-2021</td>
-                        <td>2</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+
 
 @section('script')
 <script>

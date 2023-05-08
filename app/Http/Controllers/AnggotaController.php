@@ -18,6 +18,18 @@ class AnggotaController extends Controller
         return view('anggota.dashboard', compact('adataUsers'));
     }
 
+    public function v_pertanian(){
+        return view('anggota.pertanian');
+    }
+
+    public function v_prediksi(){
+        return view('anggota.prediksi');
+    }
+
+    public function v_profile(){
+        return view('anggota.profile');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

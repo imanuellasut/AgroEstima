@@ -52,7 +52,7 @@ class LoginController extends Controller
             } else if (Auth::user()->role == "anggota") {
                 return redirect()->route('dashboard-anggota');
             } else {
-                return redirect()->route('home');
+                return redirect()->route('logout');
             }
         } else {
             return redirect()

@@ -35,7 +35,7 @@
 
 @section('pertanian')
     <li class="sidebar-menu-item">
-        <a href="{{ route('pertanian-admin') }}" class="">
+        <a href="{{ route('pertanian-anggota') }}" class="">
             <i class="ri-file-text-fill sidebar-menu-item-icon"></i>
             Data Pertanian
         </a>
@@ -44,7 +44,7 @@
 
 @section('prediksi')
     <li class="sidebar-menu-item ">
-        <a href="{{ route('prediksi-admin') }}" class="">
+        <a href="{{ route('prediksi-anggota') }}" class="">
             <i class="ri-file-chart-fill sidebar-menu-item-icon"></i>
             Prediksi Panen
         </a>
@@ -53,7 +53,7 @@
 
 @section('profile')
     <li class="sidebar-menu-item ">
-        <a href="#" class="">
+        <a href="{{ route('profile-anggota') }}" class="">
             <i class="ri-user-settings-fill sidebar-menu-item-icon"></i>
             Profile
         </a>
@@ -136,10 +136,11 @@
     <!-- end: Summary -->
     <!-- start: Graph -->
     <div class="row g-3 mt-2">
-        <div class="d-flex">
-            <div class="card border-0 shadow-sm h-100 col-6 col-lg-6 col-sm-6">
-                <div class="card-header bg-white">
-                    Perbandingan Total Panen Jagung ( Data Aktual VS Data Prediksi)
+        <div class="">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white text-center">
+                    <p class="">Perbandingan Total Panen Jagung <br>
+                    (Data Aktual VS Data Prediksi)</p>
                 </div>
                 <div class="card-body">
                     <canvas id="sales-chart"></canvas>

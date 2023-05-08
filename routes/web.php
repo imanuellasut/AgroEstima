@@ -28,11 +28,17 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('dashboard-admin');
     Route::get('/admin/pertanian', [AdminController::class, 'v_pertanian'])->name('pertanian-admin');
     Route::get('/admin/prediksi', [AdminController::class, 'v_prediksi'])->name('prediksi-admin');
+    Route::get('/admin/kriteria', [AdminController::class, 'v_kriteria'])->name('kriteria-admin');
+    Route::get('/admin/data-user', [AdminController::class, 'v_dataUser'])->name('data-user-admin');
+    Route::get('/admin/profile', [AdminController::class, 'v_profile'])->name('profile-admin');
 });
 
 //Route Untuk Anggota
 Route::middleware(['auth', 'check-role:anggota'])->group(function(){
     Route::get('/anggota/dashboard', [AnggotaController::class, 'index'])->name('dashboard-anggota');
+    Route::get('/anggota/pertanian', [AnggotaController::class, 'v_pertanian'])->name('pertanian-anggota');
+    Route::get('/anggota/prediksi', [AnggotaController::class, 'v_prediksi'])->name('prediksi-anggota');
+    Route::get('/anggota/profile', [AnggotaController::class, 'v_profile'])->name('profile-anggota');
 });
 
 
