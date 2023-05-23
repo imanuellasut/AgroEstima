@@ -21,6 +21,6 @@ class UserRoleMiddleware
             return $next($request);
         }
 
-        return response()->json(["Anda Tidak Memiliki Akses Ke Halaman Ini"]);
+        return redirect()->route(   );
     }
 }

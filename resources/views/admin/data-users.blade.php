@@ -88,7 +88,61 @@
 
 <!-- Start: Content -->
 @section('content')
-
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        <small class="fw-bold">Data Anggota</small>
+        <div class="">
+            <a href="#" class="btn btn-primary btn-sm d-flex">
+                <i class="ri-add-fill mr-2"></i>
+                Tambah Data
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive mt-0 table-sm">
+            <table id="example" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>NIK</th>
+                        <th>No.Hp</th>
+                        <th>Alamat</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                @php
+                    $no = 1;
+                @endphp
+                @foreach ( $adataUsers as $data  )
+                <tbody>
+                    <tr>
+                        <td scope="row">{{ $no++ }}</td>
+                        <td> {{ $data->name }} </td>
+                        <td> {{ $data->nik }} </td>
+                        <td> {{ $data->no_hp }} </td>
+                        <td> {{ $data->alamat }} </td>
+                        <td> {{ $data->email }} </td>
+                        <td> {{ $data->role }}</td>
+                        <td>
+                            <div class="text-decoration-none">
+                                <div class="d-flex mb-2 btn-group">
+                                    <a href="" class="btn btn-sm btn-success" style="color: beige">Edit</a>
+                                </div>
+                                <div class="d-flex btn-group">
+                                    <a href="" class="btn btn-sm btn-danger" style="font-size: 0.80rem; color: beige">Hapus</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                @endforeach
+            </table>
+        </div>
+    </div>
+</div>
 
 @section('script')
 <script>

@@ -88,7 +88,34 @@
 
 <!-- Start: Content -->
 @section('content')
+<div class="">
+    <div class="card mb-4">
+        <div class="card-header">
+            <p class="card-title">Kriteria Curah Hujan</p>
+        </div>
+        <div class="card-body">
 
+        </div>
+    </div>
+    <hr>
+    <div class="card mb-4">
+        <div class="card-header">
+            <p class="card-title">Kriteria Hama</p>
+        </div>
+        <div class="card-body">
+
+        </div>
+    </div>
+    <hr>
+    <div class="card">
+        <div class="card-header">
+            <p class="card-title">Kriteria Perawatan</p>
+        </div>
+        <div class="card-body">
+
+        </div>
+    </div>
+</div>
 
 @section('script')
 <script>

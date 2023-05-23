@@ -30,7 +30,8 @@ class AdminController extends Controller
     }
 
     public function v_dataUser() {
-        return view('admin.data-users');
+        $adataUsers = User::all();
+        return view('admin.data-users', compact('adataUsers'));
     }
 
     public function v_profile() {
