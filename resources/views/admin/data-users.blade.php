@@ -4,6 +4,7 @@
 
 <!-- Start: Sidebar -->
 @section('card-profile')
+<a href="{{ route('profile-admin') }}" class="to-profile">
     <div class="d-flex card-profile p-2">
         <div class="avatar-profile">
             <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
@@ -22,6 +23,7 @@
             <span>{{ $name }}</span>
         </div>
     </div>
+</a>
 @endsection
 
 @section('dashboard')
@@ -99,8 +101,8 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="table-responsive mt-0 table-sm">
-            <table id="example" class="table table-striped">
+        <div class="mt-0 table-sm table-responsive">
+            <table id="example" class="table table-striped ">
                 <thead>
                     <tr>
                         <th>No</th>

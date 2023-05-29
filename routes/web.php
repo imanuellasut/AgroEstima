@@ -31,6 +31,7 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
     Route::get('/admin/kriteria', [AdminController::class, 'v_kriteria'])->name('kriteria-admin');
     Route::get('/admin/data-user', [AdminController::class, 'v_dataUser'])->name('data-user-admin');
     Route::get('/admin/profile', [AdminController::class, 'v_profile'])->name('profile-admin');
+    Route::get('/admin/edit-profile', [AdminController::class, 'v_editProfile'])->name('edit-profile-admin');
 });
 
 //Route Untuk Anggota

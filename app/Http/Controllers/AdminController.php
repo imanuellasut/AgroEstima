@@ -37,4 +37,8 @@ class AdminController extends Controller
     public function v_profile() {
         return view('admin.profile');
     }
+
+    public function v_editProfile() {
+        return view('admin.profile-edit');
+    }
 }

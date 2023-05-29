@@ -32,9 +32,7 @@
             <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
         </div>
         <hr>
-        <a href="#" class="to-profile">
-            @yield('card-profile')
-        </a>
+        @yield('card-profile')
         <ul class="sidebar-menu p-3 m-0 mb-0">
             @yield('dashboard')
 

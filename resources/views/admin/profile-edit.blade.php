@@ -94,7 +94,7 @@
     <div class="card m-1">
         <div class="card-body" style="width: 250px">
             <li class="mb-2 menu-profile">
-                <a href="{{ route('edit-profile-admin') }}" class="">
+                <a href="" class="active-edit">
                     <i class="ri-settings-3-fill"></i>
                     Edit Profile
                 </a>
@@ -107,42 +107,51 @@
             </li>
         </div>
     </div>
-    <div class="card m-1">
-        <div class="card-body d-lg-flex align-items-center justify-content-center">
-            <div class="image-profile" style="margin-right: 10px;">
-                <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" class="rounded-2" alt="" style="width: 200px">
-            </div>
-        </div>
-            <hr>
-        <div class="card-body d-lg-flex justify-content-center">
-            <div class="info-profil row" >
-                <div class="col-md-12 mb-3">
-                    <label for="" class="labels mb-1">Nama</label>
-                    <input type="text" name="" id="" class="form-control bg-light"
-                    value="{{ Auth::user()->name }}" readonly>
+    <form action="">
+        <div class="card m-1">
+            <div class="card-body d-lg-flex align-items-center justify-content-center">
+                <div class="image-profile" style="margin-right: 10px;">
+                    <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" class="rounded-2" alt="" style="width: 200px">
                 </div>
-                <div class="col-md-12 mb-3">
-                    <label for="" class="labels mb-1">NIK (Nomor Induk Kependudukan)</label>
-                    <input type="text" name="" id="" class="form-control bg-light" readonly
-                    value="{{ Auth::user()->nik }}">
-                </div>
-                <div class="col-md-12 mb-3">
-                    <label for="" class="labels mb-1">No Hp</label>
-                    <input type="text" name="" id="" class="form-control bg-light" readonly
-                    value="{{ Auth::user()->no_hp }}">
-                </div>
-                <div class="col-md-12 mb-3">
-                    <label for="" class="labels mb-1">Email</label>
-                    <input type="text" name="" id="" class="form-control bg-light" readonly
-                    value="{{ Auth::user()->email }}">
-                </div>
-                <div class="col-md-12 ">
-                    <label for="" class="labels mb-1">Alamat</label>
-                    <textarea type="text" name="" id="" class="form-control bg-light" readonly>{{ Auth::user()->alamat }} </textarea>
+                <div>
+                    <label for="formFile" class="form-label">Upload Foto</label>
+                    <input class="form-control" type="file" id="formFile">
                 </div>
             </div>
+                <hr>
+            <div class="card-body d-lg-flex justify-content-center">
+                <div class="info-profil row" >
+                    <div class="col-md-12 mb-3">
+                        <label for="" class="labels mb-1">Nama</label>
+                        <input type="text" name="" id="" class="form-control bg-light"
+                        value="{{ Auth::user()->name }}">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="" class="labels mb-1">NIK (Nomor Induk Kependudukan)</label>
+                        <input type="text" name="" id="" class="form-control bg-light"
+                        value="{{ Auth::user()->nik }}">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="" class="labels mb-1">No Hp</label>
+                        <input type="text" name="" id="" class="form-control bg-light"
+                        value="{{ Auth::user()->no_hp }}">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="" class="labels mb-1">Email</label>
+                        <input type="text" name="" id="" class="form-control bg-light"
+                        value="{{ Auth::user()->email }}">
+                    </div>
+                    <div class="col-md-12 ">
+                        <label for="" class="labels mb-1">Alamat</label>
+                        <textarea type="text" name="" id="" class="form-control bg-light">{{ Auth::user()->alamat }} </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 
 @section('script')
