@@ -94,13 +94,13 @@
     <div class="card m-1">
         <div class="card-body" style="width: 250px">
             <li class="mb-2 menu-profile">
-                <a href="{{ route('edit-profile-admin') }}" class="">
+                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editProfile">
                     <i class="ri-settings-3-fill"></i>
                     Edit Profile
                 </a>
             </li>
             <li class="menu-profile">
-                <a href="" class="">
+                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editPasswrod">
                     <i class="ri-lock-password-fill"></i>
                     Edit Password
                 </a>
@@ -145,7 +145,86 @@
     </div>
 </div>
 
-@section('script')
+<!-- Modal Edit Profil -->
+    <div class="modal fade" id="editProfile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Profile</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="">
+                    <div class="modal-body">
+                        <div class="info-profil row">
+                            <div class="col-md-12 mb-3 form-floating">
+                                <input type="text" class="form-control" placeholder="Masukan nama lengkap" id="floatingNama" value="{{ Auth::user()->name }}">
+                                <label for="floatingNama" style="margin-left: 10px">Nama Lengkap</label>
+                            </div>
+                            <div class="col-md-12 mb-3 form-floating">
+                                <input type="number" class="form-control" placeholder="Masukan NIK" id="floatingNIK" value="{{ Auth::user()->nik }}" readonly>
+                                <label for="floatingNIK" style="margin-left: 10px">NIK (Nomor Induk Kependudukan)</label>
+                            </div>
+                            <div class="col-md-12 mb-3 form-floating">
+                                <input type="number" class="form-control" placeholder="Masukan NO HP" id="floatingNoHP" value="{{ Auth::user()->no_hp }}">
+                                <label for="floatingNoHP" style="margin-left: 10px">No HP</label>
+                            </div>
+                            <div class="col-md-12 mb-3 form-floating">
+                                <input type="email" class="form-control" placeholder="Masukan Email" id="floatingEmail" value="{{ Auth::user()->email }}">
+                                <label for="floatingEmail" style="margin-left: 10px">Email</label>
+                            </div>
+                            <div class="col-md-12 mb-3 form-floating">
+                                <textarea type="text" class="form-control" placeholder="Masukan Alamat" id="floatingAlamat">{{ Auth::user()->alamat }}</textarea>
+                                <label for="floatingAlamat" style="margin-left: 10px">Alamat</label>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="floatingFoto" style="margin-left: 10px">Foto</label>
+                                <input type="file" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" class="form-control" placeholder="Masukan" id="floatingFoto">
+                            </div>
+                            <div class="col-md-12 mb-3 align-content-center">
+                                <img src="" alt="" id="output" width="200px" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        <button type="button" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal Edit password -->
+<div class="modal fade" id="editPasswrod" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Password</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <div class="info-profil row">
+                        <div class="col-md-12 mb-3 form-floating">
+                            <input type="password" class="form-control" placeholder="Password Lama" id="floatingPass" value="{{ Auth::user()->password }}">
+                            <label for="floatingPass" style="margin-left: 10px">Password Lama</label>
+                        </div>
+                        <div class="col-md-12 mb-3 form-floating">
+                            <input type="password" class="form-control" placeholder="Masukan Password" id="floatingPassword">
+                            <label for="floatingPassword" style="margin-left: 10px">Password Baru</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                    <button type="button" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    @section('script')
 <script>
     $(document).ready(function () {
         $('#example').DataTable();
