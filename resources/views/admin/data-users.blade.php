@@ -102,7 +102,7 @@
     </div>
     <div class="card-body">
         <div class="mt-0 table-sm table-responsive">
-            <table id="example" class="table table-striped ">
+            <table id="tabelAnggota" class="table table-striped ">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -122,7 +122,7 @@
                 <tbody>
                     <tr>
                         <td scope="row">{{ $no++ }}</td>
-                        <td> {{ $data->name }} </td>
+                        <td > {{ $data->name }} </td>
                         <td> {{ $data->nik }} </td>
                         <td> {{ $data->no_hp }} </td>
                         <td> {{ $data->alamat }} </td>
@@ -154,31 +154,32 @@
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Anggota Baru</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="">
+                <form action="{{ route('add-anggota') }}" method="POST" id="formAnggota">
                     <div class="modal-body">
+                        @csrf
                         <div class="info-profil row">
                             <div class="col-md-12 mb-3 form-floating">
-                                <input type="text" class="form-control" placeholder="Masukan nama lengkap" id="floatingNama">
+                                <input type="text" class="form-control" placeholder="Masukan nama lengkap" id="floatingNama" name="name">
                                 <label for="floatingNama" style="margin-left: 10px">Nama Lengkap</label>
                             </div>
                             <div class="col-md-12 mb-3 form-floating">
-                                <input type="number" class="form-control" placeholder="Masukan NIK" id="floatingNIK">
+                                <input type="number" class="form-control" placeholder="Masukan NIK" id="floatingNIK" name="nik">
                                 <label for="floatingNIK" style="margin-left: 10px">NIK (Nomor Induk Kependudukan)</label>
                             </div>
                             <div class="col-md-12 mb-3 form-floating">
-                                <input type="number" class="form-control" placeholder="Masukan NO HP" id="floatingNoHP">
+                                <input type="number" class="form-control" placeholder="Masukan NO HP" id="floatingNoHP" name="no_hp">
                                 <label for="floatingNoHP" style="margin-left: 10px">No HP</label>
                             </div>
                             <div class="col-md-12 mb-3 form-floating">
-                                <input type="email" class="form-control" placeholder="Masukan Email" id="floatingEmail">
+                                <input type="email" class="form-control" placeholder="Masukan Email" id="floatingEmail" name="email">
                                 <label for="floatingEmail" style="margin-left: 10px">Email</label>
                             </div>
                             <div class="col-md-12 mb-3 form-floating">
-                                <textarea type="text" class="form-control" placeholder="Masukan Alamat" id="floatingAlamat"></textarea>
+                                <textarea type="text" class="form-control" placeholder="Masukan Alamat" id="floatingAlamat" name="alamat"></textarea>
                                 <label for="floatingAlamat" style="margin-left: 10px">Alamat</label>
                             </div>
                             <div class="col-md-12 mb-3 form-floating">
-                                <select class="form-select" id="floatingSelect" aria-label="">
+                                <select class="form-select" id="floatingSelect" aria-label="" name="role">
                                     <option selected>Pilih Role</option>
                                     <option value="0">Anggota</option>
                                     <option value="1">Admin</option>
@@ -186,24 +187,70 @@
                                 <label for="floatingSelect" tyle="margin-left: 20px">ROLE</label>
                             </div>
                             <div class="col-md-12 mb-3 form-floating">
-                                <input type="password" class="form-control" placeholder="Masukan Alamat" id="floatingPass">
+                                <input type="password" class="form-control" placeholder="Masukan Alamat" id="floatingPass" name="password">
                                 <label for="floatingPass" style="margin-left: 10px">Password</label>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary" id="addAnggota">Tambah</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
+<!-- Modal Sukses -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="successMessage"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @section('script')
 <script>
+    // MENANGKAP FORMULIR DI KIRIM
+    $('#formAnggota').submit(function(event){
+        event.preventDefault();
+        var formData = $(this).serialize();
+
+        //KIRIM PERINTAH KE AJAX
+        $.ajax({
+            url: '{{ route('add-anggota') }}'',
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+                console.log(response);
+
+                // Tampilkan pesan sukses kepada pengguna
+                $('#successMessage').text(response.message);
+                $('#successModal').modal('show');
+
+                // Reset formulir
+                $('#formAnggota')[0].reset();
+            },
+            error: function(response){
+                console.log(xhr.responseJSON);
+            }
+        });
+    });
+
+    // Tangkap saat tombol "Save" di modal ditekan
+    $('#addAnggota').click(function() {
+            $('#formAnggota').submit();
+        });
+
     $(document).ready(function () {
-        $('#example').DataTable();
+        $('#tabelAnggota').DataTable();
     });
 </script>
 @endsection
