@@ -9,7 +9,7 @@
             <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
         </div>
         <div class="info-profile">
-            @if (Auth::user()->role = 1)
+            @if (Auth::user()->role = 0)
                 <small>Admin</small>
             @else
                 <small>Anggota</small>
