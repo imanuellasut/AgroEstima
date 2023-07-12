@@ -29,10 +29,10 @@ class AdminController extends Controller
         return view('admin.kriteria');
     }
 
-    public function v_dataUser() {
-        $adataUsers = User::all();
-        return view('admin.data-users', compact('adataUsers'));
-    }
+    // public function v_dataUser() {
+    //     $adataUsers = User::all();
+    //     return view('admin.data-users', compact('adataUsers'));
+    // }
 
     public function v_profile() {
         return view('admin.profile');

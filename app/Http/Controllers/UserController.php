@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     //
+    public function indexAnggota(Request $request) {
+        $adataUsers = User::all();
+        return view('admin.data-anggota', compact('adataUsers'));
+    }
+
     public function store(Request $request) {
         // Validasi Data User
         $request->validate([
