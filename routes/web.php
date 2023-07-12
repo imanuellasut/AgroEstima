@@ -36,7 +36,7 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
     Route::get('/admin/kriteria', [AdminController::class, 'v_kriteria'])->name('kriteria-admin');
 
     // CRUD DATA ANGGOTA
-    Route::get('/admin/data-user', [AdminController::class, 'v_dataUser'])->name('data-user-admin');
+    Route::get('/admin/data-user', [UserController::class, 'indexAnggota'])->name('get-anggota');
     Route::post('/admin/data-user', [UserController::class, 'store'])->name('add-anggota');
 
     //DATA PROFILE
