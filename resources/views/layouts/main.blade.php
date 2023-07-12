@@ -42,7 +42,7 @@
 
             @yield('kriteria')
 
-            @yield('data-user')
+            @yield('data-anggota')
 
             @yield('profile')
 

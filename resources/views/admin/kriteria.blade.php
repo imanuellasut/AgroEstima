@@ -62,11 +62,11 @@
     </li>
 @endsection
 
-@section('data-user')
+@section('data-anggota')
     <li class="sidebar-menu-item">
-        <a href="{{ route('data-user-admin') }}" class="">
+        <a href="{{ route('get-anggota') }}" class="">
             <i class="ri-file-user-fill sidebar-menu-item-icon"></i>
-            Data User
+            Data Anggota
         </a>
     </li>
 @endsection

@@ -62,9 +62,9 @@
         </li>
     @endsection
 
-    @section('data-user')
+    @section('data-anggota')
         <li class="sidebar-menu-item">
-            <a href="{{ route('data-user-admin') }}" class="">
+            <a href="{{ route('get-anggota') }}" class="">
                 <i class="ri-file-user-fill sidebar-menu-item-icon"></i>
                 Data User
             </a>
@@ -96,13 +96,13 @@
             <li class="mb-2 menu-profile">
                 <a href="" class="" data-bs-toggle="modal" data-bs-target="#editProfile">
                     <i class="ri-settings-3-fill"></i>
-                    Edit Profile
+                    Ubah Profile
                 </a>
             </li>
             <li class="menu-profile">
                 <a href="" class="" data-bs-toggle="modal" data-bs-target="#editPasswrod">
                     <i class="ri-lock-password-fill"></i>
-                    Edit Password
+                    Ubah Password
                 </a>
             </li>
         </div>
@@ -199,32 +199,37 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Password</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Ubah Password</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="">
                 <div class="modal-body">
                     <div class="info-profil row">
                         <div class="col-md-12 mb-3 form-floating">
-                            <input type="password" class="form-control" placeholder="Password Lama" id="floatingPass" value="{{ Auth::user()->password }}">
-                            <label for="floatingPass" style="margin-left: 10px">Password Lama</label>
+                            <input type="password" class="form-control" placeholder="Password Lama" id="floatingPass">
+                            <label for="floatingPass" style="margin-left: 10px">Password Baru</label>
                         </div>
                         <div class="col-md-12 mb-3 form-floating">
                             <input type="password" class="form-control" placeholder="Masukan Password" id="floatingPassword">
-                            <label for="floatingPassword" style="margin-left: 10px">Password Baru</label>
+                            <label for="floatingPassword" style="margin-left: 10px">Password Baru (ulangi)</label>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-primary">Ubah Password</button>
                 </div>
             </form>
+            <div class="form-control p-5 ml-2 mr-2">
+                <p>Perhatikan</p>
+                <li>Gunakan password yang unik dan sulit ditebak oleh Orang Lain,
+                    tetapi cukup mudah Anda ingat</li>
+            </div>
         </div>
     </div>
 </div>
 
-    @section('script')
+@section('script')
 <script>
     $(document).ready(function () {
         $('#example').DataTable();

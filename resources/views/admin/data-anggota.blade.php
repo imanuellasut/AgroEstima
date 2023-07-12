@@ -62,11 +62,11 @@
     </li>
 @endsection
 
-@section('data-user')
+@section('data-anggota')
     <li class="sidebar-menu-item active">
-        <a href="{{ route('data-user-admin') }}" class="">
+        <a href="{{ route('get-anggota') }}" class="">
             <i class="ri-file-user-fill sidebar-menu-item-icon"></i>
-            Data User
+            Data Anggota
         </a>
     </li>
 @endsection
@@ -94,7 +94,7 @@
     <div class="card-header d-flex justify-content-between">
         <small class="fw-bold">Data Anggota</small>
         <div class="">
-            <a class="btn btn-primary btn-sm d-flex" data-bs-toggle="modal" data-bs-target="#tambahUser">
+            <a class="btn btn-primary btn-sm d-flex" data-bs-toggle="modal" data-bs-target="#tambahAnggota">
                 <i class="ri-add-fill mr-2"></i>
                 Tambah Data
             </a>
@@ -102,7 +102,7 @@
     </div>
     <div class="card-body">
         <div class="mt-0 table-sm table-responsive">
-            <table id="tabelAnggota" class="table table-striped ">
+            <table id="tabelAnggota" class="table">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -115,6 +115,9 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
+                <tbody>
+
+                </tbody>
                 @php
                     $no = 1;
                 @endphp
@@ -147,7 +150,7 @@
 </div>
 
 <!-- Modal Tambah User -->
-    <div class="modal fade" id="tambahUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="tambahAnggota" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -218,40 +221,40 @@
 
 @section('script')
 <script>
-    // MENANGKAP FORMULIR DI KIRIM
-    $('#formAnggota').submit(function(event){
-        event.preventDefault();
-        var formData = $(this).serialize();
+    // $(document).ready(function(){
+    //     tampilAnggota();
+    // })
 
-        //KIRIM PERINTAH KE AJAX
-        $.ajax({
-            url: '{{ route('add-anggota') }}'',
-            method: 'POST',
-            data: formData,
-            success: function(response) {
-                console.log(response);
+    // function tampilAnggota(){
+    //     $('tbody').html('');
+    //     $.ajax({
+    //         url : "{{ route('get-anggota') }}",
+    //         method : 'GET',
+    //         dataType : 'json',
+    //         success : function(data){
+    //             $.each(data, function(key, values){
+    //                 name = data[key].name;
+    //                 nik = data[key].nik;
+    //                 no_hp = data[key].no_hp;
+    //                 alamat = data[key].alamat;
+    //                 email = data[key].email;
+    //                 role = data[key].role;
 
-                // Tampilkan pesan sukses kepada pengguna
-                $('#successMessage').text(response.message);
-                $('#successModal').modal('show');
+    //                 console.log(values);
 
-                // Reset formulir
-                $('#formAnggota')[0].reset();
-            },
-            error: function(response){
-                console.log(xhr.responseJSON);
-            }
-        });
-    });
-
-    // Tangkap saat tombol "Save" di modal ditekan
-    $('#addAnggota').click(function() {
-            $('#formAnggota').submit();
-        });
-
-    $(document).ready(function () {
-        $('#tabelAnggota').DataTable();
-    });
+    //                 $('tbody').apped('<tr>\
+    //                         <td>'+parsInt(key+1)+'</td>\
+    //                         <td>'+name+'</td>\
+    //                         <td>'+nik+'</td>\
+    //                         <td>'+no_hp+'</td>\
+    //                         <td>'+alamat+'</td>\
+    //                         <td>'+email+'</td>\
+    //                         <td>'+role+'</td>\
+    //                     </tr>');
+    //             });
+    //         }
+    //     });
+    // }
 </script>
 @endsection
 
