@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('Template-Dashboard/css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
     <!-- end: CSS -->
-    <link rel="icon" href="{{ asset('img/icons8-ear-of-corn-48.png') }}">
+    <link rel="icon" href="{{ asset('img/Logo.png') }}">
     <title>@yield('title') | PERKIRAAN HASIL PANEN JAGUNG</title>
 </head>
 
@@ -28,7 +28,8 @@
     <!-- start: Sidebar -->
     <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
         <div class="d-flex align-items-center p-3">
-            <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">Agroestima</a>
+            <img src="{{ asset('img/Logo-AgroEstima.png') }}" alt="" style="width: 200px; margin-bottom: 1px" class=" sidebar-logo fs-4 img-logo">
+            {{-- <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">Agroestima</a> --}}
             <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
         </div>
         <hr>
