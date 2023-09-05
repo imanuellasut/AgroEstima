@@ -111,11 +111,8 @@
                         <th>Luas Lahan(Ha)</th>
                         <th>Jumlah Bibit(Kg)</th>
                         <th>Perawatan</th>
-                        <th>Cuaca</th>
                         <th>Hama</th>
                         <th>Prediksi (Ton)</th>
-                        <th>Produksi (Ton)</th>
-                        <th>Produktivias (Ton/Ha)</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -127,18 +124,23 @@
                         <td>2</td>
                         <td>50</td>
                         <td>Baik</td>
-                        <td>Cerah</td>
                         <td>Sedang</td>
                         <td>120</td>
-                        <td>-</td>
-                        <td>-</td>
                         <td>
                             <div class="text-decoration-none">
                                 <div class="d-flex mb-2 btn-group">
-                                    <a href="" class="btn btn-sm btn-success" style="color: beige">Edit</a>
+                                    <a href="" class="btn btn-sm btn-primary">
+                                        <img src="{{ asset('svg/icon-check.svg') }}" alt="" style="color: #f5f5dc">
+                                        Prediksi</a>
+                                </div>
+                                <div class="d-flex mb-2 btn-group">
+                                    <a href="" class="btn btn-sm btn-success" style="color: beige">
+                                        <img src="{{ asset('svg/icon-edit.svg') }}" alt="" style="color: #f5f5dc">Edit</a>
                                 </div>
                                 <div class="d-flex btn-group">
-                                    <a href="" class="btn btn-sm btn-danger" style="font-size: 0.80rem; color: beige">Hapus</a>
+                                    <a href="" class="btn btn-sm btn-info" style="font-size: 0.80rem; color: beige">
+                                        <img src="{{ asset('svg/icon-info.svg') }}" alt="" style="color: #f5f5dc">
+                                        Informasi</a>
                                 </div>
                             </div>
                         </td>

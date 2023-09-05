@@ -91,7 +91,7 @@
 <!-- Start: Content -->
 @section('content')
 <div class="card">
-    <small class="card-header fw-bold">Data Pertanian</small>
+    <small class="card-header fw-bold">Data Tanam</small>
     <div class="card-body">
         <div class="table-responsive mt-0">
             <table id="example" class="table table-striped">
