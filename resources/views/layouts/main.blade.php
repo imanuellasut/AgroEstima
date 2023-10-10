@@ -37,11 +37,24 @@
         <ul class="sidebar-menu p-3 m-0 mb-0">
             @yield('dashboard')
 
-            @yield('pertanian')
+            @yield('data_pertanian')
 
-            @yield('prediksi')
+            @yield('data_prediksi')
+
+            @yield('data_akurasi_fuzzy')
+            <hr>
+            <p class="master-text">Master Fuzzy</p>
+
+            @yield('data-variabel')
+
+            @yield('data-himpunan')
+
+            @yield('data-aturan')
 
             @yield('kriteria')
+
+            <hr>
+            <p class="master-text">Master User</p>
 
             @yield('data-anggota')
 
@@ -49,9 +62,9 @@
 
             <hr class="hr-bottom">
             <li class="sidebar-menu-item ">
-                <a   href="{{ route('logout') }}" class="" onclick="event.preventDefault();
+                <a href="{{ route('logout') }}" class="" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
-                    <i class="ri-logout-circle-fill sidebar-menu-item-icon"></i>
+                    <iconify-icon icon="ion:log-out" class="sidebar-menu-item-icon" rotate="180deg"></iconify-icon>
                     Keluar
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -87,6 +100,8 @@
     <script src=https://code.jquery.com/jquery-3.5.1.js""></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <!-- Start: PWA -->
     <script src="{{ asset('sw.js') }}"></script>

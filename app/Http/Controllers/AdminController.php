@@ -18,21 +18,28 @@ class AdminController extends Controller
     }
 
     public function v_pertanian() {
-        return view('admin.pertanian');
+        return view('admin.d_pertanian');
     }
 
     public function v_prediksi() {
-        return view('admin.prediksi');
+        return view('admin.d_prediksi');
     }
 
-    public function v_kriteria() {
-        return view('admin.kriteria');
+    public function v_akurasi_fuzzy() {
+        return view('admin.d_aturan_fuzzy');
     }
 
-    // public function v_dataUser() {
-    //     $adataUsers = User::all();
-    //     return view('admin.data-users', compact('adataUsers'));
-    // }
+    public function f_variabel() {
+        return view('admin.f_data_variabel');
+    }
+
+    public function f_himmpunan() {
+        return view('admin.f_data_himpunan');
+    }
+
+    public function f_aturan() {
+        return view('admin.f_data_aturan');
+    }
 
     public function v_profile() {
         return view('admin.profile');

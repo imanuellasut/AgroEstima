@@ -143,6 +143,15 @@ hr {
     margin-top: 100px;
 }
 
+.master-text {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.sidebar.collapsed .master-text {
+    display: none;
+}
+
 .sidebar.collapsed .to-profile {
     display: none;
 }
@@ -209,6 +218,7 @@ hr {
     font-size: .875rem;
     margin-bottom: 16px;
     white-space: nowrap;
+    height: 40px;
 }
 
 .sidebar-menu-item>a {
@@ -227,10 +237,15 @@ hr {
     box-shadow: 0 0.25rm 0.25rem rgba(0, 0, 0, 0.199);
 }
 
+.sidebar-menu-item.active img {
+    color: var(--bs-white);
+}
+
 .sidebar-menu-item-icon {
     margin-right: .625rem;
     font-size: 1.25rem;
 }
+
 
 .sidebar-menu-item-accordion {
     transition: transform .2s;

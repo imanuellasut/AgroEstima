@@ -248,6 +248,13 @@ body {
     font-size: 1rem;
 }
 
+.tombol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
 @media screen and (width < 750px) {
     .container__right {
         display: none;

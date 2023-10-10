@@ -27,20 +27,27 @@ Auth::routes();
 //Route Untuk Admin
 Route::middleware(['auth', 'check-role:admin'])->group(function(){
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('dashboard-admin');
-    Route::get('/admin/pertanian', [AdminController::class, 'v_pertanian'])->name('pertanian-admin');
+    Route::get('/admin/pertanian', [AdminController::class, 'v_pertanian'])->name('d_pertanian_admin');
 
     // CRUD DATA PREDIKSI
-    Route::get('/admin/prediksi', [AdminController::class, 'v_prediksi'])->name('prediksi-admin');
+    Route::get('/admin/prediksi', [AdminController::class, 'v_prediksi'])->name('d_prediksi_admin');
 
-    // CRUD DATA KRITERIA
-    Route::get('/admin/kriteria', [AdminController::class, 'v_kriteria'])->name('kriteria-admin');
+    // DATA AKURASI FUZZY
+    Route::get('/admin/akurasi-fuzzy', [AdminController::class, 'v_akurasi_fuzzy'])->name('d_aturan_fuzzy_admin');
+
+    // DATA FUZZY TSUKAMOTO
+    Route::get('/admin/data-variabel', [AdminController::class, 'f_variabel'])->name('f_variabel_fuzzy');
+    Route::get('/admin/data-himpunan', [AdminController::class, 'f_himmpunan'])->name('f_himpunan_fuzzy');
+    Route::get('/admin/data-aturan', [AdminController::class, 'f_aturan'])->name('f_aturan_fuzzy');
 
     // CRUD DATA ANGGOTA
     Route::get('/admin/data-user', [UserController::class, 'indexAnggota'])->name('get-anggota');
     Route::post('/admin/data-user', [UserController::class, 'store'])->name('add-anggota');
+    // Route::get('/admin/{id}/Edit', [UserController::class, 'edit'])->name('edit-anggota');
+    Route::put('/admin/update-data-user/{id}', [UserController::class, 'update'])->name('update-anggota');
 
     //DATA PROFILE
-    Route::get('/admin/profile', [AdminController::class, 'v_profile'])->name('profile-admin');
+    Route::get('/admin/profile', [AdminController::class, 'v_profile'])->name('profil_admin');
 });
 
 //Route Untuk Anggota

@@ -11,8 +11,8 @@ class UserController extends Controller
 {
     //
     public function indexAnggota(Request $request) {
-        $adataUsers = User::all();
-        return view('admin.data-anggota', compact('adataUsers'));
+        $dataUser = User::all();
+        return view('admin.data_anggota', compact('dataUser'));
     }
 
     public function store(Request $request) {
@@ -63,4 +63,10 @@ class UserController extends Controller
             'data' => $data
         ], 200);
     }
+
+    public function edit($id) {
+        $anggota = User::find($id);
+        return view('admin.data_anggota', compact('anggota-edit'));
+    }
+
 }

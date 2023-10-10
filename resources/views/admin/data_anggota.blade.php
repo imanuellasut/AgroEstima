@@ -4,7 +4,7 @@
 
 <!-- Start: Sidebar -->
 @section('card-profile')
-    <a href="{{ route('profile-admin') }}" class="to-profile">
+    <a href="{{ route('profil_admin') }}" class="to-profile">
         <div class="d-flex card-profile p-2">
             <div class="avatar-profile">
                 <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
@@ -27,37 +27,64 @@
 @endsection
 
 @section('dashboard')
-    <li class="sidebar-menu-item ">
+    <li class="sidebar-menu-item">
         <a href="{{ route('dashboard-admin') }}">
-            <i class="ri-dashboard-fill sidebar-menu-item-icon"></i>
+            <iconify-icon icon="bxs:dashboard" class="sidebar-menu-item-icon"></iconify-icon>
             Dashboard
         </a>
     </li>
 @endsection
 
-@section('pertanian')
-    <li class="sidebar-menu-item ">
-        <a href="{{ route('pertanian-admin') }}" class="">
-            <i class="ri-file-text-fill sidebar-menu-item-icon"></i>
+@section('data_pertanian')
+    <li class="sidebar-menu-item">
+        <a href="{{ route('d_pertanian_admin') }}" class="">
+            <iconify-icon icon="material-symbols:chart-data-rounded" class="sidebar-menu-item-icon"></iconify-icon>
             Data Pertanian
         </a>
     </li>
 @endsection
 
-@section('prediksi')
+@section('data_prediksi')
     <li class="sidebar-menu-item">
-        <a href="{{ route('prediksi-admin') }}" class="">
+        <a href="{{ route('d_prediksi_admin') }}" class="">
             <i class="ri-file-chart-fill sidebar-menu-item-icon"></i>
             Prediksi Panen
         </a>
     </li>
 @endsection
 
-@section('kriteria')
+@section('data_akurasi_fuzzy')
     <li class="sidebar-menu-item ">
-        <a href="{{ route('kriteria-admin') }}" class="">
-            <i class="ri-file-settings-fill sidebar-menu-item-icon"></i>
-            Kriteria
+        <a href="{{ route('d_aturan_fuzzy_admin') }}" class="">
+            <iconify-icon icon="icon-park-solid:data-screen" class="sidebar-menu-item-icon"></iconify-icon>
+            Akurasi Fuzzy
+        </a>
+    </li>
+@endsection
+
+@section('data-variabel')
+    <li class="sidebar-menu-item">
+        <a href="{{ route('f_variabel_fuzzy') }}" class="">
+            <iconify-icon icon="mdi:folder-sync" class="sidebar-menu-item-icon"></iconify-icon>
+            Data Variabel
+        </a>
+    </li>
+@endsection
+
+@section('data-himpunan')
+    <li class="sidebar-menu-item">
+        <a href="{{ route('f_himpunan_fuzzy') }}" class="">
+            <iconify-icon icon="material-symbols:folder-data" class="sidebar-menu-item-icon"></iconify-icon>
+            Data Himpunan
+        </a>
+    </li>
+@endsection
+
+@section('data-aturan')
+    <li class="sidebar-menu-item">
+        <a href="{{ route('f_aturan_fuzzy') }}" class="">
+            <iconify-icon icon="material-symbols:folder-managed" class="sidebar-menu-item-icon"></iconify-icon>
+            Data Aturan
         </a>
     </li>
 @endsection
@@ -65,17 +92,17 @@
 @section('data-anggota')
     <li class="sidebar-menu-item active">
         <a href="{{ route('get-anggota') }}" class="">
-            <i class="ri-file-user-fill sidebar-menu-item-icon"></i>
+            <iconify-icon icon="clarity:administrator-solid" class="sidebar-menu-item-icon"></iconify-icon>
             Data Anggota
         </a>
     </li>
 @endsection
 
 @section('profile')
-    <li class="sidebar-menu-item ">
-        <a href="{{ route('profile-admin') }}" class="">
-            <i class="ri-user-settings-fill sidebar-menu-item-icon"></i>
-            Profile
+    <li class="sidebar-menu-item">
+        <a href="{{ route('profil_admin') }}" class="">
+            <iconify-icon icon="iconamoon:profile-circle-fill" class="sidebar-menu-item-icon"></iconify-icon>
+            Profil
         </a>
     </li>
 @endsection
@@ -121,7 +148,7 @@
                 @php
                     $no = 1;
                 @endphp
-                @foreach ( $adataUsers as $data  )
+                @foreach ( $dataUser as $data  )
                 <tbody>
                     <tr>
                         <td scope="row">{{ $no++ }}</td>
@@ -134,7 +161,9 @@
                         <td>
                             <div class="text-decoration-none">
                                 <div class="d-flex mb-2 btn-group">
-                                    <a href="" class="btn btn-sm btn-success" style="color: beige">Edit</a>
+                                    @can('anggota-edit')
+                                        <a href="" class="btn btn-sm btn-success" style="color: beige" data-bs-toggle="modal" data-bs-target="#editAnggota{{ $anggota->id }}">Edit</a>
+                                    @endcan
                                 </div>
                                 <div class="d-flex btn-group">
                                     <a href="" class="btn btn-sm btn-danger" style="font-size: 0.80rem; color: beige">Hapus</a>
@@ -149,20 +178,23 @@
     </div>
 </div>
 
-<!-- Modal Tambah User -->
-    <div class="modal fade" id="tambahAnggota" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+@include('admin.modal.tambah_anggota')
+@include('admin.modal.edit_anggota')
+
+<!-- Modal Edit User -->
+    {{-- <div class="modal fade" id="editAnggota{{ $data->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Anggota Baru</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Anggota</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('add-anggota') }}" method="POST" id="formAnggota">
+                <form action="" method="POST" id="formAnggota">
                     <div class="modal-body">
                         @csrf
                         <div class="info-profil row">
                             <div class="col-md-12 mb-3 form-floating">
-                                <input type="text" class="form-control" placeholder="Masukan nama lengkap" id="floatingNama" name="name">
+                                <input type="text" class="form-control" placeholder="Masukan nama lengkap" id="floatingNama" name="name" value="{{ $data->name }}">
                                 <label for="floatingNama" style="margin-left: 10px">Nama Lengkap</label>
                             </div>
                             <div class="col-md-12 mb-3 form-floating">
@@ -202,7 +234,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 <!-- Modal Sukses -->
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
@@ -221,40 +253,6 @@
 
 @section('script')
 <script>
-    // $(document).ready(function(){
-    //     tampilAnggota();
-    // })
-
-    // function tampilAnggota(){
-    //     $('tbody').html('');
-    //     $.ajax({
-    //         url : "{{ route('get-anggota') }}",
-    //         method : 'GET',
-    //         dataType : 'json',
-    //         success : function(data){
-    //             $.each(data, function(key, values){
-    //                 name = data[key].name;
-    //                 nik = data[key].nik;
-    //                 no_hp = data[key].no_hp;
-    //                 alamat = data[key].alamat;
-    //                 email = data[key].email;
-    //                 role = data[key].role;
-
-    //                 console.log(values);
-
-    //                 $('tbody').apped('<tr>\
-    //                         <td>'+parsInt(key+1)+'</td>\
-    //                         <td>'+name+'</td>\
-    //                         <td>'+nik+'</td>\
-    //                         <td>'+no_hp+'</td>\
-    //                         <td>'+alamat+'</td>\
-    //                         <td>'+email+'</td>\
-    //                         <td>'+role+'</td>\
-    //                     </tr>');
-    //             });
-    //         }
-    //     });
-    // }
 </script>
 @endsection
 
