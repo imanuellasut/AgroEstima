@@ -183,13 +183,11 @@
     <!-- end: Summary -->
     <!-- start: Graph -->
     <div class="card-header bg-white text-center mt-3 p-3 shadow-sm rounded">
-        <p>Perbandingan Total Panen Jagung <br>
-        (Data Aktual VS Data Prediksi) </p>
-        <hr>
         <div class="row g-3">
             <div class="card border-0 col-12 col-sm-6 col-lg-6 p-4">
                 <div class="card-header bg-white text-center">
-                    Grafik Bar
+                    Perbandingan Total Panen Jagung <br>
+                    (Data Aktual VS Data Prediksi)
                 </div>
                 <div class="card-body">
                     <canvas id="sales-chart"></canvas>
@@ -197,7 +195,8 @@
             </div>
             <div class="card border-0 col-12 col-sm-6 col-lg-6 p-4">
                 <div class="card-header bg-white text-center">
-                    Grafik Line
+                    Total Produksi Panen Jagung <br>
+                    Setiap Masa Panen
                 </div>
                 <div class="card-body">
                     <canvas id="sales-chart"></canvas>

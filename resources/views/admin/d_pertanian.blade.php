@@ -118,7 +118,7 @@
 <!-- Start: Content -->
 @section('content')
 <div class="card">
-    <small class="card-header fw-bold">Data Pertanian</small>
+    <small class="card-header fw-bold">Daftar Data Pertanian</small>
     <div class="card-body">
         <div class="table-responsive mt-0">
             <table class="table">

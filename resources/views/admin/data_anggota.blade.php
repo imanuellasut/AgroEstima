@@ -119,9 +119,9 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between">
-        <small class="fw-bold">Data Anggota</small>
+        <small class="fw-bold">Daftar Data Anggota</small>
         <div class="">
-            <a class="btn btn-primary btn-sm d-flex" data-bs-toggle="modal" data-bs-target="#tambahAnggota">
+            <a class="btn btn-success btn-sm d-flex" data-bs-toggle="modal" data-bs-target="#tambahAnggota">
                 <i class="ri-add-fill mr-2"></i>
                 Tambah Data
             </a>
@@ -142,9 +142,6 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
-
-                </tbody>
                 @php
                     $no = 1;
                 @endphp
@@ -159,16 +156,15 @@
                         <td> {{ $data->email }} </td>
                         <td> {{ $data->role }}</td>
                         <td>
-                            <div class="text-decoration-none">
-                                <div class="d-flex mb-2 btn-group">
-                                    @can('anggota-edit')
-                                        <a href="" class="btn btn-sm btn-success" style="color: beige" data-bs-toggle="modal" data-bs-target="#editAnggota{{ $anggota->id }}">Edit</a>
-                                    @endcan
-                                </div>
-                                <div class="d-flex btn-group">
-                                    <a href="" class="btn btn-sm btn-danger" style="font-size: 0.80rem; color: beige">Hapus</a>
-                                </div>
-                            </div>
+                            <a href="" class="btn btn-primary" style="color: beige" data-bs-toggle="modal">
+                                <iconify-icon icon="material-symbols:info" style="font-size: 0.90rem"></iconify-icon>
+                            </a>
+                            <a href="" class="btn btn-warning" style="color: beige" data-bs-toggle="modal">
+                                <iconify-icon icon="basil:edit-solid" style="font-size: 0.90rem;"></iconify-icon>
+                            </a>
+                            <a href="" class="btn btn-danger" style="color: beige">
+                                <iconify-icon icon="material-symbols:delete" style="font-size: 0.90rem;"></iconify-icon>
+                            </a>
                         </td>
                     </tr>
                 </tbody>

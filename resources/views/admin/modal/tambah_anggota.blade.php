@@ -45,7 +45,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="addAnggota">Tambah</button>
+                    <button type="submit" class="btn btn-success" id="addAnggota">Tambah</button>
                 </div>
             </form>
         </div>
