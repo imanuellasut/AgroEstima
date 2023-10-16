@@ -15,34 +15,28 @@ class UserController extends Controller
         return view('admin.data_anggota', compact('dataUser'));
     }
 
-    public function store(Request $request) {
+    public function addUser(Request $request) {
         // Validasi Data User
         $request->validate([
             'name'      => 'required',
-            'nik'       => 'required',
+            'nik'       => 'required|max:16',
             'alamat'    => 'required',
-            'no_hp'     => 'required',
+            'no_hp'     => 'required|max:12',
             'role'      => 'required',
-            'email'     => 'required',
-            'password'  => 'required'
+            'email'     => 'required|email|max:255',
+            'password'  => 'nullable|min:8'
         ]);
 
         // Cek apakah email sudah terdaftar
         $email = User::where('email', $request->email)->first();
         if($email) {
-            return Response::json([
-                'success' => false,
-                'message' => 'Email Sudah Terdaftar!'
-            ], 409);
+            return redirect()->route('get-anggota')->with('error', 'Email Sudah Terdaftar!');
         }
 
         // Cek apakah NIK sudah terdaftar
         $nik = User::where('nik', $request->nik)->first();
         if($nik) {
-            return Response::json([
-                'success' => false,
-                'message' => 'NIK Sudah Terdaftar!'
-            ], 409);
+            return redirect()->route('get-anggota')->with('error', 'NIK Sudah Terdaftar!');
         }
 
         // Simpan Data User ke Database
@@ -56,17 +50,32 @@ class UserController extends Controller
         $data->password = Hash::make($request->password);
         $data->save();
 
-        // Redirect respon JSON
-        return Response::json([
-            'success' => true,
-            'message' => 'Data Anggota Berhasil Ditambahkan!',
-            'data' => $data
-        ], 200);
+        return redirect()->route('get-anggota')->with('success', 'Data Anggota Berhasil Ditambahkan!');
     }
 
     public function edit($id) {
-        $anggota = User::find($id);
+        $dataUser = User::find($id);
         return view('admin.data_anggota', compact('anggota-edit'));
+    }
+
+    public function updateUser(Request $request, $id) {
+
+         // Validasi Data User
+        $data = $request->validate([
+            'name'      => 'required',
+            'nik'       => 'required',
+            'alamat'    => 'required',
+            'no_hp'     => 'required',
+            'role'      => 'required',
+            'email'     => 'required',
+            'password'  => 'required'
+        ]);
+    }
+
+    public function deleteUser($id) {
+        $dataUser = User::find($id);
+        $dataUser->delete();
+        return redirect()->route('get-anggota')->with('success', 'Data Anggota Berhasil Dihapus!');
     }
 
 }
