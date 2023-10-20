@@ -55,7 +55,7 @@
 
 @section('data_akurasi_fuzzy')
     <li class="sidebar-menu-item ">
-        <a href="{{ route('d_aturan_fuzzy_admin') }}" class="">
+        <a href="{{ route('d_akurasi_fuzzy_admin') }}" class="">
             <iconify-icon icon="icon-park-solid:data-screen" class="sidebar-menu-item-icon"></iconify-icon>
             Akurasi Fuzzy
         </a>
@@ -118,45 +118,81 @@
 <!-- Start: Content -->
 @section('content')
     <div class="card">
-        <div class="card-header d-flex justify-content-between">
-            <small class="fw-bold">Daftar Data Variabel</small>
+        <div class="card-header d-lg-flex justify-content-between">
+            <div>
+            </div>
             <div class="">
-                <a class="btn btn-success btn-sm d-flex" data-bs-toggle="modal" data-bs-target="#tambahAnggota">
+                <a class="tombolTambah" onclick="tambahVariabel()">
                     <i class="ri-add-fill mr-2"></i>
                     Tambah Data
                 </a>
             </div>
         </div>
         <div class="card-body">
-            <div class="mt-0 table-sm table-responsive">
-                <table id="tabelAnggota" class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Kode</th>
-                            <th scope="col">Nama Variabel</th>
-                            <th scope="col">Satuan</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
+            <div class="mt-0 table-sm table-responsive"  id="readData">
 
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>01</td>
-                            <td>Luas Lahan</td>
-                            <td>Ha</td>
-                            <td>
-                                <a class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editAnggota">
-                                    <i class="ri-pencil-fill"></i>
-                                </a>
-                                <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusAnggota">
-                                    <i class="ri-delete-bin-6-fill"></i>
-                                </a>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
+
+    <!-- Modal Tambah Data -->
+    <div class="modal fade" id="tambahVariabel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="page" class="p-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
+
+    <script>
+        // $(document).ready(function() {
+        //     // read()
+        //     console.log("Hello World!");
+        // });
+
+        //Read Data Variabel
+        function read() {
+            $.get('{{ route('v_data_variabel_fuzzy') }}', {}, function(data, status){
+                $('#readData').html(data);
+            });
+        }
+
+        //Modal Halaman Tambah  Data
+        function tambahVariabel() {
+            $.get ('{{ route('tambah_variabel_fuzzy') }}', {}, function(data, status) {
+                $('#modalLabel').html('Tambah Variabel');
+                $('#page').html(data);
+                $('#tambahVariabel').modal('show');
+            });
+        }
+
+        //Modal Proses Tambah Data
+        function prosesTambah() {
+            var kode = $('#kode').val();
+            var nama = $('#nama').val();
+            var satuan = $('#satuan').val();
+            $.ajax({
+                url: '{{ route('proses_tambah') }}',
+                type: 'get',
+                data: {
+                    kode: kode,
+                    nama: nama,
+                    satuan: satuan,
+                },
+                success: function(data) {
+                    $('.btn-close').click();
+                    read();
+                }
+            });
+        }
+
+    </script>
 @endsection

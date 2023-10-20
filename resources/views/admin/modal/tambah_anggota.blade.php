@@ -14,11 +14,11 @@
                             <label for="floatingNama" style="margin-left: 10px">Nama Lengkap</label>
                         </div>
                         <div class="col-md-12 mb-3 form-floating">
-                            <input type="number" class="form-control" placeholder="Masukan NIK" id="floatingNIK" name="nik">
+                            <input type="number" class="form-control" placeholder="Masukan NIK" id="floatingNIK" name="nik" maxlength="16">
                             <label for="floatingNIK" style="margin-left: 10px">NIK (Nomor Induk Kependudukan)</label>
                         </div>
                         <div class="col-md-12 mb-3 form-floating">
-                            <input type="number" class="form-control" placeholder="Masukan NO HP" id="floatingNoHP" name="no_hp">
+                            <input type="number" class="form-control" placeholder="Masukan NO HP" id="floatingNoHP" name="no_hp" maxlength="12">
                             <label for="floatingNoHP" style="margin-left: 10px">No HP</label>
                         </div>
                         <div class="col-md-12 mb-3 form-floating">
@@ -35,19 +35,23 @@
                                 <option value="0">Anggota</option>
                                 <option value="1">Admin</option>
                             </select>
-                            <label for="floatingSelect" tyle="margin-left: 20px">ROLE</label>
+                            <label for="floatingSelect" style="margin-left: 10px">ROLE</label>
                         </div>
                         <div class="col-md-12 mb-3 form-floating">
-                            <input type="password" class="form-control" placeholder="Masukan Alamat" id="floatingPass" name="password">
+                            <input type="password" class="form-control" placeholder="Masukan Passowrd" id="floatingPass" name="password">
                             <label for="floatingPass" style="margin-left: 10px">Password</label>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success" id="addAnggota">Tambah</button>
+                    <button type="submit" class="tombolTambah" id="addAnggota">Tambah</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+
+</script>

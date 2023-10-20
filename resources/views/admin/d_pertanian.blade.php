@@ -55,7 +55,7 @@
 
 @section('data_akurasi_fuzzy')
     <li class="sidebar-menu-item ">
-        <a href="{{ route('d_aturan_fuzzy_admin') }}" class="">
+        <a href="{{ route('d_akurasi_fuzzy_admin') }}" class="">
             <iconify-icon icon="icon-park-solid:data-screen" class="sidebar-menu-item-icon"></iconify-icon>
             Akurasi Fuzzy
         </a>
@@ -125,28 +125,19 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">tgl tanam</th>
+                        <th scope="col">tgl Panen</th>
+                        <th scope="col">Luas Lahan</th>
+                        <th scope="col">Jenis Tanaman</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
+                        <td>05/05/21</td>
+                        <td>12/01/21</td>
+                        <td>1 Hecktar</td>
+                        <td>Jagung</td>
                     </tr>
                 </tbody>
             </table>

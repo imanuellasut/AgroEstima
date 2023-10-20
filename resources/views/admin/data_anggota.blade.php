@@ -55,7 +55,7 @@
 
 @section('data_akurasi_fuzzy')
     <li class="sidebar-menu-item ">
-        <a href="{{ route('d_aturan_fuzzy_admin') }}" class="">
+        <a href="{{ route('d_akurasi_fuzzy_admin') }}" class="">
             <iconify-icon icon="icon-park-solid:data-screen" class="sidebar-menu-item-icon"></iconify-icon>
             Akurasi Fuzzy
         </a>
@@ -121,13 +121,21 @@
     <div class="card-header d-flex justify-content-between">
         <small class="fw-bold">Daftar Data Anggota</small>
         <div class="">
-            <a class="btn btn-success btn-sm d-flex" data-bs-toggle="modal" data-bs-target="#tambahAnggota">
-                <i class="ri-add-fill mr-2"></i>
+            <a class="tombolTambah d-flex" data-bs-toggle="modal" data-bs-target="#tambahAnggota">
+                <span class="iconify" data-icon="zondicons:add-solid" style="color: white;" data-width="20"></span>
                 Tambah Data
             </a>
         </div>
     </div>
     <div class="card-body">
+        <div class="d-block">
+                <form action="{{ route('get-anggota') }}" method="GET">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="cari" placeholder="Cari Nama Anggota" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary btn-sm" type="submit" id="button-addon2">Cari</button>
+                    </div>
+                </form>
+        </div>
         <div class="mt-0 table-sm table-responsive">
             <table id="tabelAnggota" class="table">
                 <thead>
@@ -136,7 +144,6 @@
                         <th>Nama</th>
                         <th>NIK</th>
                         <th>No.Hp</th>
-                        <th>Alamat</th>
                         <th>Email</th>
                         <th>Role</th>
                         <th>Aksi</th>
@@ -152,105 +159,45 @@
                         <td > {{ $data->name }} </td>
                         <td> {{ $data->nik }} </td>
                         <td> {{ $data->no_hp }} </td>
-                        <td> {{ $data->alamat }} </td>
                         <td> {{ $data->email }} </td>
                         <td> {{ $data->role }}</td>
-                        <td>
-                            <a href="" class="btn btn-primary" style="color: beige" data-bs-toggle="modal">
-                                <iconify-icon icon="material-symbols:info" style="font-size: 0.90rem"></iconify-icon>
+                        <td style="width: 12%;">
+                            <a href="" class="tombolEdit m-1" data-bs-toggle="modal"
+                            data-bs-target="#editAnggota__{{ $data->id }}">
+                                <span class="iconify" data-icon="basil:edit-solid" data-width="20"  style="color: white;"></span>
                             </a>
-                            <a href="" class="btn btn-warning" style="color: beige" data-bs-toggle="modal">
-                                <iconify-icon icon="basil:edit-solid" style="font-size: 0.90rem;"></iconify-icon>
-                            </a>
-                            <a href="" class="btn btn-danger" style="color: beige">
-                                <iconify-icon icon="material-symbols:delete" style="font-size: 0.90rem;"></iconify-icon>
+                            <a href="" class="tombolHapus m-1"
+                            data-bs-toggle="modal"
+                            data-bs-target="#hapusAnggota_{{ $data->id }}">
+                            <span class="iconify" data-icon="material-symbols:delete" data-width="20"  style="color: white;"></span>
                             </a>
                         </td>
                     </tr>
                 </tbody>
+                    @include('admin.modal.show_anggota')
+                    @include('admin.modal.tambah_anggota')
+                    @include('admin.modal.edit_anggota')
+                    @include('admin.modal.hapus_anggota')
                 @endforeach
             </table>
         </div>
     </div>
 </div>
 
-@include('admin.modal.tambah_anggota')
-@include('admin.modal.edit_anggota')
-
-<!-- Modal Edit User -->
-    {{-- <div class="modal fade" id="editAnggota{{ $data->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Anggota</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="" method="POST" id="formAnggota">
-                    <div class="modal-body">
-                        @csrf
-                        <div class="info-profil row">
-                            <div class="col-md-12 mb-3 form-floating">
-                                <input type="text" class="form-control" placeholder="Masukan nama lengkap" id="floatingNama" name="name" value="{{ $data->name }}">
-                                <label for="floatingNama" style="margin-left: 10px">Nama Lengkap</label>
-                            </div>
-                            <div class="col-md-12 mb-3 form-floating">
-                                <input type="number" class="form-control" placeholder="Masukan NIK" id="floatingNIK" name="nik">
-                                <label for="floatingNIK" style="margin-left: 10px">NIK (Nomor Induk Kependudukan)</label>
-                            </div>
-                            <div class="col-md-12 mb-3 form-floating">
-                                <input type="number" class="form-control" placeholder="Masukan NO HP" id="floatingNoHP" name="no_hp">
-                                <label for="floatingNoHP" style="margin-left: 10px">No HP</label>
-                            </div>
-                            <div class="col-md-12 mb-3 form-floating">
-                                <input type="email" class="form-control" placeholder="Masukan Email" id="floatingEmail" name="email">
-                                <label for="floatingEmail" style="margin-left: 10px">Email</label>
-                            </div>
-                            <div class="col-md-12 mb-3 form-floating">
-                                <textarea type="text" class="form-control" placeholder="Masukan Alamat" id="floatingAlamat" name="alamat"></textarea>
-                                <label for="floatingAlamat" style="margin-left: 10px">Alamat</label>
-                            </div>
-                            <div class="col-md-12 mb-3 form-floating">
-                                <select class="form-select" id="floatingSelect" aria-label="" name="role">
-                                    <option selected>Pilih Role</option>
-                                    <option value="0">Anggota</option>
-                                    <option value="1">Admin</option>
-                                </select>
-                                <label for="floatingSelect" tyle="margin-left: 20px">ROLE</label>
-                            </div>
-                            <div class="col-md-12 mb-3 form-floating">
-                                <input type="password" class="form-control" placeholder="Masukan Alamat" id="floatingPass" name="password">
-                                <label for="floatingPass" style="margin-left: 10px">Password</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="addAnggota">Tambah</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
-<!-- Modal Sukses -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Success</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="successMessage"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
 @section('script')
 <script>
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+    }
+    @if (Session::has('success'))
+        toastr.success('{{ Session::get('success') }}')
+    @endif
+
+    @if (Session::has('error'))
+        toastr.error('{{ Session::get('error') }}')
+    @endif
 </script>
 @endsection
-
 @endsection
 <!--End: Content -->
