@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VariabelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,18 +34,26 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
     Route::get('/admin/prediksi', [AdminController::class, 'v_prediksi'])->name('d_prediksi_admin');
 
     // DATA AKURASI FUZZY
-    Route::get('/admin/akurasi-fuzzy', [AdminController::class, 'v_akurasi_fuzzy'])->name('d_aturan_fuzzy_admin');
+    Route::get('/admin/akurasi-fuzzy', [AdminController::class, 'v_akurasi_fuzzy'])->name('d_akurasi_fuzzy_admin');
 
     // DATA FUZZY TSUKAMOTO
-    Route::get('/admin/data-variabel', [AdminController::class, 'f_variabel'])->name('f_variabel_fuzzy');
-    Route::get('/admin/data-himpunan', [AdminController::class, 'f_himmpunan'])->name('f_himpunan_fuzzy');
-    Route::get('/admin/data-aturan', [AdminController::class, 'f_aturan'])->name('f_aturan_fuzzy');
+    // DATA VARIABEL
+        Route::get('/admin/data-variabel', [VariabelController::class, 'index'])->name('f_variabel_fuzzy');
+        Route::get('/admin/data-variabel/variabel-himpunan/', [VariabelController::class, 'v_DataVariabel'])->name('v_data_variabel_fuzzy');
+        Route::get('/admin/data-variabel/tambah', [VariabelController::class, 'v_tambah'])->name('tambah_variabel_fuzzy');
+        Route::get('/admin/data-variabel/proses-tambah', [VariabelController::class, 'p_tambah'])->name('proses_tambah');
+
+    // DATA HIMPUNAN
+        Route::get('/admin/data-himpunan', [AdminController::class, 'f_himmpunan'])->name('f_himpunan_fuzzy');
+
+    // DATA ATURAN
+        Route::get('/admin/data-aturan', [AdminController::class, 'f_aturan'])->name('f_aturan_fuzzy');
 
     // CRUD DATA ANGGOTA
     Route::get('/admin/data-user', [UserController::class, 'indexAnggota'])->name('get-anggota');
-    Route::post('/admin/data-user', [UserController::class, 'store'])->name('add-anggota');
-    // Route::get('/admin/{id}/Edit', [UserController::class, 'edit'])->name('edit-anggota');
-    Route::put('/admin/update-data-user/{id}', [UserController::class, 'update'])->name('update-anggota');
+    Route::post('/admin/data-user', [UserController::class, 'addUser'])->name('add-anggota');
+    Route::post('/admin/update-user/{id}', [UserController::class, 'updateUser'])->name('update-anggota');
+    Route::get('/admin/delete-user/{id}', [UserController::class, 'deleteUser'])->name('delete-anggota');
 
     //DATA PROFILE
     Route::get('/admin/profile', [AdminController::class, 'v_profile'])->name('profil_admin');
