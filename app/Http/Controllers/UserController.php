@@ -30,13 +30,13 @@ class UserController extends Controller
         // Cek apakah email sudah terdaftar
         $email = User::where('email', $request->email)->first();
         if($email) {
-            return redirect()->route('get-anggota')->with('error', 'Email Sudah Terdaftar!');
+            return back()->with('error', 'Email Sudah Terdaftar!');
         }
 
         // Cek apakah NIK sudah terdaftar
         $nik = User::where('nik', $request->nik)->first();
         if($nik) {
-            return redirect()->route('get-anggota')->with('error', 'NIK Sudah Terdaftar!');
+            return back()->with('error', 'NIK Sudah Terdaftar!');
         }
 
         // Simpan Data User ke Database
@@ -50,26 +50,54 @@ class UserController extends Controller
         $data->password = Hash::make($request->password);
         $data->save();
 
-        return redirect()->route('get-anggota')->with('success', 'Data Anggota Berhasil Ditambahkan!');
-    }
-
-    public function edit($id) {
-        $dataUser = User::find($id);
-        return view('admin.data_anggota', compact('anggota-edit'));
+        return back()->with('success', 'Data Anggota Berhasil Ditambahkan!');
     }
 
     public function updateUser(Request $request, $id) {
 
          // Validasi Data User
-        $data = $request->validate([
+        $request->validate([
             'name'      => 'required',
-            'nik'       => 'required',
+            'nik'       => 'required|max:16',
             'alamat'    => 'required',
-            'no_hp'     => 'required',
+            'no_hp'     => 'required|max:12',
             'role'      => 'required',
-            'email'     => 'required',
-            'password'  => 'required'
+            'email'     => 'required|email|max:255',
+            'password'  => 'nullable|min:8'
         ]);
+
+        // // Cek apakah email sudah terdaftar
+        // $email = User::where('email', $request->email)->first();
+        // if($email) {
+        //     return back()->with('error', 'Email Sudah Terdaftar!');
+        // }
+
+        // // Cek apakah NIK sudah terdaftar
+        // $nik = User::where('nik', $request->nik)->first();
+        // if($nik) {
+        //     return back()->with('error', 'NIK Sudah Terdaftar!');
+        // }
+
+        // Simpan Data User ke Database
+
+        $dataUser = User::find($id);
+        $dataUser->name = $request->name;
+        $dataUser->nik = $request->nik;
+        $dataUser->alamat = $request->alamat;
+        $dataUser->no_hp = $request->no_hp;
+        $dataUser->role = $request->role;
+        $dataUser->email = $request->email;
+        if($request->password)
+        {
+            $dataUser->password = Hash::make($request->password);
+        }
+        $dataUser->save();
+
+        return back()->with('success', 'Data Anggota Berhasil Diubah!');
+    }
+
+    public function updateProfile(Request $request, User $user){
+
     }
 
     public function deleteUser($id) {

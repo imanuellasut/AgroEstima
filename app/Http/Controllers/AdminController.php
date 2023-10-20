@@ -26,10 +26,11 @@ class AdminController extends Controller
     }
 
     public function v_akurasi_fuzzy() {
-        return view('admin.d_aturan_fuzzy');
+        return view('admin.d_akurasi_fuzzy');
     }
 
     public function f_variabel() {
+        
         return view('admin.f_data_variabel');
     }
 
