@@ -4,7 +4,6 @@
         "dev": "npm run development",
         "development": "mix"
     },
-
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
         "axios": "^0.25",
@@ -13,5 +12,8 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "sass": "^1.56.1"
+    },
+    "dependencies": {
+        "jquery": "^3.7.1"
     }
 }
