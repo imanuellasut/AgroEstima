@@ -74,6 +74,128 @@ body {
 
 /* start: Global */
 
+/* Start Tombol  */
+.tombolInfo {
+    border: none;
+    display: flex;
+    padding: 0.50rem 0.50rem;
+    background-color: #14B8A6;
+    color: #ffffff;
+    line-height: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.3rem;
+    user-select: none;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transition: all .6s ease;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+}
+
+.tombolInfo:hover {
+    background-color: #0D9488;
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transform: translateY(-1px);
+}
+
+.tombolInfo:focus {
+    outline: none;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+}
+
+.tombolEdit {
+    border: none;
+    display: flex;
+    padding: 0.50rem 0.50rem;
+    background-color: #22C55E;
+    color: #ffffff;
+    line-height: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.3rem;
+    user-select: none;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transition: all .6s ease;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+}
+
+.tombolEdit:hover {
+    background-color: #16A34A;
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transform: translateY(-1px);
+}
+
+.tombolHapus {
+    border: none;
+    display: flex;
+    padding: 0.50rem 0.50rem;
+    background-color: #EF4444;
+    color: #ffffff;
+    line-height: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.3rem;
+    user-select: none;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transition: all .6s ease;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+}
+
+.tombolHapus:hover {
+    background-color: #DC2626;
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transform: translateY(-1px);
+}
+
+.tombolTambah {
+    border: none;
+    display: flex;
+    padding: 0.50rem 0.50rem;
+    background-color: #2563EB;
+    color: #ffffff;
+    line-height: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.3rem;
+    user-select: none;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transition: all .6s ease;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+}
+
+.tombolTambah:hover {
+    background-color: #1D4ED8;
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transform: translateY(-1px);
+}
+
+
+
+/* End Tombol */
 
 
 /* start: Sidebar */
