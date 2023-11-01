@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Variabel_Himpunan extends Model
 {
     use HasFactory;
-    use softDeletes;
 
     protected $table = 'variabel_himpunan';
     protected $fillable = [
-        'kode',
+        'id',
         'nama',
         'satuan',
     ];
+
+    public function himpunan() {
+        return $this->hasMany(FuzzyHimpunan::class, 'id_variabel');
+    }
 }
