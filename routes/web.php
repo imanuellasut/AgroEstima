@@ -24,7 +24,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
 //Route Untuk Admin
 Route::middleware(['auth', 'check-role:admin'])->group(function(){
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('dashboard-admin');
@@ -39,9 +38,10 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
     // DATA FUZZY TSUKAMOTO
     // DATA VARIABEL
         Route::get('/admin/data-variabel', [VariabelController::class, 'index'])->name('f_variabel_fuzzy');
-        Route::get('/admin/data-variabel/variabel-himpunan/', [VariabelController::class, 'v_DataVariabel'])->name('v_data_variabel_fuzzy');
-        Route::get('/admin/data-variabel/tambah', [VariabelController::class, 'v_tambah'])->name('tambah_variabel_fuzzy');
-        Route::get('/admin/data-variabel/proses-tambah', [VariabelController::class, 'p_tambah'])->name('proses_tambah');
+        Route::post('/admin/data-variabel/pagination-data', [VariabelController::class, 'pagination'])->name('pagination_data_variabel');
+        Route::post('/admin/data-variabel/tambah-variabel', [VariabelController::class, 'addVariabel'])->name('tambah_variabel');
+        Route::post('/admin/data-variabel/perbarui-variabel', [VariabelController::class, 'updateVariabel'])->name('perbarui_variabel');
+        Route::delete('/admin/data-variabel/hapus-variabel', [VariabelController::class, 'deleteVariabel'])->name('hapus_variabel');
 
     // DATA HIMPUNAN
         Route::get('/admin/data-himpunan', [AdminController::class, 'f_himmpunan'])->name('f_himpunan_fuzzy');
