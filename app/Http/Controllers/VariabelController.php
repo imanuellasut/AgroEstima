@@ -5,104 +5,78 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Variabel_Himpunan;
 use App\Models\User;
+use App\Models\FuzzyHimpunan;
 
-class VariabelController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('admin.f_data_variabel');
+class VariabelController extends Controller {
+
+    //Tampil Data Variabel
+    public function index() {
+        $dataVariabel = Variabel_Himpunan::paginate(5);
+        return view('admin.fuzzy_variabel', compact('dataVariabel'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //Tambah Data Variabel
+    public function addVariabel(Request $request) {
+        $request->validate(
+            [
+                'nama' => 'required|unique:variabel_himpunan',
+                'satuan' => 'required',
+            ],
+            [
+                'nama.required' => 'Nama Variabel tidak boleh kosong',
+                'nama.unique' => 'Nama Variabel sudah ada',
+                'satuan.required' => 'Satuan tidak boleh kosong',
+            ]
+        );
 
-    public function v_DataVariabel() {
-        $dataVariabel = Variabel_Himpunan::all();
-        return view('admin.f_tabel_variabel', compact('dataVariabel'));
-    }
+         // Insert Data variabel
+        $variabel = new Variabel_Himpunan;
+        $variabel->nama     = $request['nama'];
+        $variabel->satuan   = $request['satuan'];
+        $variabel->save();
 
-
-    public function v_tambah()
-    {
-        return view('admin.modal.tambah_variabelFuzzy');
-    }
-
-    public function p_tambah(Request $request) {
-        // Validasi Data variabel
-        $request->validate([
-            'kode'      => 'required',
-            'nama'       => 'required',
-            'satuan'    => 'required',
+        return response()->json([
+            'status' => 'success',
         ]);
-
-        // Insert Data variabel
-        $data['kode']      = $request->kode;
-        $data['nama']       = $request->nama;
-        $data['satuan']    = $request->satuan;
-        Variabel_Himpunan::insert($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    //Update Data Variabel
+    public function updateVariabel(Request $request) {
+        $request->validate(
+            [
+                'up_nama' => 'required|unique:variabel_himpunan,nama,'.$request->up_id,
+                'up_satuan' => 'required',
+            ],
+            [
+                'up_nama.required' => 'Nama Variabel tidak boleh kosong',
+                'up_nama.unique' => 'Nama Variabel sudah ada',
+                'up_satuan.required' => 'Satuan tidak boleh kosong',
+            ]
+        );
+
+        // Update Data variabel
+        Variabel_Himpunan::where('id', $request->up_id)
+            ->update([
+                'nama' => $request->up_nama,
+                'satuan' => $request->up_satuan,
+            ]);
+
+        return response()->json([
+            'status' => 'success',
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function deleteVariabel(Request $request) {
+        Variabel_Himpunan::where('id', $request->down_id)
+            ->delete();
+
+        return response()->json([
+            'status' => 'success',
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    // public function pagination(Request $request) {
+    //     $dataVariabel = Variabel_Himpunan::paginate(5);
+    //     return view('admin.fuzzy_variabel', compact('dataVariabel'));
+    // }
 }
