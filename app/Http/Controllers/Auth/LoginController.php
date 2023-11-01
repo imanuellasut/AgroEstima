@@ -46,6 +46,7 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
         if (Auth::attempt(['email' => $input["email"], 'password' => $input["password"]])) {
             if (Auth::user()->role == "admin") {
                 return redirect()->route('dashboard-admin');
@@ -59,5 +60,7 @@ class LoginController extends Controller
             ->route('login')
             ->with('error','Email-Address And Password Are Wrong.');
         }
+
     }
+
 }

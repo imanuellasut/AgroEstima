@@ -66,18 +66,6 @@ class UserController extends Controller
             'password'  => 'nullable|min:8'
         ]);
 
-        // // Cek apakah email sudah terdaftar
-        // $email = User::where('email', $request->email)->first();
-        // if($email) {
-        //     return back()->with('error', 'Email Sudah Terdaftar!');
-        // }
-
-        // // Cek apakah NIK sudah terdaftar
-        // $nik = User::where('nik', $request->nik)->first();
-        // if($nik) {
-        //     return back()->with('error', 'NIK Sudah Terdaftar!');
-        // }
-
         // Simpan Data User ke Database
 
         $dataUser = User::find($id);
