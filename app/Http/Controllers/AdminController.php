@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Variabel_Himpunan;
 use Illuminate\Http\Request;
+use App\Models\FuzzyHimpunan;
 
 class AdminController extends Controller
 {
@@ -18,7 +20,8 @@ class AdminController extends Controller
     }
 
     public function v_pertanian() {
-        return view('admin.d_pertanian');
+        $dataVariabel = Variabel_Himpunan::all();
+        return view('admin.d_pertanian', compact('dataVariabel'));
     }
 
     public function v_prediksi() {
@@ -29,13 +32,11 @@ class AdminController extends Controller
         return view('admin.d_akurasi_fuzzy');
     }
 
-    public function f_variabel() {
-        
-        return view('admin.f_data_variabel');
-    }
 
     public function f_himmpunan() {
-        return view('admin.f_data_himpunan');
+        $dataHimpunan = FuzzyHimpunan::all();
+        $dataVariabel = Variabel_Himpunan::all();
+        return view('admin.fuzzy_himpunan', compact('dataVariabel', 'dataHimpunan'));
     }
 
     public function f_aturan() {
