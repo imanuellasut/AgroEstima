@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Profile')
+@section('title', 'Data Anggota')
 
 <!-- Start: Sidebar -->
 @section('card-profile')
@@ -122,7 +122,7 @@
         <small class="fw-bold">Daftar Data Anggota</small>
         <div class="">
             <a class="tombolTambah d-flex" data-bs-toggle="modal" data-bs-target="#tambahAnggota">
-                <span class="iconify" data-icon="zondicons:add-solid" style="color: white;" data-width="20"></span>
+                <span class="iconify" data-icon="zondicons:add-solid" style="color: white; margin-right: 5px" data-width="20"></span>
                 Tambah Data
             </a>
         </div>
@@ -137,9 +137,9 @@
                 </form>
         </div>
         <div class="mt-0 table-sm table-responsive">
-            <table id="tabelAnggota" class="table">
-                <thead>
-                    <tr>
+            <table id="tabelAnggota" class="table table-striped table-hover" >
+                <thead style="background-color: #96BA54">
+                    <tr style="color: white; height: 3rem;" >
                         <th>No</th>
                         <th>Nama</th>
                         <th>NIK</th>
@@ -169,7 +169,7 @@
                             <a href="" class="tombolHapus m-1"
                             data-bs-toggle="modal"
                             data-bs-target="#hapusAnggota_{{ $data->id }}">
-                            <span class="iconify" data-icon="material-symbols:delete" data-width="20"  style="color: white;"></span>
+                                <span class="iconify" data-icon="material-symbols:delete" data-width="20"  style="color: white;"></span>
                             </a>
                         </td>
                     </tr>

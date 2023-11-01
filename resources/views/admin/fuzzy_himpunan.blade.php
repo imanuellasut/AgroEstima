@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Data Pertanian')
+@section('title', 'Data Himpunan Fuzzy')
 
 <!-- Start: Sidebar -->
 @section('card-profile')
@@ -36,7 +36,7 @@
 @endsection
 
 @section('data_pertanian')
-    <li class="sidebar-menu-item active">
+    <li class="sidebar-menu-item ">
         <a href="{{ route('d_pertanian_admin') }}" class="">
             <iconify-icon icon="material-symbols:chart-data-rounded" class="sidebar-menu-item-icon"></iconify-icon>
             Data Pertanian
@@ -72,7 +72,7 @@
 @endsection
 
 @section('data-himpunan')
-    <li class="sidebar-menu-item">
+    <li class="sidebar-menu-item active">
         <a href="{{ route('f_himpunan_fuzzy') }}" class="">
             <iconify-icon icon="material-symbols:folder-data" class="sidebar-menu-item-icon"></iconify-icon>
             Data Himpunan
@@ -111,38 +111,63 @@
 @section('navbar')
     <nav class="px-3 py-2 bg-white rounded shadow-sm">
         <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
-        <h5 class="fw-bold mb-0 me-auto p-1">Data Pertanian</h5>
+        <h5 class="fw-bold mb-0 me-auto p-1">Data Himpunan Fuzzy</h5>
     </nav>
 @endsection
 
 <!-- Start: Content -->
 @section('content')
-<div class="card">
-    <small class="card-header fw-bold">Daftar Data Pertanian</small>
+@foreach ( $dataVariabel as $data )
+<div class="card mb-4">
+    <div class="card-header d-lg-flex justify-content-between" style="align-items: center">
+        <div class="d-flex">
+            <iconify-icon icon="material-symbols:folder-data" class="sidebar-menu-item-icon"></iconify-icon>
+            <small class="fw-bold">Fungsi Keanggotaan Variabel {{ $data->nama }}</small>
+        </div>
+        <div class="">
+            <a class="tombolTambah d-flex" data-bs-toggle="modal" data-bs-target="#tambahAnggota">
+                <span class="iconify" data-icon="zondicons:add-solid" style="color: white; margin-right: 5px" data-width="20"></span>
+                Tambah Data
+            </a>
+        </div>
+    </div>
     <div class="card-body">
         <div class="table-responsive mt-0">
-            <table class="table">
-                <thead style="background-color: #96BA54">
-                    <tr style="color: white">
-                        <th>#</th>
-                        @foreach ( $dataVariabel as $data )
-                        <th scope="col">{{ $data->nama }}</th>
-                        @endforeach
+            <table class="table table-bordered table-striped table-hover" >
+                <thead  style="background-color: #96BA54">
+                    <tr  style="color: white">
+                        <th scope="col" style="width: 2rem">No</th>
+                        <th scope="col">Nama Himpunan Fuzzy</th>
+                        <th scope="col">Jenis Kurva</th>
+                        <th scope="col">Domain/Nilai</th>
+                        <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td scope="row">1</td>
-                        <td scope="row">1</td>
-                        <td scope="row">1</td>
-                        <td scope="row">1</td>
-                        <td scope="row">1</td>
-                        <td scope="row">1</td>
-                    </tr>
+                    @foreach ($dataHimpunan as $key=>$himpunan )
+                    @if($condition = $himpunan->id_variabel == $data->id)
+                        <tr>
+                            <td style="text-align: center">{{ $key+1 }}</td>
+                            <td>{{ $himpunan ->nama }}</td>
+                            <td>{{ $himpunan ->jenis_kurva }}</td>
+                            <td>[{{ $himpunan ->nilai_bawah }}] [{{ $himpunan ->nilai_atas }}]</td>
+                            <td>
+                                <a href="" class="tombolEdit m-1">
+                                    <span class="iconify" data-icon="basil:edit-solid" data-width="20"  style="color: white;"></span>
+                                </a>
+                                <a href="" class="tombolHapus">
+                                    <span class="iconify" data-icon="material-symbols:delete" data-width="20"  style="color: white;"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    @endif
+
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+@endforeach
 @endsection
 <!--End: Content -->

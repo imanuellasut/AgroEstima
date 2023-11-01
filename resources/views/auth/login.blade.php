@@ -9,6 +9,9 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css" integrity="sha512-8D+M+7Y6jVsEa7RD6Kv/Z7EImSpNpQllgaEIQAtqHcI0H6F4iZknRj0Nx1DCdB+TwBaS+702BGWYC0Ze2hpExQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
         {{-- CSS | Style --}}
         <link rel="stylesheet" href={{asset('css/style.css')}} />
 
@@ -31,7 +34,6 @@
                         </p>
                         <form action="{{url('login')}}" method="POST">
                             @csrf
-
                             <label for="email">Email</label>
                             <div class="email-wrap">
                                 <input
@@ -86,6 +88,16 @@
             </div>
         </div>
     </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <script src="{{asset('js/main.js')}}"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+        }
+        @if (Session::has('error'))
+            toastr.success('{{ Session::get('error') }}')
+        @endif
+    </script>
 </html>

@@ -10,8 +10,8 @@
                 <p> <b>NIK :</b> {{  $data->nik }}</p>
             </div>
             <div class="modal-footer">
-                <a href="/admin/delete-user/{{ $data->id }}" class="tombolHapus">Hapus</a>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <a href="/admin/delete-user/{{ $data->id }}" class="tombolHapus"> Hapus </a>
+                <button type="button" class="tombolBatal" data-bs-dismiss="modal">Batal</button>
             </div>
         </div>
     </div>
