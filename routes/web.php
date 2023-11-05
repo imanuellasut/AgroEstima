@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariabelController;
+use App\Http\Controllers\AturanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,8 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
         Route::get('/admin/data-himpunan', [AdminController::class, 'f_himmpunan'])->name('f_himpunan_fuzzy');
 
     // DATA ATURAN
-        Route::get('/admin/data-aturan', [AdminController::class, 'f_aturan'])->name('f_aturan_fuzzy');
+        Route::get('/admin/data-aturan', [AturanController::class, 'index'])->name('f_aturan_fuzzy');
+        Route::post('/admin/data-aturan/tambah-aturan', [AturanController::class, 'tambahAturan'])->name('tambah_aturan');
 
     // CRUD DATA ANGGOTA
     Route::get('/admin/data-user', [UserController::class, 'indexAnggota'])->name('get-anggota');

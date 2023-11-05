@@ -10,6 +10,7 @@ class FuzzyHimpunan extends Model
     use HasFactory;
 
     protected $table = 'fuzzy_himpunan';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'id',
         'id_variabel',
@@ -18,4 +19,14 @@ class FuzzyHimpunan extends Model
         'nilai_bawah',
         'nilai_atas',
     ];
+
+    public function variabelHimpunan()
+    {
+        return $this->belongsTo(Variabel_Himpunan::class, 'id_variabel');
+    }
+
+    public function fuzzyAturan()
+    {
+        return $this->hasOne(Fuzzy_Aturan::class, 'id_himpunan', 'id');
+    }
 }

@@ -11,10 +11,12 @@ class Variabel_Himpunan extends Model
     use HasFactory;
 
     protected $table = 'variabel_himpunan';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'id',
         'nama',
         'satuan',
+        'tipe_variabel',
     ];
 
     public function himpunan() {
