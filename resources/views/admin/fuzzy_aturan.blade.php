@@ -157,53 +157,13 @@
                     @endforeach
                     </select>
                 </div>
-                <div class="d-flex justify-content-lg-end">
+                <div class="d-flex justify-content-end">
                     <button type="submit" class="tombolTambah my-1">
                         <span class="iconify" data-icon="zondicons:add-solid" style="color: white; margin-right: 5px" data-width="20"></span>
                         Tambah Aturan
                     </button>
                 </div>
             </form>
-
-
-            {{-- <form  id="aturanForm">
-                @csrf
-                <h4>JIKA</h4>
-                <hr style="width: 100%; margin-left: 0px">
-                <div class="row g-3">
-                    @foreach ($variabel as $v)
-                    <div class="col-lg-4">
-                        <div class="mb-2">
-                            <label>{{ $v->nama }}</label>
-                            <select class="form-select" name="aturan[{{ $v->id_variabel }}]">
-                                <option selected>-- Pilih --</option>
-                                @foreach ($v->himpunan as $h)
-                                    <option value="{{ $h->id_himpunan }}">{{ $h->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                <hr style="width: 100%; margin-left: 0px">
-                <h4>MAKA</h4>
-                <hr style="width: 100%; margin-left: 0px">
-                <div class="col-lg-12 mb-2">
-                    <label>Produksi</label>
-                    <select class="form-select" aria-label="Default select example" name="id_keputusan">
-                        <option selected>-- Pilih --</option>
-                    @foreach ($keputusan as $k)
-                        <option value="{{ $k->id_keputusan }}">{{ $k->nama_keputusan }}</option>
-                    @endforeach
-                    </select>
-                </div>
-                <div class="d-flex justify-content-lg-end">
-                    <button type="submit" class="tombolTambah my-1">
-                        <span class="iconify" data-icon="zondicons:add-solid" style="color: white; margin-right: 5px" data-width="20"></span>
-                        Tambah Aturan
-                    </button>
-                </div>
-            </form> --}}
         </div>
     </div>
 
@@ -233,12 +193,24 @@
                             <tr>
                                 <td scope="row" class="text-lg-center">{{ $no++ }}</td>
                                 <td  class="text-lg-center">{{ $kode_aturan }}</td>
-                                <td><b>Jika</b> {{ implode(' Dan ', $data['aturan']) }} <b>Maka</b> Produksi = {{ $data['keputusan'] }}</td>
+                                <td><b>Jika</b> {{ implode(' Dan ', $data['aturan']) }} <b>Maka</b> Produksi = {{ $data['keputusan'] }} </td>
                                 <td class="text-lg-center">
-                                    <a href="" class="tombolEdit m-1">
+                                    <a href="" class="tombolEdit m-1 edit_aturan"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#updateModal"
+                                    data-kode="{{ $kode_aturan }}"
+                                    data-keputusan="{{ $data['keputusan'] }}"
+                                    data-idkeputusan = "{{ $data['id_keputusan'] }}"
+                                    data-himpunan="{{ implode(',', $data['himpunan']) }}"
+                                    data-idhimpunan = "{{ implode(',', $data['id_himpunan']) }}">
                                         <span class="iconify" data-icon="basil:edit-solid" data-width="20"  style="color: white;"></span>
                                     </a>
-                                    <a href="" class="tombolHapus">
+                                    <a href="" class="tombolHapus hapus_aturan"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal"
+                                    data-kode="{{ $kode_aturan }}"
+                                    data-aturan="{{ implode(' Dan ', $data['aturan']) }}"
+                                    data-keputusan = "{{ $data['keputusan'] }}">
                                         <span class="iconify" data-icon="material-symbols:delete" data-width="20"  style="color: white;"></span>
                                     </a>
                                 </td>
@@ -249,5 +221,163 @@
             </div>
         </div>
     </div>
+
+    @include('admin.modal_aturan.edit_aturan')
+    @include('admin.modal_aturan.delete_aturan')
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+
+    $(document).ready(function() {
+        $(document).on('click', '.edit_aturan', function() {
+
+                var kode = $(this).data('kode');
+                var himpunan = $(this).data('himpunan').split(',');
+                var idhimpunan = $(this).data('idhimpunan').split(',');
+                var keputusan = $(this).data('keputusan');
+                var idkeputusan = $(this).data('idkeputusan');
+
+                $('#up_kode').val(kode);
+                $('#up_himpunan').val(idhimpunan);
+                $('#up_keputusan').val(keputusan);
+
+
+                // Untuk setiap id dalam array idhimpunan
+                for (var i = 0; i < idhimpunan.length; i++) {
+                    // Dapatkan opsi dengan id yang sesuai
+                    var option = $('#option_' + idhimpunan[i]);
+
+                    // Jika opsi ditemukan
+                    if (option.length) {
+                        // Jika nilai opsi sama dengan nilai dalam array id_himpunan
+                        if (option.val() == idhimpunan[i]) {
+                            // Tambahkan atribut 'selected' ke opsi ini
+                            option.prop('selected', true);
+                        }
+                    }
+                }
+
+                // Dapatkan opsi dengan id yang sesuai
+                var option = $('#option_keputusan_' + idkeputusan);
+
+                // Jika opsi ditemukan
+                if (option.length) {
+                    // Tambahkan atribut 'selected' ke opsi ini
+                    option.prop('selected', true);
+                }
+
+                console.log('Kode:', kode);
+                console.log('Himpunan:', himpunan);
+                console.log('ID Himpunan:', idhimpunan);
+                console.log('Keputusan:', keputusan);
+                console.log('ID Keputusan:', idkeputusan);
+                console.log('Opsi:', option)
+
+                // $('select[id^="up_himpunan_"]').each(function(i, select) {
+                //     console.log('Memeriksa select:', select);
+                //     $(select).find('option').each(function(j, option) {
+                //         console.log('Memeriksa opsi:', option);
+                //         if ($(option).val() == himpunan[i]) {
+                //             console.log('Opsi cocok, menambahkan atribut selected');
+                //             $(option).prop('selected', true);
+                //         }
+                //     });
+                // });
+        });
+
+         //Edit Data Variabel
+        $(document).on('click', '#edit_variabel', function(e){
+            e.preventDefault();
+            let up_keputusan = $('#up_keputusan').val();
+            let up_kode = $('#up_kode').val();
+
+            console.log('Keputusan:', up_keputusan);
+            console.log('Kode:', up_kode);
+
+            // Mendapatkan nilai dari setiap elemen select up_himpunan
+            @foreach ($variabel as $v)
+                let up_himpunan_{{ $v->id }} = $('#up_himpunan[{{ $v->id }}]').val();
+                @foreach ($v->himpunan  as $h )
+                let option_{{ $h->id }} = $('#option_{{ $h->id }}').val();
+                console.log('Himpunan {{ $v->id }}:',);
+                @endforeach
+            @endforeach;
+
+            // $.ajax({
+            //     url : '{{ route('perbarui_variabel') }}',
+            //     method : 'POST',
+            //     data : {
+            //         _token: '{{ csrf_token() }}',
+            //         up_keputusan : up_keputusan,
+            //         up_himpunan :up_himpunan,
+            //         up_kode : up_kode
+            //     },
+            //     success:function(res){
+            //         if(res.status=='success'){
+            //             $('.btn-close').click();
+            //             $('#perbaruiVariabelForm')[0].reset();
+            //             $('.table').load(location.href+' .table');
+            //             toastr["success"]("Data Variabel Berhasil Ditambahkan")
+            //             toastr.options = {
+            //                 "closeButton": true,
+            //                 "progressBar": true,
+            //             };
+            //         }
+            //     }
+            // });
+        });
+
+
+        $(document).on('click', '.hapus_aturan', function() {
+            var kode = $(this).data('kode');
+            var aturan = $(this).data('aturan');
+            var keputusan = $(this).data('keputusan');
+
+            $('#down_kode').val(kode);
+            $('#down_aturan').val(aturan);
+            $('#down_keputusan').val(keputusan);
+        } );
+
+        $(document).on('click', '#delete_aturan', function(e){
+                e.preventDefault();
+                let down_kode = $('#down_kode').val();
+
+                $.ajax({
+                    url : '{{ route('hapus_aturan') }}',
+                    method : 'delete',
+                    data : {
+                        _token: '{{ csrf_token() }}',
+                        down_kode : down_kode,
+                    },
+                    success:function(res){
+                        if(res.status=='success'){
+                            $('.btn-close').click();
+                            $('.table').load(location.href+' .table');
+                            toastr["success"]("Data Aturan Berhasil Dihapus")
+                            toastr.options = {
+                                "closeButton": true,
+                                "progressBar": true,
+                            };
+                        }
+                    }
+                });
+            });
+
+    } );
+
+
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+    }
+    @if (Session::has('success'))
+        toastr.success('{{ Session::get('success') }}')
+    @endif
+</script>
 @endsection
 <!--End: Content -->
