@@ -109,9 +109,10 @@
 <!-- End: Sidebar -->
 
 @section('navbar')
-    <nav class="px-3 py-2 bg-white rounded shadow-sm">
+    <nav class="px-3 py-2 bg-white rounded shadow-sm text-muted">
         <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
-        <h5 class="fw-bold mb-0 me-auto p-1">Data Variabel Fuzzy</h5>
+        <iconify-icon icon="mdi:folder-sync" class="sidebar-menu-item-icon"></iconify-icon>
+        <small class="mb-0 me-auto p-1">Data Variabel</small>
     </nav>
 @endsection
 
@@ -119,10 +120,12 @@
 @section('content')
     <div class="card">
         <div class="card-header d-lg-flex justify-content-between" style="align-items: center">
-            <div>
-                <span class="text-muted">Daftar Data Variabel Fuzzy</span>
+            <div class="d-flex">
+                <iconify-icon icon="mdi:folder-sync" class="sidebar-menu-item-icon"></iconify-icon>
+                <small class="fw-bold">Daftar Data Variabel Fuzzy</small>
             </div>
-            <div class="">
+            <hr style="max-width: 100%; margin-left: 0px">
+            <div>
                 <a class="tombolTambah my-1" data-bs-toggle="modal" data-bs-target="#tambahModal">
                     <span class="iconify" data-icon="zondicons:add-solid" style="color: white; margin-right: 5px" data-width="20"></span>
                     Tambah Data
@@ -146,7 +149,7 @@
                             <td>{{ $key+1 }}</td>
                             <td>{{ $data->nama }}</td>
                             <td>{{ $data->satuan }}</td>
-                            <td>
+                            <td class="text-lg-center">
                                 <a class="tombolEdit m-1 edit-button edit_variabel_form"
                                 data-bs-toggle="modal"
                                 data-bs-target="#updateModal"
@@ -167,7 +170,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $dataVariabel->links() }}
             </div>
         </div>
     </div>
@@ -192,7 +194,7 @@
                 e.preventDefault();
                 let nama = $('#nama').val();
                 let satuan = $('#satuan').val();
-                console.log(nama+satuan);
+                // console.log(nama+satuan);
 
                 $.ajax({
                     url : '{{ route('tambah_variabel') }}',

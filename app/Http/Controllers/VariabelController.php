@@ -11,7 +11,7 @@ class VariabelController extends Controller {
 
     //Tampil Data Variabel
     public function index() {
-        $dataVariabel = Variabel_Himpunan::paginate(5);
+        $dataVariabel = Variabel_Himpunan::all();
         return view('admin.fuzzy_variabel', compact('dataVariabel'));
     }
 

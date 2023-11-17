@@ -128,6 +128,7 @@
                         @foreach ( $dataVariabel as $data )
                         <th scope="col">{{ $data->nama }}</th>
                         @endforeach
+                        <th>Produksi</th>
                     </tr>
                 </thead>
                 <tbody>

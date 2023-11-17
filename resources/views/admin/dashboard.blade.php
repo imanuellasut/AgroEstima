@@ -109,9 +109,10 @@
 <!-- End: Sidebar -->
 
 @section('navbar')
-    <nav class="px-3 py-2 bg-white rounded shadow-sm">
+    <nav class="px-3 py-2 bg-white rounded shadow-sm text-muted">
         <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
-        <h5 class="fw-bold mb-0 me-auto p-1">Dashboard</h5>
+        <iconify-icon icon="bxs:dashboard" class="sidebar-menu-item-icon"></iconify-icon>
+        <p class="mb-0 me-auto p-1">Dashboard</p>
     </nav>
 @endsection
 
@@ -184,22 +185,13 @@
     <!-- start: Graph -->
     <div class="card-header bg-white text-center mt-3 p-3 shadow-sm rounded">
         <div class="row g-3">
-            <div class="card border-0 col-12 col-sm-6 col-lg-6 p-4">
+            <div class="card">
                 <div class="card-header bg-white text-center">
                     Perbandingan Total Panen Jagung <br>
                     (Data Aktual VS Data Prediksi)
                 </div>
                 <div class="card-body">
-                    <canvas id="sales-chart"></canvas>
-                </div>
-            </div>
-            <div class="card border-0 col-12 col-sm-6 col-lg-6 p-4">
-                <div class="card-header bg-white text-center">
-                    Total Produksi Panen Jagung <br>
-                    Setiap Masa Panen
-                </div>
-                <div class="card-body">
-                    <canvas id="sales-chart"></canvas>
+                    <canvas id="myChart" style="height: 100%; max-height: 270px;"></canvas>
                 </div>
             </div>
         </div>
@@ -207,9 +199,26 @@
     <!-- end: Graph -->
 
     <script>
-        $(document).ready(function() {
-            console.log("Hello World!");
-        });
+    var xValues = ["Januari", "Februari", "Maret", "April", "Mei"];
+    var yValues = [100, 200, 50, 24, 15];
+    var y1Values = [55, 100, 44, 24, 15];
+
+    new Chart("myChart", {
+    type: "bar",
+    data: {
+        labels: xValues,
+        datasets: [{
+            label:'Data Aktual',
+            backgroundColor: 'rgba(99, 132, 0, 0.6)',
+            data: yValues
+        }, {
+            label:'Data Prediksi',
+            backgroundColor: 'rgba(0, 99, 132, 0.6)',
+            data: y1Values
+        }]
+    },
+    });
     </script>
+
 @endsection
 <!--End: Content -->

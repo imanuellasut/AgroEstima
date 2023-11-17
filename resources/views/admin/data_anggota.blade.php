@@ -174,15 +174,16 @@
                         </td>
                     </tr>
                 </tbody>
-                    @include('admin.modal.show_anggota')
-                    @include('admin.modal.tambah_anggota')
-                    @include('admin.modal.edit_anggota')
-                    @include('admin.modal.hapus_anggota')
+                @include('admin.modal.show_anggota')
+                @include('admin.modal.edit_anggota')
+                @include('admin.modal.hapus_anggota')
                 @endforeach
             </table>
         </div>
     </div>
 </div>
+
+@include('admin.modal.tambah_anggota')
 
 @section('script')
 <script>
