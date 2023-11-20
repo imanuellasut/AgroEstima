@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariabelController;
+use App\Http\Controllers\HimpunanController;
 use App\Http\Controllers\AturanController;
 
 /*
@@ -45,7 +46,9 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
         Route::delete('/admin/data-variabel/hapus-variabel', [VariabelController::class, 'deleteVariabel'])->name('hapus_variabel');
 
     // DATA HIMPUNAN
-        Route::get('/admin/data-himpunan', [AdminController::class, 'f_himmpunan'])->name('f_himpunan_fuzzy');
+        Route::get('/admin/data-himpunan', [HimpunanController::class, 'index'])->name('f_himpunan_fuzzy');
+        Route::post('/admin/data-himpunan/tambah-keputusan', [HimpunanController::class, 'addKeputusan'])->name('tambah_keputusan');
+        Route::post('/admin/data-himpunan/tambah-himpunan', [HimpunanController::class, 'addHimpunan'])->name('tambah_himpunan');
 
     // DATA ATURAN
         Route::get('/admin/data-aturan', [AturanController::class, 'index'])->name('f_aturan_fuzzy');
