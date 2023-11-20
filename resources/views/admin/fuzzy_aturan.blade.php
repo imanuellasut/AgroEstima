@@ -307,29 +307,6 @@
                 console.log('Himpunan {{ $v->id }}:',);
                 @endforeach
             @endforeach;
-
-            // $.ajax({
-            //     url : '{{ route('perbarui_variabel') }}',
-            //     method : 'POST',
-            //     data : {
-            //         _token: '{{ csrf_token() }}',
-            //         up_keputusan : up_keputusan,
-            //         up_himpunan :up_himpunan,
-            //         up_kode : up_kode
-            //     },
-            //     success:function(res){
-            //         if(res.status=='success'){
-            //             $('.btn-close').click();
-            //             $('#perbaruiVariabelForm')[0].reset();
-            //             $('.table').load(location.href+' .table');
-            //             toastr["success"]("Data Variabel Berhasil Ditambahkan")
-            //             toastr.options = {
-            //                 "closeButton": true,
-            //                 "progressBar": true,
-            //             };
-            //         }
-            //     }
-            // });
         });
 
 
