@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Variabel_Himpunan;
 use App\Models\Fuzzy_Aturan;
-use App\Models\FuzzyHimpunan;
+use App\Models\Fuzzy_Himpunan;
 use App\Models\Fuzzy_Keputusan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -14,11 +14,11 @@ class AturanController extends Controller
 {
     public function index() {
         $variabel = Variabel_Himpunan::all();
-        $himpunan = FuzzyHimpunan::all();
+        $himpunan = Fuzzy_Himpunan::all();
         $keputusan = Fuzzy_Keputusan::all();
         $aturan = Fuzzy_Aturan::with('himpunanFuzzy', 'keputusan')->get();
 
-        $results = FuzzyHimpunan::select('fuzzy_aturan.kode_aturan', 'variabel_himpunan.nama as nama_variabel', 'fuzzy_himpunan.nama as nama_himpunan', 'fuzzy_himpunan.id as id_himpunan' , 'fuzzy_keputusan.nama_keputusan as nama_keputusan', 'fuzzy_keputusan.id_keputusan as id_keputusan')
+        $results = Fuzzy_Himpunan::select('fuzzy_aturan.kode_aturan', 'variabel_himpunan.nama as nama_variabel', 'fuzzy_himpunan.nama as nama_himpunan', 'fuzzy_himpunan.id as id_himpunan' , 'fuzzy_keputusan.nama_keputusan as nama_keputusan', 'fuzzy_keputusan.id_keputusan as id_keputusan')
             ->join('variabel_himpunan', 'fuzzy_himpunan.id_variabel', '=', 'variabel_himpunan.id')
             ->join('fuzzy_aturan', 'fuzzy_himpunan.id', '=', 'fuzzy_aturan.id_himpunan')
             ->join('fuzzy_keputusan', 'fuzzy_aturan.id_keputusan', '=', 'fuzzy_keputusan.id_keputusan')

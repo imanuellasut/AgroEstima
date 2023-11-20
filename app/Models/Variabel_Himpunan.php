@@ -20,6 +20,6 @@ class Variabel_Himpunan extends Model
     ];
 
     public function himpunan() {
-        return $this->hasMany(FuzzyHimpunan::class, 'id_variabel');
+        return $this->hasMany(Fuzzy_Himpunan::class, 'id_variabel');
     }
 }

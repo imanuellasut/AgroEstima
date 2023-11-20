@@ -14,7 +14,7 @@ class Fuzzy_Keputusan extends Model
         'id_keputusan',
         'nama_keputusan',
         'jenis_kurva',
-        'nilai_bawah',
-        'nilai_atas',
+        'kep_nilai_bawah',
+        'kep_nilai_atas',
     ];
 }

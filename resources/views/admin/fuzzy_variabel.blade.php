@@ -217,9 +217,14 @@
                         }
                     }, error:function(err){
                         let error = err.responseJSON;
-                        $.each(error.errors, function(index, value){
-                            $('.errMsgContainer').append('<span class="text-danger">'+value+'</span>'+'<br>')
-                        });
+                        $('.errMsgContainerNama').empty();
+                        $('.errMsgContainerSatuan').empty();
+
+                        if(error.errors.nama){
+                            $('.errMsgContainerNama').append('<span class="text-danger">'+'*'+error.errors.nama+'</span>'+'<br>')
+                        } if(error.errors.satuan){
+                            $('.errMsgContainerSatuan').append('<span class="text-danger">'+'*'+error.errors.satuan+'</span>'+'<br>')
+                        }
                     }
                 });
             });

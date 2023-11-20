@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Variabel_Himpunan;
-use App\Models\User;
 use App\Models\FuzzyHimpunan;
+use App\Models\User;
+
 
 class VariabelController extends Controller {
 

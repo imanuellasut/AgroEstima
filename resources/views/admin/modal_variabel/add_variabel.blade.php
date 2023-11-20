@@ -9,15 +9,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="p-2">
-                        <div class="errMsgContainer mb-2">
-
-                        </div>
+                        <div class="errMsgContainerNama mb-2"> </div>
                         <div class="col-md-12 mb-3 form-floating">
-                            <input type="text" class="form-control" placeholder="Masukan Nama" id="nama" name="nama"></input>
+                            <input type="text" class="form-control" placeholder="Masukan Nama" id="nama" name="nama">
                             <label for="nama" >Nama Variabel</label>
                         </div>
+                        <div class="errMsgContainerSatuan mb-2"></div>
                         <div class="col-md-12 mb-3 form-floating">
-                            <input type="text" class="form-control" placeholder="Masukan Nama" id="satuan" name="satuan"></input>
+                            <input type="text" class="form-control" placeholder="Masukan Nama" id="satuan" name="satuan">
                             <label for="satuan" >Satuan</label>
                         </div>
                         <div class="modal-footer">

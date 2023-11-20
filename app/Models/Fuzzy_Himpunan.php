@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FuzzyHimpunan extends Model
+class Fuzzy_Himpunan extends Model
 {
     use HasFactory;
-
     protected $table = 'fuzzy_himpunan';
     protected $primaryKey = 'id';
     protected $fillable = [
