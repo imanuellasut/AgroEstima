@@ -8,7 +8,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="text"  id="up_id">
+                    <input type="text"  id="up_id" hidden>
                     <div class="p-2">
                         <div class="errMsgContainer mb-2">
                         </div>

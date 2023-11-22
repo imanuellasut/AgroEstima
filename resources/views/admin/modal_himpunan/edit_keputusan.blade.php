@@ -36,7 +36,7 @@
                         </div>
                         <div class="modal-footer">
                             <button class="tombolEdit " id="update_keputusan">
-                                <iconify-icon icon="material-symbols:save" style="margin-right: 5px"></iconify-icon>
+                                <iconify-icon icon="dashicons:update-alt" style="margin-right: 5px"></iconify-icon>
                                 Perbarui
                             </button>
                             <button type="button" class="tombolBatal" data-bs-dismiss="modal">Batal</button>

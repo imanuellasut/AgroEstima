@@ -10,17 +10,17 @@
                 <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
             </div>
             <div class="info-profile">
-                @if (Auth::user()->role = 1)
-                    <small>Admin</small>
-                @else
-                    <small>Anggota</small>
-                @endif
-                <br>
                 @php
                     $data = Auth::user()->name;
                     $name = implode(" ", array_slice(explode(" ", $data), 0, 2));
                 @endphp
                 <span>{{ $name }}</span>
+                <br>
+                @if (Auth::user()->role  = 1)
+                    <small>Admin</small>
+                @else
+                    <small>Anggota</small>
+                @endif
             </div>
         </div>
     </a>

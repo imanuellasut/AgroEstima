@@ -16,7 +16,7 @@ Sistem ini digunakan untuk melakukan perkiraan hasil panen tanaman jagung
 
 ## Database
 
-![Alt text](/public/img/DATABASE%20-%20METODE%20FUZZY.png)
+![Alt text](/public/img/DATABASE%20FIX-FUZZY%20TSUKAMOTO.png)
 
 ## Run Locally
 
