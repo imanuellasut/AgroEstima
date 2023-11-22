@@ -68,8 +68,7 @@ class VariabelController extends Controller {
     }
 
     public function deleteVariabel(Request $request) {
-        Variabel_Himpunan::where('id', $request->down_id)
-            ->delete();
+        Variabel_Himpunan::where('id', $request->down_id)->delete();
 
         return response()->json([
             'status' => 'success',

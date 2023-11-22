@@ -247,6 +247,10 @@
                 let up_nama = $('#up_nama').val();
                 let up_satuan = $('#up_satuan').val();
 
+                console.log('Kode:', up_id);
+                console.log('Nama:', up_nama);
+                console.log('Satuan:', up_satuan);
+
                 $.ajax({
                     url : '{{ route('perbarui_variabel') }}',
                     method : 'POST',
@@ -312,23 +316,6 @@
                     }
                 });
             });
-
-            // //Pagination
-            // $(document).on('click', '.pagination a', function(e){
-            //     e.preventDefault();
-            //     let page = $(this).attr('href').split('page=')[1];
-            //     variabel(page);
-
-            // });
-
-            // function variabel(page){
-            //     $.ajax ({
-            //         url : '/admin/data-variabel/pagination-data?='+page,
-            //         success:function(data){
-
-            //         }
-            //     });
-            // }
 
         } );
     </script>

@@ -47,7 +47,7 @@
                         <div class="errMsgContainer mb-2">
                         </div>
                         <div class="form-group modal-footer">
-                            <button class="tombolTambah" type="submit">
+                            <button class="tombolEdit" type="submit">
                                 <iconify-icon icon="dashicons:update-alt" style="margin-right: 5px"></iconify-icon>
                                 Perbarui
                             </button>

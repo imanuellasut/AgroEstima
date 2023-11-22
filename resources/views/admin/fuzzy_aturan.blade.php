@@ -234,6 +234,7 @@
 <script>
 
     $(document).ready(function() {
+        //View Edit Data Aturan
         $(document).on('click', '.edit_aturan', function() {
 
                 var kode = $(this).data('kode');
@@ -290,7 +291,7 @@
                 // });
         });
 
-         //Edit Data Variabel
+         //update Data Variabel
         $(document).on('click', '#edit_variabel', function(e){
             e.preventDefault();
             let up_keputusan = $('#up_keputusan').val();
