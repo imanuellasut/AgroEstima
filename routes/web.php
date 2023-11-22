@@ -48,7 +48,11 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
     // DATA HIMPUNAN
         Route::get('/admin/data-himpunan', [HimpunanController::class, 'index'])->name('f_himpunan_fuzzy');
         Route::post('/admin/data-himpunan/tambah-keputusan', [HimpunanController::class, 'addKeputusan'])->name('tambah_keputusan');
+        Route::post('/admin/data-himpunan/perbarui-keputusan', [HimpunanController::class, 'perbaruiKeputusan'])->name('perbarui_keputusan');
+        Route::delete('/admin/data-himpunan/hapus-keputusan', [HimpunanController::class, 'deleteKeputusan'])->name('hapus_keputusan');
         Route::post('/admin/data-himpunan/tambah-himpunan', [HimpunanController::class, 'addHimpunan'])->name('tambah_himpunan');
+        Route::post('/admin/data-himpunan/perbarui-himpunan', [HimpunanController::class, 'perbaruiHimpunan'])->name('perbarui_himpunan');
+        Route::delete('/admin/data-himpunan/hapus-himpunan', [HimpunanController::class, 'deleteHimpunan'])->name('hapus_himpunan');
 
     // DATA ATURAN
         Route::get('/admin/data-aturan', [AturanController::class, 'index'])->name('f_aturan_fuzzy');
