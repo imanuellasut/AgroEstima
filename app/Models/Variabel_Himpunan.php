@@ -22,4 +22,8 @@ class Variabel_Himpunan extends Model
     public function himpunan() {
         return $this->hasMany(Fuzzy_Himpunan::class, 'id_variabel');
     }
+
+    public function dataPertanian() {
+        return $this->hasMany(Data_pertanian::class, 'id_variabel');
+    }
 }

@@ -18,6 +18,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'nik',
@@ -53,5 +55,9 @@ class User extends Authenticatable
         return new Attribute(
             get: fn ($value) =>  ["anggota", "admin"][$value],
         );
+    }
+
+    public function dataPertanian() {
+        return $this->hasMany(Data_Pertanian::class, 'id_user');
     }
 }

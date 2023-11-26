@@ -137,7 +137,7 @@
                 <table class="table table-hover" id="tabelVariabel">
                     <thead style="background-color: #96BA54">
                         <tr style="color: white">
-                            <th scope="col" style="width: 2rem">#</th>
+                            <th scope="col" style="width: 2rem">No</th>
                             <th scope="col">Nama Variabel</th>
                             <th scope="col">Satuan</th>
                             <th scope="col">Aksi</th>
@@ -146,9 +146,9 @@
                     <tbody>
                         @foreach ($dataVariabel as $key=>$data )
                         <tr>
-                            <td>{{ $key+1 }}</td>
-                            <td>{{ $data->nama }}</td>
-                            <td>{{ $data->satuan }}</td>
+                            <td class="text-center" style="vertical-align: middle;">{{ $key+1 }}</td>
+                            <td style="vertical-align: middle;">{{ $data->nama }}</td>
+                            <td style="vertical-align: middle;">{{ $data->satuan }}</td>
                             <td class="text-lg-center">
                                 <a class="tombolEdit m-1 edit-button edit_variabel_form"
                                 data-bs-toggle="modal"
@@ -227,6 +227,12 @@
                         }
                     }
                 });
+            });
+
+            //Hapus validasi modal Tambah Data Variabel
+            $(document).on('click', '.btn-close', function(e){
+                $('.errMsgContainerNama').empty();
+                $('.errMsgContainerSatuan').empty();
             });
 
             //Tampil Edit Data Variabel

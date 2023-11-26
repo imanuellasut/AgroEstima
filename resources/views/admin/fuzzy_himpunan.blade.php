@@ -146,10 +146,10 @@
                 <tbody>
                     @foreach ($dataKeputusan as $key => $data )
                         <tr>
-                            <td style="text-align: center">{{ $key+1 }}</td>
-                            <td>{{ $data ->nama_keputusan }}</td>
-                            <td>{{ $data ->jenis_kurva }}</td>
-                            <td>[{{ $data ->kep_nilai_bawah }}] [{{ $data ->kep_nilai_atas }}]</td>
+                            <td style="vertical-align: middle; text-align: center">{{ $key+1 }}</td>
+                            <td style="vertical-align: middle;">{{ $data ->nama_keputusan }}</td>
+                            <td style="vertical-align: middle;">{{ $data ->jenis_kurva }}</td>
+                            <td style="vertical-align: middle;">[{{ $data ->kep_nilai_bawah }}] [{{ $data ->kep_nilai_atas }}]</td>
                             <td class="text-lg-center">
                                 <a href="" class="tombolEdit m-1 editKeputusan"
                                 data-bs-toggle="modal"
@@ -163,7 +163,7 @@
                                 </a>
                                 <a href="" class="tombolHapus deleteKeputusan"
                                 data-bs-toggle="modal"
-                                data-bs-target="#deleteKeputusan"
+                                data-bs-target="#deleteKeputusan_{{ $data->id_keputusan }}"
                                 data-idkeputusan="{{ $data->id_keputusan }}"
                                 data-namakeputusan="{{ $data ->nama_keputusan }}"
                                 data-jeniskurvakeputusan="{{ $data->jenis_kurva }}"
@@ -173,6 +173,7 @@
                                 </a>
                             </td>
                         </tr>
+                        @include('admin.modal_himpunan.edit_keputusan')
                         @include('admin.modal_himpunan.delete_keputusan')
                     @endforeach
                 </tbody>
@@ -218,10 +219,10 @@
                         @foreach ($dataHimpunan as $himpunan )
                         @if($himpunan->id_variabel == $data->id)
                             <tr>
-                                <td style="text-align: center">{{ $no++ }}</td>
-                                <td>{{ $himpunan ->nama }}</td>
-                                <td>{{ $himpunan ->jenis_kurva }}</td>
-                                <td>[{{ $himpunan ->nilai_bawah }}] [{{ $himpunan ->nilai_atas }}]</td>
+                                <td style="vertical-align: middle; text-align: center">{{ $no++ }}</td>
+                                <td style="vertical-align: middle;">{{ $himpunan ->nama }}</td>
+                                <td style="vertical-align: middle;">{{ $himpunan ->jenis_kurva }}</td>
+                                <td style="vertical-align: middle;">[{{ $himpunan ->nilai_bawah }}] [{{ $himpunan ->nilai_atas }}]</td>
                                 <td class="text-lg-center">
                                     <a href="" class="tombolEdit m-1 editAnggota"
                                     data-bs-toggle="modal"
@@ -257,10 +258,9 @@
         </div>
     </div>
     @include('admin.modal_himpunan.add_himpunan')
-
 @endforeach
 @include('admin.modal_himpunan.add_keputusan')
-@include('admin.modal_himpunan.edit_keputusan')
+
 
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
