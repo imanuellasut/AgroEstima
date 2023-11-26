@@ -109,10 +109,11 @@
 <!-- End: Sidebar -->
 
 @section('navbar')
-    <nav class="px-3 py-2 bg-white rounded shadow-sm">
-        <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
-        <h5 class="fw-bold mb-0 me-auto p-1">Data Pertanian</h5>
-    </nav>
+<nav class="px-3 py-2 bg-white rounded shadow-sm text-muted">
+    <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
+    <iconify-icon icon="material-symbols:chart-data-rounded" class="sidebar-menu-item-icon"></iconify-icon>
+    <p class="mb-0 me-auto p-1">Data Pertanian</p>
+</nav>
 @endsection
 
 <!-- Start: Content -->
@@ -121,26 +122,55 @@
     <small class="card-header fw-bold">Daftar Data Pertanian</small>
     <div class="card-body">
         <div class="table-responsive mt-0">
-            <table class="table">
+            <table class="table table-bordered table-striped table-hover " id="">
                 <thead style="background-color: #96BA54">
                     <tr style="color: white">
-                        <th>#</th>
-                        @foreach ( $dataVariabel as $data )
-                        <th scope="col">{{ $data->nama }}</th>
-                        @endforeach
-                        <th>Produksi</th>
+                        <th class="text-center">Kode Pertanian</th>
+                        <th class="text-center">Nama Anggota</th>
+                        <th class="text-center">Tanggal Tanam</th>
+                        <th class="text-center">Tanggal Panen</th>
+                        <th class="text-center">Hasil Panen</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
+                @foreach ( $dataP as $pertanian )
+                @if($pertanian->tgl_panen)
                 <tbody>
                     <tr>
-                        <td scope="row">1</td>
-                        <td scope="row">1</td>
-                        <td scope="row">1</td>
-                        <td scope="row">1</td>
-                        <td scope="row">1</td>
-                        <td scope="row">1</td>
+                        <td class="text-center" style="vertical-align: middle;">{{ $pertanian->kode_pertanian }}</td>
+                        @php
+                            $data = $pertanian->nama_anggota;
+                            $name = implode(" ", array_slice(explode(" ", $data), 0, 2));
+                        @endphp
+                        <td class="text-center text-uppercase" style="vertical-align: middle;">{{ $name }}</td>
+                        <td class="text-center" style="vertical-align: middle;">{{ $pertanian->tgl_tanam }}</td>
+                        <td class="text-center" style="vertical-align: middle;">{{ $pertanian->tgl_panen }}</td>
+                        <td class="text-center" style="vertical-align: middle;">
+                            @if($pertanian->jml_produksi == null)
+                            <span style="color: black">-</span>
+                            @endif
+                            {{ $pertanian->jml_produksi }}</td>
+                        <td class="text-center">
+                            @if($pertanian->jml_prediksi == null)
+                            <a href="" class="tombolLihat m-1" data-bs-toggle="modal" data-bs-target="" >
+                                <span class="iconify" data-icon="carbon:view-filled" data-width="20" style="color: white; margin-right: 2px"></span>
+                            </a>
+                            <a href="" class="tombolEdit m-1" data-bs-toggle="modal"
+                            data-bs-target="#updatepertanian_{{ $pertanian->kode_pertanian }}"
+                            data-kodePertanian = {{ $pertanian->kode_pertanian }}>
+                                <span class="iconify" data-icon="basil:edit-solid" data-width="20"
+                                style="color: white;"></span>
+                            </a>
+                            @else
+                            <a href="" class="tombolLihat m-1" data-bs-toggle="modal" data-bs-target="" >
+                                <span class="iconify" data-icon="carbon:view-filled" data-width="20"  style="color: white;"></span>
+                            </a>
+                            @endif
+                        </td>
                     </tr>
                 </tbody>
+                @endif
+                @endforeach
             </table>
         </div>
     </div>

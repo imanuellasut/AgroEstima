@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VariabelController;
-use App\Http\Controllers\HimpunanController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AturanController;
+use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\HimpunanController;
+use App\Http\Controllers\VariabelController;
+use App\Http\Controllers\DataPertanianController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +30,15 @@ Auth::routes();
 //Route Untuk Admin
 Route::middleware(['auth', 'check-role:admin'])->group(function(){
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('dashboard-admin');
-    Route::get('/admin/pertanian', [AdminController::class, 'v_pertanian'])->name('d_pertanian_admin');
+
+    // CRUD DATA PERTANIAN
+    Route::get('/admin/pertanian', [DataPertanianController::class, 'v_pertanian'])->name('d_pertanian_admin');
 
     // CRUD DATA PREDIKSI
-    Route::get('/admin/prediksi', [AdminController::class, 'v_prediksi'])->name('d_prediksi_admin');
+    Route::get('/admin/prediksi', [DataPertanianController::class, 'v_prediksi'])->name('d_prediksi_admin');
+    Route::post('/admin/tambah-prediksi', [DataPertanianController::class, 'tambahPrediksi'])->name('tambah_prediksi');
+    Route::post('/admin/perbarui-prediksi', [DataPertanianController::class, 'updatePrediksi'])->name('perbarui_prediksi');
+    Route::delete('/admin/hapus-prediksi', [DataPertanianController::class, 'deletePrediksi'])->name('hapus_prediksi');
 
     // DATA AKURASI FUZZY
     Route::get('/admin/akurasi-fuzzy', [AdminController::class, 'v_akurasi_fuzzy'])->name('d_akurasi_fuzzy_admin');
