@@ -137,12 +137,15 @@
             <table class="table table-bordered table-striped table-hover tablePrediksi" id="shwoTable">
                 <thead style="background-color: #96BA54">
                     <tr style="color: white">
-                        <th class="text-center" style="vertical-align: middle;">Kode Pertanian</th>
+                        <th class="text-center" style="vertical-align: middle; width: 5%;">Kode Pertanian</th>
                         <th class="text-center" style="vertical-align: middle;">Anggota</th>
                         <th class="text-center" style="vertical-align: middle;">Tanggal Tanam</th>
-                        @foreach ($variabels as $variabel)
+                        @foreach ($variabels as $dataV )
+                                <th scope="col" style="text-align: center; vertical-align: middle;">{{ $dataV->nama }}</th>
+                            @endforeach
+                        {{-- @foreach ($variabels as $variabel)
                         <th class="text-center" style="vertical-align: middle;">{{ $variabel->nama }} ({{ $variabel->satuan }})</th>
-                        @endforeach
+                        @endforeach --}}
                         <th class="text-center" style="vertical-align: middle;">Hasil Prediksi (Kg)</th>
                         <th class="text-center" style="vertical-align: middle;">Aksi</th>
                     </tr>
@@ -176,7 +179,7 @@
                             </td>
                             <td class="text-center" style="width: 25%">
                                 @if($item->jml_prediksi == null)
-                                    <a href="" class="tombolLihat m-1" data-bs-toggle="modal" data-bs-target="" >
+                                    <a href="" class="tombolLihat m-1" data-bs-toggle="modal" data-bs-target="#hitungPrediksi_{{ $item->kode_pertanian }}" >
                                         <span class="iconify" data-icon="mdi:calculator-variant" data-width="20" style="color: white; margin-right: 2px"></span>
                                     </a>
                                     <a href="" class="tombolEdit m-1" data-bs-toggle="modal"
@@ -196,6 +199,7 @@
                         </tr>
                         @include('admin.modal_prediksi.edit_prediksi')
                         @include('admin.modal_prediksi.delete_prediksi')
+                        @include('admin.modal_prediksi.hitung_prediksi')
                     @endforeach
                 </tbody>
             </table>
@@ -241,13 +245,13 @@
                 error: function(err) {
                     console.log(err);
                     let error = err.responseJSON;
-                    $('.errMsgContainerNilai+{{ $variabel->id }}').empty();
                     $('.errMsgContainerTglTanam').empty();
                     if(error.errors.tgl_tanam){
                         $('.errMsgContainerTglTanam').append('<span class="text-danger">'+'*'+error.errors.tgl_tanam+'</span>'+'<br>')
                     }
                     @foreach ($variabels as $variabel)
                         if(error.errors['nilai_' + {{ $variabel->id }}]){
+                            $('.errMsgContainerNilai+{{ $variabel->id }}').empty();
                             $('.errMsgContainerNilai{{ $variabel->id }}').append('<span class="text-danger">'+'*'+error.errors['nilai_' + {{ $variabel->id }}]+'</span>'+'<br>')
                         }
                     @endforeach

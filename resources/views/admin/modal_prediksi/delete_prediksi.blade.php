@@ -8,7 +8,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" id="kode_pertanian" name="kode_pertanian" value="{{ $item->kode_pertanian }}">
+                    <input type="text" id="kode_pertanian" name="kode_pertanian" value="{{ $item->kode_pertanian }}" hidden>
                     <div class="mb-2">
                         Apakah Anda yakin akan menghapus <br> Data Prediksi :  {{ $item->kode_pertanian }}</b> ?
                     </div>

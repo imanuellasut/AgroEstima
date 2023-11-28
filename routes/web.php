@@ -9,6 +9,7 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\HimpunanController;
 use App\Http\Controllers\VariabelController;
 use App\Http\Controllers\DataPertanianController;
+use App\Http\Controllers\PerhitunganFuzzyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
     Route::post('/admin/tambah-prediksi', [DataPertanianController::class, 'tambahPrediksi'])->name('tambah_prediksi');
     Route::post('/admin/perbarui-prediksi', [DataPertanianController::class, 'updatePrediksi'])->name('perbarui_prediksi');
     Route::delete('/admin/hapus-prediksi', [DataPertanianController::class, 'deletePrediksi'])->name('hapus_prediksi');
+    Route::post('/admin/hitung-prediksi', [PerhitunganFuzzyController::class, 'calculateFuzzy'])->name('hitung_prediksi');
 
     // DATA AKURASI FUZZY
     Route::get('/admin/akurasi-fuzzy', [AdminController::class, 'v_akurasi_fuzzy'])->name('d_akurasi_fuzzy_admin');

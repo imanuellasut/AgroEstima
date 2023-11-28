@@ -118,5 +118,30 @@
 <!-- Start: Content -->
 @section('content')
 
+<h1>Hasil Fuzzifikasi</h1>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th >Nama Variabel</th>
+            <th>Fungsi Keanggotaan</th>
+            <th>Nilai Fuzzifikasi</th>
+        </tr>
+    </thead>
+    @foreach ($hasil as $namaVariabel => $himpunan)
+    <tbody>
+        <tr>
+            <td rowspan="2">{{ $namaVariabel }}</td>
+            @foreach ($himpunan as $namaHimpunan => $nilai)
+            <td>{{ $namaHimpunan }}</td>
+                @foreach ($nilai as $jenisKurva => $nilaiFuzzifikasi)
+                <td>{{ $nilaiFuzzifikasi }}</td>
+        </tr>
+                @endforeach
+            @endforeach
+    </tbody>
+    @endforeach
+</table>
+
 @endsection
 <!--End: Content -->
