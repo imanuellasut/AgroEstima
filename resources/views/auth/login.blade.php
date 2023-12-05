@@ -37,7 +37,7 @@
                             <label for="email">Email</label>
                             <div class="email-wrap">
                                 <input
-                                    type="email"
+                                    type="text"
                                     id="email"
                                     name="email"
                                     placeholder="Email"

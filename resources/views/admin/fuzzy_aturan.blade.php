@@ -7,7 +7,11 @@
     <a href="{{ route('profil_admin') }}" class="to-profile">
         <div class="d-flex card-profile p-2">
             <div class="avatar-profile">
-                <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
+                @if(Auth::user()->foto != null)
+                <img src="{{ asset('img/profile/' .Auth::user()->foto ) }}"  style="aspect-ratio: 1 / 1; object-fit: cover">
+                @else
+                <img src="{{ asset('Template-Dashboard/img/default-profile.jpg') }}"  alt="" style="aspect-ratio: 1 / 1; object-fit: cover">
+                @endif
             </div>
             <div class="info-profile">
                 @php
@@ -62,6 +66,11 @@
     </li>
 @endsection
 
+@section('textMasterFuzzy')
+    <hr>
+    <p class="master-text">Master Fuzzy</p>
+@endsection
+
 @section('data-variabel')
     <li class="sidebar-menu-item">
         <a href="{{ route('f_variabel_fuzzy') }}" class="">
@@ -87,6 +96,11 @@
             Data Aturan
         </a>
     </li>
+@endsection
+
+@section('textMasterUser')
+    <hr>
+    <p class="master-text">Master User</p>
 @endsection
 
 @section('data-anggota')
@@ -176,45 +190,58 @@
         </div>
         <div class="card-body">
             <div class="mt-0 table-sm table-responsive">
-                <table class="table table-hover" id="tabelVariabel">
+                <table class="table table-hover">
                     <thead style="background-color: #96BA54">
-                        <tr style="color: white">
-                            <th scope="col" style="width: 2rem">No</th>
-                            <th scope="col" style="text-align: center; width: 5rem">Kode</th>
-                            <th scope="col" style="text-align: center">Aturan</th>
-                            <th scope="col" style="width: 20%; text-align: center">Aksi</th>
+                        <tr style="color: white;" class="justify-center align-content-center">
+                            <th scope="col" style="text-align: center; width: 5%; vertical-align: middle;" rowspan="2">Kode</th>
+                            <th scope="col" style="text-align: center; vertical-align: middle;" colspan="{{ $jumlahVariabel }}">Aturan</th>
+                            <th scope="col" style="text-align: center; vertical-align: middle;" rowspan="2">Hasil Panen</th>
+                            <th scope="col" style="text-align: center; vertical-align: middle;" rowspan="2">Aksi</th>
+                        </tr>
+                        <tr  style="color: white; "class="justify-center align-content-center">
+                            @foreach ($variabel as $dataV )
+                                <th scope="col" style="text-align: center; vertical-align: middle;">{{ $dataV->nama }}</th>
+                            @endforeach
                         </tr>
                     </thead>
-                    @php
-                        $no = 1;
-                    @endphp
                     <tbody>
-                        @foreach ($aturan_tabel as $kode_aturan => $data)
-                            <tr>
-                                <td scope="row" class="text-lg-center" style="vertical-align: middle;">{{ $no++ }}</td>
-                                <td  class="text-lg-center" style="vertical-align: middle;">{{ $kode_aturan }}</td>
-                                <td style="vertical-align: middle;"><b>Jika</b> {{ implode(' Dan ', $data['aturan']) }} <b>Maka</b> Produksi = {{ $data['keputusan'] }} </td>
-                                <td class="text-lg-center">
-                                    <a href="" class="tombolEdit m-1 edit_aturan"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#updateModal"
-                                    data-kode="{{ $kode_aturan }}"
-                                    data-keputusan="{{ $data['keputusan'] }}"
-                                    data-idkeputusan = "{{ $data['id_keputusan'] }}"
-                                    data-himpunan="{{ implode(',', $data['himpunan']) }}"
-                                    data-idhimpunan = "{{ implode(',', $data['id_himpunan']) }}">
-                                        <span class="iconify" data-icon="basil:edit-solid" data-width="20"  style="color: white;"></span>
-                                    </a>
-                                    <a href="" class="tombolHapus hapus_aturan"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal"
-                                    data-kode="{{ $kode_aturan }}"
-                                    data-aturan="{{ implode(' Dan ', $data['aturan']) }}"
-                                    data-keputusan = "{{ $data['keputusan'] }}">
-                                        <span class="iconify" data-icon="material-symbols:delete" data-width="20"  style="color: white;"></span>
-                                    </a>
-                                </td>
-                            </tr>
+                        @foreach ($dataAturan as $item)
+                        <tr class="justify-center align-content-center" >
+                            <td class="text-center" style="vertical-align: middle;">{{ $item->kode_aturan }}</td>
+                            @php
+                                $id_variabel_array = explode(',', $item->id_variabel);
+                                $namaHimpunan = explode(',', $item->nama_himpunan);
+                            @endphp
+                            @foreach ($variabel as $dataV )
+                                @php
+                                    $index = array_search($dataV->id, $id_variabel_array);
+                                @endphp
+                                <td class="text-center" style="vertical-align: middle;"> {{ $index !== false ? $namaHimpunan[$index] : '' }}</td>
+                            @endforeach
+                            @php
+                                $data = $item->nama_keputusan;
+                                $nameKeputusan = implode("", array_slice(explode(",", $data), 0, 1));
+                            @endphp
+                            <td class="text-center" style="vertical-align: middle;">{{ $nameKeputusan }}</td>
+                            <td class="text-lg-center">
+                                <a href="" class="tombolEdit m-1 edit_aturan"
+                                data-bs-toggle="modal"
+                                data-bs-target="#updateModal"
+                                data-kode="{{ $item->kode_aturan }}"
+                                data-keputusan="{{ $item->nama_keputusan }}"
+                                data-idkeputusan ="{{ $item->id_keputusan }}"
+                                data-himpunan="{{ $item->nama_himpunan }}"
+                                data-idhimpunan ="{{ $item->id_himpunan }}">
+                                    <span class="iconify" data-icon="basil:edit-solid" data-width="20"  style="color: white;"></span>
+                                </a>
+                                <a href="" class="tombolHapus hapus_aturan"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteModal"
+                                data-kode="{{ $item->kode_aturan }}">
+                                    <span class="iconify" data-icon="material-symbols:delete" data-width="20"  style="color: white;"></span>
+                                </a>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

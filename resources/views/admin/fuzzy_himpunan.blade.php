@@ -7,7 +7,11 @@
     <a href="{{ route('profil_admin') }}" class="to-profile">
         <div class="d-flex card-profile p-2">
             <div class="avatar-profile">
-                <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
+                @if(Auth::user()->foto != null)
+                <img src="{{ asset('img/profile/' .Auth::user()->foto ) }}"  style="aspect-ratio: 1 / 1; object-fit: cover">
+                @else
+                <img src="{{ asset('Template-Dashboard/img/default-profile.jpg') }}"  alt="" style="aspect-ratio: 1 / 1; object-fit: cover">
+                @endif
             </div>
             <div class="info-profile">
                 @php
@@ -62,6 +66,11 @@
     </li>
 @endsection
 
+@section('textMasterFuzzy')
+    <hr>
+    <p class="master-text">Master Fuzzy</p>
+@endsection
+
 @section('data-variabel')
     <li class="sidebar-menu-item">
         <a href="{{ route('f_variabel_fuzzy') }}" class="">
@@ -87,6 +96,11 @@
             Data Aturan
         </a>
     </li>
+@endsection
+
+@section('textMasterUser')
+    <hr>
+    <p class="master-text">Master User</p>
 @endsection
 
 @section('data-anggota')
@@ -269,9 +283,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-    <script>
+<script>
         $(document).ready(function() {
-
             //Tambah Data Himpunan Keputusan
             $(document).on('click', '#tambah_keputusan', function(e){
                 e.preventDefault();
@@ -363,11 +376,11 @@
                 let up_kep_nilai_bawah = parseFloat($('#up_kep_nilai_bawah').val()) || null;
                 let up_kep_nilai_atas = parseFloat($('#up_kep_nilai_atas').val()) || null;
 
-                console.log('Kode:', up_id_keputusan);
-                console.log('Nama:', up_nama_keputusan);
-                console.log('Jenis Kurva:', up_jenis_kurva_keputusan);
-                console.log('Nilai Bawah:', up_kep_nilai_bawah);
-                console.log('Nilai Atas:', up_kep_nilai_atas);
+                // console.log('Kode:', up_id_keputusan);
+                // console.log('Nama:', up_nama_keputusan);
+                // console.log('Jenis Kurva:', up_jenis_kurva_keputusan);
+                // console.log('Nilai Bawah:', up_kep_nilai_bawah);
+                // console.log('Nilai Atas:', up_kep_nilai_atas);
 
                 $.ajax({
                     url : '{{ route('perbarui_keputusan') }}',
@@ -648,6 +661,6 @@
             });
 
         });
-    </script>
+</script>
 @endsection
 <!--End: Content -->

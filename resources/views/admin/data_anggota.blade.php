@@ -7,7 +7,11 @@
     <a href="{{ route('profil_admin') }}" class="to-profile">
         <div class="d-flex card-profile p-2">
             <div class="avatar-profile">
-                <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
+                @if(Auth::user()->foto != null)
+                <img src="{{ asset('img/profile/' .Auth::user()->foto ) }}"  style="aspect-ratio: 1 / 1; object-fit: cover">
+                @else
+                <img src="{{ asset('Template-Dashboard/img/default-profile.jpg') }}"  alt="" style="aspect-ratio: 1 / 1; object-fit: cover">
+                @endif
             </div>
             <div class="info-profile">
                 @php
@@ -62,6 +66,11 @@
     </li>
 @endsection
 
+@section('textMasterFuzzy')
+    <hr>
+    <p class="master-text">Master Fuzzy</p>
+@endsection
+
 @section('data-variabel')
     <li class="sidebar-menu-item">
         <a href="{{ route('f_variabel_fuzzy') }}" class="">
@@ -87,6 +96,11 @@
             Data Aturan
         </a>
     </li>
+@endsection
+
+@section('textMasterUser')
+    <hr>
+    <p class="master-text">Master User</p>
 @endsection
 
 @section('data-anggota')
@@ -118,7 +132,7 @@
 <!-- Start: Content -->
 @section('content')
 <div class="card">
-    <div class="card-header d-flex justify-content-between">
+    <div class="card-header d-flex justify-content-between align-items-center">
         <small class="fw-bold">Daftar Data Anggota</small>
         <div class="">
             <a class="tombolTambah d-flex" data-bs-toggle="modal" data-bs-target="#tambahAnggota">
@@ -128,13 +142,22 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="d-block">
-                <form action="{{ route('get-anggota') }}" method="GET">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="cari" placeholder="Cari Nama Anggota" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary btn-sm" type="submit" id="button-addon2">Cari</button>
-                    </div>
-                </form>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="mb-2 d-flex justify-content-between align-items-center">
+                <div class="mr-5" style="margin-right: 4px">
+                    <form method="GET" action="{{ route('get-anggota') }}">
+                        <select name="perPage" onchange="this.form.submit()" class="form-select">
+                            {{-- <option value="" disabled>Data</option> --}}
+                            <option value="5" {{ (old('perPage') ? old('perPage') : $perPage) == 5 ? 'selected' : '' }}>5</option>
+                            <option value="10" {{ (old('perPage') ? old('perPage') : $perPage) == 10 ? 'selected' : '' }}>10</option>
+                            <option value="15" {{ (old('perPage') ? old('perPage') : $perPage) == 15 ? 'selected' : '' }}>15</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="">
+                    <small>Data per halaman</small>
+                </div>
+            </div>
         </div>
         <div class="mt-0 table-sm table-responsive">
             <table id="tabelAnggota" class="table table-striped table-hover" >
@@ -149,13 +172,10 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                @php
-                    $no = 1;
-                @endphp
-                @foreach ( $dataUser as $data  )
+                @foreach ( $dataUser as $key =>$data  )
                 <tbody>
                     <tr>
-                        <td scope="row">{{ $no++ }}</td>
+                        <td scope="row">{{ $dataUser->firstItem() + $key }}</td>
                         <td > {{ $data->name }} </td>
                         <td> {{ $data->nik }} </td>
                         <td> {{ $data->no_hp }} </td>
@@ -179,6 +199,11 @@
                 @include('admin.modal.hapus_anggota')
                 @endforeach
             </table>
+            <hr class="">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class=""><small>{{ $dataUser->count()  }} Data dari Halaman {{ $dataUser->currentPage() }} </small></div>
+                <div class=""> {{ $dataUser -> links() }}</div>
+            </div>
         </div>
     </div>
 </div>

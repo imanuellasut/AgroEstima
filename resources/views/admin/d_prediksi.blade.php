@@ -7,7 +7,11 @@
     <a href="{{ route('profil_admin') }}" class="to-profile">
         <div class="d-flex card-profile p-2">
             <div class="avatar-profile">
-                <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
+                @if(Auth::user()->foto != null)
+                <img src="{{ asset('img/profile/' .Auth::user()->foto ) }}"  style="aspect-ratio: 1 / 1; object-fit: cover">
+                @else
+                <img src="{{ asset('Template-Dashboard/img/default-profile.jpg') }}"  alt="" style="aspect-ratio: 1 / 1; object-fit: cover">
+                @endif
             </div>
             <div class="info-profile">
                 @php
@@ -62,6 +66,11 @@
     </li>
 @endsection
 
+@section('textMasterFuzzy')
+    <hr>
+    <p class="master-text">Master Fuzzy</p>
+@endsection
+
 @section('data-variabel')
     <li class="sidebar-menu-item">
         <a href="{{ route('f_variabel_fuzzy') }}" class="">
@@ -87,6 +96,11 @@
             Data Aturan
         </a>
     </li>
+@endsection
+
+@section('textMasterUser')
+    <hr>
+    <p class="master-text">Master User</p>
 @endsection
 
 @section('data-anggota')
@@ -133,26 +147,57 @@
         </div>
     </div>
     <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="mb-2 d-flex justify-content-between align-items-center">
+                <div class="mr-5" style="margin-right: 4px">
+                    <form method="GET" action="{{ route('d_prediksi_admin') }}">
+                        <select name="perPage" onchange="this.form.submit()" class="form-select">
+                            {{-- <option value="" disabled>Data</option> --}}
+                            <option value="5" {{ (old('perPage') ? old('perPage') : $perPage) == 5 ? 'selected' : '' }}>5</option>
+                            <option value="10" {{ (old('perPage') ? old('perPage') : $perPage) == 10 ? 'selected' : '' }}>10</option>
+                            <option value="15" {{ (old('perPage') ? old('perPage') : $perPage) == 15 ? 'selected' : '' }}>15</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="">
+                    <small>Data per halaman</small>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="mr-5" style="margin-right: 4px">
+                    <form method="GET" action="{{ route('d_prediksi_admin') }}">
+                        <select name="tahun_tanam" onchange="this.form.submit()" class="form-select">
+                            <option value="" disabled selected>Tahun Tanam</option>
+                            <option value="">Semua Data</option>
+                            <option value="2021" {{ (old('tahun_tanam') ? old('tahun_tanam') : $tahun_tanam) == 2021 ? 'selected' : '' }}>2021</option>
+                            <option value="2022" {{ (old('tahun_tanam') ? old('tahun_tanam') : $tahun_tanam) == 2022 ? 'selected' : '' }}>2022</option>
+                            <option value="2023" {{ (old('tahun_tanam') ? old('tahun_tanam') : $tahun_tanam) == 2023 ? 'selected' : '' }}>2023</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="table-responsive mt-0">
             <table class="table table-bordered table-striped table-hover tablePrediksi" id="shwoTable">
                 <thead style="background-color: #96BA54">
                     <tr style="color: white">
-                        <th class="text-center" style="vertical-align: middle; width: 5%;">Kode Pertanian</th>
+                        <th class="text-center" style="vertical-align: middle; width: 5%;">No</th>
+                        <th class="text-center" style="vertical-align: middle; width: 10%;">Kode</th>
                         <th class="text-center" style="vertical-align: middle;">Anggota</th>
-                        <th class="text-center" style="vertical-align: middle;">Tanggal Tanam</th>
+                        <th class="text-center" style="vertical-align: middle; width: 15%">Tanggal Tanam</th>
                         @foreach ($variabels as $dataV )
                                 <th scope="col" style="text-align: center; vertical-align: middle;">{{ $dataV->nama }}</th>
-                            @endforeach
-                        {{-- @foreach ($variabels as $variabel)
-                        <th class="text-center" style="vertical-align: middle;">{{ $variabel->nama }} ({{ $variabel->satuan }})</th>
-                        @endforeach --}}
+                        @endforeach
                         <th class="text-center" style="vertical-align: middle;">Hasil Prediksi (Kg)</th>
                         <th class="text-center" style="vertical-align: middle;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($dataPertanian as $item)
+                    @foreach ($dataPertanian as $key => $item)
                         <tr class="justify-center align-content-center">
+                            <td class="text-center" style="vertical-align: middle;">
+                                {{ $dataPertanian->firstItem() + $key }}
+                            </td>
                             <td class="text-center" style="vertical-align: middle;">{{ $item->kode_pertanian }}</td>
                             @php
                                 $data = $item->nama_anggota;
@@ -174,27 +219,37 @@
                                 @if($item->jml_prediksi == null)
                                     <span class="badge bg-danger">Belum Dihitung </span>
                                 @else
-                                    {{ $item->jml_prediksi }}
+                                    {{ number_format($item->jml_prediksi, 2, ',', '.')}}
                                 @endif
                             </td>
-                            <td class="text-center" style="width: 25%">
+                            <td class="text-center" style="width: 20%">
                                 @if($item->jml_prediksi == null)
                                     <a href="" class="tombolLihat m-1" data-bs-toggle="modal" data-bs-target="#hitungPrediksi_{{ $item->kode_pertanian }}" >
-                                        <span class="iconify" data-icon="mdi:calculator-variant" data-width="20" style="color: white; margin-right: 2px"></span>
+                                        <span class="iconify" data-icon="mdi:calculator-variant" data-width="20" style="color: white; margin-right: 2px" aria-label="Hitung"></span>
                                     </a>
                                     <a href="" class="tombolEdit m-1" data-bs-toggle="modal"
-                                    data-bs-target="#updatePrediksi_{{ $item->kode_pertanian }}"
+                                    data-bs-target="#updatePrediksiAdmin_{{ $item->kode_pertanian }}"
                                     data-kodePertanian = {{ $item->kode_pertanian }}>
                                         <span class="iconify" data-icon="basil:edit-solid" data-width="20"
-                                        style="color: white;"></span>
+                                        style="color: white;" aria-label="Update"></span>
+                                    </a>
+                                    <a href="" class="tombolHapus m-1" data-bs-toggle="modal"
+                                    data-bs-target="#deletePrediksi_{{ $item->kode_pertanian }}">
+                                        <span class="iconify" data-icon="material-symbols:delete" data-width="20"  style="color: white;" aria-label="Delete"></span>
                                     </a>
                                 @else
-
-                                @endif
+                                <a href="" class="tombolDisabled m-1 disabled">
+                                    <span class="iconify" data-icon="mdi:calculator-variant" data-width="20" style="color: white; margin-right: 2px" aria-label="Hitung"></span>
+                                </a>
+                                <a href="" class="tombolDisabled m-1 disabled">
+                                    <span class="iconify" data-icon="basil:edit-solid" data-width="20"
+                                    style="color: white;" aria-label="Update"></span>
+                                </a>
                                 <a href="" class="tombolHapus m-1" data-bs-toggle="modal"
                                 data-bs-target="#deletePrediksi_{{ $item->kode_pertanian }}">
-                                    <span class="iconify" data-icon="material-symbols:delete" data-width="20"  style="color: white;"></span>
+                                    <span class="iconify" data-icon="material-symbols:delete" data-width="20"  style="color: white;" aria-label="Delete"></span>
                                 </a>
+                                @endif
                             </td>
                         </tr>
                         @include('admin.modal_prediksi.edit_prediksi')
@@ -203,21 +258,27 @@
                     @endforeach
                 </tbody>
             </table>
+            <hr class="">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="">
+                    <small>{{ $dataPertanian->count()  }} Data dari Halaman
+                    {{ $dataPertanian->currentPage() }} </small>
+                </div>
+                <div class=""> {{ $dataPertanian -> links() }}</div>
+            </div>
         </div>
     </div>
 </div>
 @include('admin.modal_prediksi.add_prediksi')
 
-
-
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 <script>
     $(document).ready(function() {
+
         //Tambah Data Prediksi
         $(document).on('submit', '#tambahPrediksiForm', function(e){
             e.preventDefault();
@@ -266,7 +327,7 @@
         });
 
         //tampil Edit Data Prediksi
-        $(document).on('submit', '#updatePrediksiForm', function(e){
+        $(document).on('submit', '#updatePrediksiFormAdmin', function(e){
             e.preventDefault();
             var id_variabel = $('#id_variabel').val();
             var data = $(this).serializeArray();
@@ -289,7 +350,6 @@
                 error: function(err) {
                     console.log(err);
                     let error = err.responseJSON;
-                    $('.errMsgContainerNilai+{{ $variabel->id }}').empty();
                     $('.errMsgContainerTglTanam').empty();
                     if(error.errors.tgl_tanam){
                         $('.errMsgContainerTglTanam').append('<span class="text-danger">'+'*'+error.errors.tgl_tanam+'</span>'+'<br>')

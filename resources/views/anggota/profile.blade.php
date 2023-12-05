@@ -4,36 +4,42 @@
 
 <!-- Start: Sidebar -->
 @section('card-profile')
+<a href="{{ route('profile-anggota') }}" class="to-profile">
     <div class="d-flex card-profile p-2">
         <div class="avatar-profile">
-            <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
+            @if(Auth::user()->foto != null)
+            <img src="{{ asset('img/profile/' .Auth::user()->foto ) }}"  style="aspect-ratio: 1 / 1; object-fit: cover">
+            @else
+            <img src="{{ asset('Template-Dashboard/img/default-profile.jpg') }}"  alt="" style="aspect-ratio: 1 / 1; object-fit: cover">
+            @endif
         </div>
         <div class="info-profile">
-            @if (Auth::user()->role = 1)
-                <small>Admin</small>
-            @else
-                <small>Anggota</small>
-            @endif
-            <br>
             @php
                 $data = Auth::user()->name;
                 $name = implode(" ", array_slice(explode(" ", $data), 0, 2));
             @endphp
             <span>{{ $name }}</span>
+            <br>
+            @if (Auth::user()->role = 0)
+                <small>Admin</small>
+            @else
+                <small>Anggota</small>
+            @endif
         </div>
     </div>
+</a>
 @endsection
 
 @section('dashboard')
-<li class="sidebar-menu-item ">
-    <a href="{{ route('dashboard-anggota') }}">
-        <i class="ri-dashboard-fill sidebar-menu-item-icon"></i>
-        Dashboard
-    </a>
-</li>
+    <li class="sidebar-menu-item ">
+        <a href="{{ route('dashboard-anggota') }}">
+            <i class="ri-dashboard-fill sidebar-menu-item-icon"></i>
+            Dashboard
+        </a>
+    </li>
 @endsection
 
-@section('pertanian')
+@section('data_pertanian')
     <li class="sidebar-menu-item ">
         <a href="{{ route('pertanian-anggota') }}" class="">
             <i class="ri-file-text-fill sidebar-menu-item-icon"></i>
@@ -42,11 +48,20 @@
     </li>
 @endsection
 
-@section('prediksi')
-    <li class="sidebar-menu-item">
+@section('data_prediksi')
+    <li class="sidebar-menu-item ">
         <a href="{{ route('prediksi-anggota') }}" class="">
             <i class="ri-file-chart-fill sidebar-menu-item-icon"></i>
             Prediksi Panen
+        </a>
+    </li>
+@endsection
+
+@section('data_akurasi_fuzzy')
+    <li class="sidebar-menu-item ">
+        <a href="{{ route('d_akurasi_fuzzy_anggota') }}" class="">
+            <iconify-icon icon="icon-park-solid:data-screen" class="sidebar-menu-item-icon"></iconify-icon>
+            Akurasi Fuzzy
         </a>
     </li>
 @endsection
@@ -70,108 +85,61 @@
 
 <!-- Start: Content -->
 @section('content')
-<div class="">
-    <div class="card card-body ml-1">
-        <div class="row gx-4 mb-4 ">
-            <div class="col-auto">
-                <div class="avatar avatar-xl position-relative">
-                <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="profile_image"
-                class="border-1 shadow-sm rounded-2" style="width: 80px">
-                </div>
-            </div>
-            <div class="col-auto my-auto">
-                <div class="h-100">
-                    <h5 class="mb-1">
-                        {{ $name }}
-                    </h5>
-                    <p class="mb-0 font-weight-normal text-sm">
-                        NIK: {{ Auth::user()->nik }}
-                    </p>
-                </div>
+<div class="d-lg-flex">
+    <div class="card m-1">
+        <div class="card-body" style="width: 250px">
+            <li class="mb-2 menu-profile">
+                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editProfile">
+                    <i class="ri-settings-3-fill"></i>
+                    Ubah Profile
+                </a>
+            </li>
+            <li class="menu-profile">
+                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editPasswrod">
+                    <i class="ri-lock-password-fill"></i>
+                    Ubah Password
+                </a>
+            </li>
+        </div>
+    </div>
+    <div class="card m-1">
+        <div class="card-body d-lg-flex align-items-center justify-content-center">
+            <div class="image-profile" style="margin-right: 10px;">
+                <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" class="rounded-2" alt="" style="width: 200px">
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-            <div class="card card-plain h-100">
-                <div class="card-header bg-primary text-light">
-                    <div class="row">
-                        <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">Information</h6>
-                        </div>
-                        <div class="col-md-4 text-end">
-                            <a href="javascript:;">
-                                <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
-                            </a>
-                        </div>
-                    </div>
+            <hr>
+        <div class="card-body d-lg-flex justify-content-center">
+            <div class="info-profil row" >
+                <div class="col-md-12 mb-3">
+                    <label for="" class="labels mb-1">Nama</label>
+                    <input type="text" name="" id="" class="form-control bg-light"
+                    value="{{ Auth::user()->name }}" readonly>
                 </div>
-                <div class="card-body p-3">
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Nama :</strong> &nbsp; {{ Auth::user()->name }}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm">
-                            <strong class="text-dark">NIK :</strong> &nbsp; {{ Auth::user()->nik }}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm">
-                            <strong class="text-dark">No HP :</strong> &nbsp; {{ Auth::user()->no_hp }}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm">
-                            <strong class="text-dark">Alamat :</strong> &nbsp; {{ Auth::user()->alamat }}</li>
-                        <li class="list-group-item border-0 ps-0 pb-0">
-                        <strong class="text-dark text-sm">Email :</strong> &nbsp; {{ Auth::user()->email }}</li>
-                    </ul>
-                    <hr class="horizontal gray-light my-4">
-                    <div class="row g-3 d-flex">
-                        <div class="col-12">
-                            <a href="#"
-                                class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
-                                <div>
-                                    <i class="ri-bar-chart-2-fill summary-icon bg-indigo mb-2"></i>
-                                </div>
-                                <div class="info-card">
-                                    <p>Total Produksi</p>
-                                    <div class="info-card-satuan">
-                                        <h4>100</h4>
-                                        <p>Ton</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-12">
-                            <a href="#"
-                                class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
-                                <div>
-                                    <i class="ri-line-chart-fill summary-icon bg-success mb-2"></i>
-                                </div>
-                                <div class="info-card">
-                                    <p>Produktivias</p>
-                                    <div class="info-card-satuan">
-                                        <h4>100</h4>
-                                        <p>Ha/Ton</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-12">
-                            <a href="#"
-                                class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
-                                <div>
-                                    <i class="ri-plant-fill summary-icon bg-danger mb-2"></i>
-                                </div>
-                                <div class="info-card">
-                                    <p>Total Penanaman</p>
-                                    <div class="info-card-satuan">
-                                        <h4>100</h4>
-                                        <p>Tanam</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                <div class="col-md-12 mb-3">
+                    <label for="" class="labels mb-1">NIK (Nomor Induk Kependudukan)</label>
+                    <input type="text" name="" id="" class="form-control bg-light" readonly
+                    value="{{ Auth::user()->nik }}">
                 </div>
-            </div>
+                <div class="col-md-12 mb-3">
+                    <label for="" class="labels mb-1">No Hp</label>
+                    <input type="text" name="" id="" class="form-control bg-light" readonly
+                    value="{{ Auth::user()->no_hp }}">
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="" class="labels mb-1">Email</label>
+                    <input type="text" name="" id="" class="form-control bg-light" readonly
+                    value="{{ Auth::user()->email }}">
+                </div>
+                <div class="col-md-12 ">
+                    <label for="" class="labels mb-1">Alamat</label>
+                    <textarea type="text" name="" id="" class="form-control bg-light" readonly>{{ Auth::user()->alamat }} </textarea>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 @section('script')
 <script>

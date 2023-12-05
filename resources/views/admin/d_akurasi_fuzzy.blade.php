@@ -7,7 +7,11 @@
     <a href="{{ route('profil_admin') }}" class="to-profile">
         <div class="d-flex card-profile p-2">
             <div class="avatar-profile">
-                <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
+                @if(Auth::user()->foto != null)
+                <img src="{{ asset('img/profile/' .Auth::user()->foto ) }}"  style="aspect-ratio: 1 / 1; object-fit: cover">
+                @else
+                <img src="{{ asset('Template-Dashboard/img/default-profile.jpg') }}"  alt="" style="aspect-ratio: 1 / 1; object-fit: cover">
+                @endif
             </div>
             <div class="info-profile">
                 @php
@@ -62,6 +66,11 @@
     </li>
 @endsection
 
+@section('textMasterFuzzy')
+    <hr>
+    <p class="master-text">Master Fuzzy</p>
+@endsection
+
 @section('data-variabel')
     <li class="sidebar-menu-item">
         <a href="{{ route('f_variabel_fuzzy') }}" class="">
@@ -89,6 +98,11 @@
     </li>
 @endsection
 
+@section('textMasterUser')
+    <hr>
+    <p class="master-text">Master User</p>
+@endsection
+
 @section('data-anggota')
     <li class="sidebar-menu-item">
         <a href="{{ route('get-anggota') }}" class="">
@@ -109,39 +123,75 @@
 <!-- End: Sidebar -->
 
 @section('navbar')
-    <nav class="px-3 py-2 bg-white rounded shadow-sm">
+    <nav class="px-3 py-2 bg-white rounded shadow-sm text-muted">
         <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
-        <h5 class="fw-bold mb-0 me-auto p-1">Data Akurasi Fuzzy</h5>
+        <iconify-icon icon="icon-park-solid:data-screen" class="sidebar-menu-item-icon"></iconify-icon>
+        <p class="mb-0 me-auto p-1">Data Akurasi Fuzzy</p>
     </nav>
 @endsection
 
 <!-- Start: Content -->
 @section('content')
-
-<h1>Hasil Fuzzifikasi</h1>
-
-<table class="table table-bordered table-striped table-hover">
-    <thead>
-        <tr>
-            <th >Nama Variabel</th>
-            <th>Fungsi Keanggotaan</th>
-            <th>Nilai Fuzzifikasi</th>
-        </tr>
-    </thead>
-    @foreach ($hasil as $namaVariabel => $himpunan)
-    <tbody>
-        <tr>
-            <td rowspan="2">{{ $namaVariabel }}</td>
-            @foreach ($himpunan as $namaHimpunan => $nilai)
-            <td>{{ $namaHimpunan }}</td>
-                @foreach ($nilai as $jenisKurva => $nilaiFuzzifikasi)
-                <td>{{ $nilaiFuzzifikasi }}</td>
-        </tr>
+<div class="card">
+    <div class="card-header d-lg-flex justify-content-between" style="align-items: center">
+        <div class="d-flex">
+            <iconify-icon icon="icon-park-solid:data-screen" class="sidebar-menu-item-icon"></iconify-icon>
+            <small class="fw-bold">Daftar Data Prediksi</small>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="text-center p-4 rounded"  style="background-color: rgba(151, 187, 84, 0.50); border: 0px">
+            @if($akurasiPrediksi > 100)
+                <h5 class="text-danger">Estimasi Nilai Kesalahan (Error):  100%</h5>
+                <small>Dihitung dengan rumus <b>Mean Absoulute Presentase Error (MAPE)</b> dimana semakin kecil nilai semakin baik</small>
+            @else
+            <h5 class="">Estimasi Nilai Kesalahan (Error):  {{ number_format($akurasiPrediksi, 2, ',', '.') }}%</h5>
+            <small>Dihitung dengan rumus <b>Mean Absoulute Presentase Error (MAPE)</b> dimana semakin kecil nilai semakin baik</small>
+            @endif
+        </div>
+        <div class="table-responsive mt-2">
+            <table class="table table-bordered table-striped table-hover tabelPertanian" id="">
+                <thead style="background-color: #96BA54">
+                    <tr style="color: white">
+                        <th class="text-center" style="middle; width: 15%;">Kode Pertanian</th>
+                        <th class="text-center">Nama Anggota</th>
+                        <th class="text-center">Tanggal Tanam</th>
+                        <th class="text-center">Tanggal Panen</th>
+                        <th class="text-center">Hasil Panen</th>
+                        <th class="text-center">Hasil Prediksi</th>
+                    </tr>
+                </thead>
+                @foreach ( $dataP as $pertanian )
+                @if($pertanian->tgl_panen)
+                <tbody>
+                    <tr>
+                        <td class="text-center" style="vertical-align: middle;">{{ $pertanian->kode_pertanian }}</td>
+                        @php
+                            $data = $pertanian->nama_anggota;
+                            $name = implode(" ", array_slice(explode(" ", $data), 0, 2));
+                        @endphp
+                        <td class=" text-uppercase" style="vertical-align: middle;">{{ $name }}</td>
+                        <td class="text-center" style="vertical-align: middle;">{{ $pertanian->tgl_tanam }}</td>
+                        <td class="text-center" style="vertical-align: middle;">{{ $pertanian->tgl_panen }}</td>
+                        <td class="text-center" style="vertical-align: middle;">
+                            @if($pertanian->jml_produksi == null)
+                            <span style="color: black">-</span>
+                            @endif
+                            {{ $pertanian->jml_produksi }}
+                        </td>
+                        <td class="text-center" style="vertical-align: middle;">
+                            @if($pertanian->jml_prediksi == null)
+                            <span style="color: black">-</span>
+                            @endif
+                            {{ number_format($pertanian->jml_prediksi, 2, ',', '.')}}
+                        </td>
+                    </tr>
+                </tbody>
+                @endif
                 @endforeach
-            @endforeach
-    </tbody>
-    @endforeach
-</table>
-
+            </table>
+        </div>
+    </div>
+</div>
 @endsection
 <!--End: Content -->

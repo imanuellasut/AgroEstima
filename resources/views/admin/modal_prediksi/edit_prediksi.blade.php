@@ -1,5 +1,5 @@
-<div class="modal fade" id="updatePrediksi_{{ $item->kode_pertanian }}" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <form action="" method="post" id="updatePrediksiForm" class="formUpdatePrediksi">
+<div class="modal fade" id="updatePrediksiAdmin_{{ $item->kode_pertanian }}" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <form action="" method="post" id="updatePrediksiFormAdmin" class="formUpdatePrediksiAdmin">
         @csrf
         <div class="modal-dialog">
             <div class="modal-content">

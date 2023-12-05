@@ -42,9 +42,15 @@ class LoginController extends Controller
 
     public function login(Request $request) {
         $input = $request->all();
-        $this->validate($request,[
+        $this->validate($request,
+        [
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'unique:users',
+        ],
+        [
+            'email.required' => 'Email tidak boleh kosong',
+            'email.email' => 'Email tidak valid',
+            'password.required' => 'Password tidak boleh kosong',
         ]);
 
         if (Auth::attempt(['email' => $input["email"], 'password' => $input["password"]])) {

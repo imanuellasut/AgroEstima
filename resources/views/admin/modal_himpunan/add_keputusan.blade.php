@@ -17,7 +17,7 @@
                         <div class="errMsgContainerKurva mb-2"></div>
                         <div class="col-md-12 mb-3">
                             <label class="mb-2">Jenis Kurva</label>
-                            <select class="form-select" aria-label="Default select example" id="jenis_kurva_keputusan" name="jenis_kurva">
+                            <select class="form-select" aria-label="Default select example" id="jenis_kurva_keputusan" name="jenis_kurva" onchange="changeImage(this.value)">
                                 <option selected disabled >-- Pilih Kurva --</option>
                                 <option value="Linier Turun">Linier Turun</option>
                                 <option value="Linier Naik">Linier Naik</option>
@@ -33,6 +33,9 @@
                             <input type="number"  class="form-control" placeholder="Masukan Nilai Atas" id="kep_nilai_atas" name="kep_nilai_atas">
                             <label for="kep_nilai_atas" >Nilai Atas</label>
                         </div>
+                        <div class="col-md-12 mb-3">
+                            <img id="kurvaImage" src="" alt="" style="width: 100%">
+                        </div>
                         <div class="modal-footer">
                             <button class="tombolTambah " id="tambah_keputusan">
                                 <iconify-icon icon="material-symbols:save" style="margin-right: 5px"></iconify-icon>
@@ -46,3 +49,15 @@
         </div>
     </form>
 </div>
+
+<script>
+    function changeImage(value) {
+        var imgSrc = "";
+        if (value == "Linier Turun") {
+            imgSrc = "{{ asset('img/derajat_keanggotaan/Linier Turun.png') }}";
+        } else if (value == "Linier Naik") {
+            imgSrc = "{{ asset('img/derajat_keanggotaan/Linier Naik.png') }}";
+        }
+        document.getElementById("kurvaImage").src = imgSrc;
+    }
+</script>

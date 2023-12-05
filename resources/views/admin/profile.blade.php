@@ -7,7 +7,11 @@
     <a href="{{ route('profil_admin') }}" class="to-profile">
         <div class="d-flex card-profile p-2">
             <div class="avatar-profile">
-                <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" alt="" >
+                @if(Auth::user()->foto != null)
+                <img src="{{ asset('img/profile/' .Auth::user()->foto ) }}"  style="aspect-ratio: 1 / 1; object-fit: cover">
+                @else
+                <img src="{{ asset('Template-Dashboard/img/default-profile.jpg') }}"  alt="" style="aspect-ratio: 1 / 1; object-fit: cover">
+                @endif
             </div>
             <div class="info-profile">
                 @php
@@ -62,6 +66,11 @@
     </li>
 @endsection
 
+@section('textMasterFuzzy')
+    <hr>
+    <p class="master-text">Master Fuzzy</p>
+@endsection
+
 @section('data-variabel')
     <li class="sidebar-menu-item">
         <a href="{{ route('f_variabel_fuzzy') }}" class="">
@@ -87,6 +96,11 @@
             Data Aturan
         </a>
     </li>
+@endsection
+
+@section('textMasterUser')
+    <hr>
+    <p class="master-text">Master User</p>
 @endsection
 
 @section('data-anggota')
@@ -121,13 +135,13 @@
     <div class="card m-1">
         <div class="card-body" style="width: 250px">
             <li class="mb-2 menu-profile">
-                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editProfile">
+                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editProfile_{{ Auth::user()->nik }}">
                     <i class="ri-settings-3-fill"></i>
                     Ubah Profile
                 </a>
             </li>
             <li class="menu-profile">
-                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editPasswrod">
+                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editPasswrod_{{ Auth::user()->nik }}">
                     <i class="ri-lock-password-fill"></i>
                     Ubah Password
                 </a>
@@ -137,7 +151,7 @@
     <div class="card m-1">
         <div class="card-body d-lg-flex align-items-center justify-content-center">
             <div class="image-profile" style="margin-right: 10px;">
-                <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" class="rounded-2" alt="" style="width: 200px">
+                <img src="{{ asset('img/profile/' .Auth::user()->foto ) }}" class="rounded-2" alt="" style="width: 200px; height: auto; aspect-ratio: 1 / 1; object-fit: cover">
             </div>
         </div>
             <hr>
@@ -145,27 +159,27 @@
             <div class="info-profil row" >
                 <div class="col-md-12 mb-3">
                     <label for="" class="labels mb-1">Nama</label>
-                    <input type="text" name="" id="" class="form-control bg-light"
+                    <input type="text"  class="form-control bg-light"
                     value="{{ Auth::user()->name }}" readonly>
                 </div>
                 <div class="col-md-12 mb-3">
                     <label for="" class="labels mb-1">NIK (Nomor Induk Kependudukan)</label>
-                    <input type="text" name="" id="" class="form-control bg-light" readonly
+                    <input type="text"  class="form-control bg-light" readonly
                     value="{{ Auth::user()->nik }}">
                 </div>
                 <div class="col-md-12 mb-3">
                     <label for="" class="labels mb-1">No Hp</label>
-                    <input type="text" name="" id="" class="form-control bg-light" readonly
+                    <input type="text"  class="form-control bg-light" readonly
                     value="{{ Auth::user()->no_hp }}">
                 </div>
                 <div class="col-md-12 mb-3">
                     <label for="" class="labels mb-1">Email</label>
-                    <input type="text" name="" id="" class="form-control bg-light" readonly
+                    <input type="text"  class="form-control bg-light" readonly
                     value="{{ Auth::user()->email }}">
                 </div>
                 <div class="col-md-12 ">
                     <label for="" class="labels mb-1">Alamat</label>
-                    <textarea type="text" name="" id="" class="form-control bg-light" readonly>{{ Auth::user()->alamat }} </textarea>
+                    <textarea type="text" name="alamat" id="alamat" class="form-control bg-light" readonly>{{ Auth::user()->alamat }} </textarea>
                 </div>
             </div>
         </div>
@@ -173,7 +187,8 @@
 </div>
 
 <!-- Modal Edit Profil -->
-    <div class="modal fade" id="editProfile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+@include('admin.modal.edit_profile')
+    {{-- <div class="modal fade" id="editProfile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -219,50 +234,81 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 <!-- Modal Edit password -->
-<div class="modal fade" id="editPasswrod" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Ubah Password</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="">
-                <div class="modal-body">
-                    <div class="info-profil row">
-                        <div class="col-md-12 mb-3 form-floating">
-                            <input type="password" class="form-control" placeholder="Password Lama" id="floatingPass">
-                            <label for="floatingPass" style="margin-left: 10px">Password Baru</label>
-                        </div>
-                        <div class="col-md-12 mb-3 form-floating">
-                            <input type="password" class="form-control" placeholder="Masukan Password" id="floatingPassword">
-                            <label for="floatingPassword" style="margin-left: 10px">Password Baru (ulangi)</label>
+@include('admin.modal.edit_password')
+    {{-- <div class="modal fade" id="editPasswrod" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Ubah Password</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="">
+                    <div class="modal-body">
+                        <div class="info-profil row">
+                            <div class="col-md-12 mb-3 form-floating">
+                                <input type="password" class="form-control" placeholder="Password Lama" id="floatingPass">
+                                <label for="floatingPass" style="margin-left: 10px">Password Baru</label>
+                            </div>
+                            <div class="col-md-12 mb-3 form-floating">
+                                <input type="password" class="form-control" placeholder="Masukan Password" id="floatingPassword">
+                                <label for="floatingPassword" style="margin-left: 10px">Password Baru (ulangi)</label>
+                            </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        <button type="button" class="btn btn-primary">Ubah Password</button>
+                    </div>
+                </form>
+                <div class="form-control p-5 ml-2 mr-2">
+                    <p>Perhatikan</p>
+                    <li>Gunakan password yang unik dan sulit ditebak oleh Orang Lain,
+                        tetapi cukup mudah Anda ingat</li>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary">Ubah Password</button>
-                </div>
-            </form>
-            <div class="form-control p-5 ml-2 mr-2">
-                <p>Perhatikan</p>
-                <li>Gunakan password yang unik dan sulit ditebak oleh Orang Lain,
-                    tetapi cukup mudah Anda ingat</li>
             </div>
         </div>
-    </div>
-</div>
+    </div> --}}
 
-@section('script')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
 <script>
     $(document).ready(function () {
-        $('#example').DataTable();
+        $(document).on('submit', '#formEditProfile', function(e){
+            e.preventDefault();
+
+            var data = new FormData(this);
+            for (var pair of data.entries()) {
+                console.log(pair[0]+ ', ' + pair[1]);
+            }
+
+            $.ajax({
+                url: '{{ route('update_profile_admin') }}',
+                type: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    // tampilkan pesan sukses
+                    alert('Profil berhasil diperbarui');
+                },
+                error: function(error){
+                    console.log(error);
+                    // tampilkan pesan error
+                    alert('Gagal memperbarui profil');
+                }
+            });
+
+        });
     });
 </script>
-@endsection
 
 @endsection
+
 <!--End: Content -->

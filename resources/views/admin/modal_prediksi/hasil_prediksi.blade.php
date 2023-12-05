@@ -62,6 +62,11 @@
     </li>
 @endsection
 
+@section('textMasterFuzzy')
+    <hr>
+    <p class="master-text">Master Fuzzy</p>
+@endsection
+
 @section('data-variabel')
     <li class="sidebar-menu-item">
         <a href="{{ route('f_variabel_fuzzy') }}" class="">
@@ -87,6 +92,11 @@
             Data Aturan
         </a>
     </li>
+@endsection
+
+@section('textMasterUser')
+    <hr>
+    <p class="master-text">Master User</p>
 @endsection
 
 @section('data-anggota')
@@ -133,7 +143,7 @@
         <hr style="max-width: 100%;">
     </div>
     <div class="card-body">
-        <div class="table-responsive mt-0">
+        <div class="table-responsive mt-0 mb-2">
             <table class="table table-bordered table-hover" >
                 <thead style="background-color: #96BA54">
                     <tr style="color: white">
@@ -160,7 +170,7 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card mt-4">
     <div class="card-header d-lg-flex justify-content-between" style="align-items: center">
         <div class="d-flex">
             <iconify-icon icon="icon-park-solid:data-file" class="sidebar-menu-item-icon"></iconify-icon>
@@ -169,7 +179,7 @@
         <hr style="max-width: 100%;">
     </div>
     <div class="card-body">
-        <div class="table-responsive mt-0">
+        <div class="table-responsive mt-0 mb-2">
             <table class="table table-bordered table-hover" >
                 <thead style="background-color: #96BA54">
                     <tr style="color: white;" class="justify-center align-content-center">
@@ -221,7 +231,7 @@
                 <small>Nilai a/a*z = ( {{ rtrim($displayMin, ' + ') }} )/( {{ rtrim($displayZ, ' + ') }} )</small>
             </div>
             <div class="mt-2">
-                <p>Prediksi: {{ $prediksi }}</p>
+                <p>Prediksi: {{ number_format($prediksi, 2, ',', '.' ) }}</p>
         </div>
     </div>
 </div>

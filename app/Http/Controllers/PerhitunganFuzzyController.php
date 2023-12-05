@@ -11,8 +11,8 @@ use App\Models\Fuzzy_Keputusan;
 use App\Models\Variabel_Himpunan;
 use Illuminate\Support\Facades\DB;
 
-class PerhitunganFuzzyController extends Controller
-{
+class PerhitunganFuzzyController extends Controller {
+    //--------------------Prhitungan Fuzzitung Tsukamoto Untuk Anggota-----------------------//
     public function calculateFuzzy(Request $request) {
         $jumlahVariabel = Variabel_Himpunan::count();
         $variabel = Variabel_Himpunan::all();
@@ -51,6 +51,48 @@ class PerhitunganFuzzyController extends Controller
         ]);
 
         return view('admin.modal_prediksi.hasil_prediksi', ['hasil' => $hasilFuzzifikasi, 'dataInferensi' => $hasilInferensi, 'jumlahVariabel' => $jumlahVariabel, 'hasilDefuzzifikasi' => $hasilDefuzzifikasi['hasilDefuzzifikasi'], 'prediksi' => $hasilDefuzzifikasi['prediksi']], compact('variabel'));
+    }
+
+
+    //--------------------Prhitungan Fuzzitung Tsukamoto Untuk Anggota-----------------------//
+    public function calculateFuzzyAnggota(Request $request) {
+        $jumlahVariabel = Variabel_Himpunan::count();
+        $variabel = Variabel_Himpunan::all();
+        $kode_pertanian = $request->input('kode_pertanian');
+
+
+        //-----------------------Perhitungan Fuzzifikasi-----------------------//
+        // Cari data pertanian dengan kode yang sama
+        $dataPertanian = $this->getDataPertanian($kode_pertanian);
+
+        if (!$dataPertanian) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data pertanian tidak ditemukan',
+            ], 404);
+        }
+
+        // Perhitungan Fuzzy Tsukamoto untuk setiap variabel
+        // Implementasi perhitungan tingkat keanggotaan
+        $hasilFuzzifikasi = $this->fuzzifikasi($dataPertanian);
+
+        //-----------------------Perhitungan Inferennsi Fuzzy Tsukamoto-----------------------//
+        // Ambil semua aturan fuzzy
+        $aturanFuzzy = $this->getAturanFuzzy();
+        // Lakukan inferensi
+        $hasilInferensi = $this->inferensi($aturanFuzzy, $hasilFuzzifikasi);
+         // Lakukan defuzzifikasi
+        $hasilDefuzzifikasi = $this->defuzzifikasi($hasilInferensi, $aturanFuzzy);
+
+        // dd($hasilDefuzzifikasi['prediksi']);
+
+        //-----------------------Simpan hasil defuzzifikasi ke Database-----------------------//
+        $fuzzyHasil = Fuzzy_Hasil::where('kode_pertanian', $kode_pertanian);
+        $fuzzyHasil->update([
+            'jml_prediksi' => $hasilDefuzzifikasi['prediksi'],
+        ]);
+
+        return view('anggota.modal_prediksi.hasil_prediksiAnggota', ['hasil' => $hasilFuzzifikasi, 'dataInferensi' => $hasilInferensi, 'jumlahVariabel' => $jumlahVariabel, 'hasilDefuzzifikasi' => $hasilDefuzzifikasi['hasilDefuzzifikasi'], 'prediksi' => $hasilDefuzzifikasi['prediksi']], compact('variabel'));
     }
 
     private function getDataPertanian($kode_pertanian) {

@@ -4,15 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {
     //
     public function indexAnggota(Request $request) {
-        $dataUser = User::all();
-        return view('admin.data_anggota', compact('dataUser'));
+        if ($request->has('perPage')) {
+            session(['perPage' => $request->get('perPage')]);
+        }
+
+         // Gunakan nilai default jika 'perPage' tidak disetel
+        $perPage = session('perPage', 10);
+
+        $dataUser = User::latest()->paginate($perPage);
+        return view('admin.data_anggota', ['perPage' => $perPage], compact('dataUser'));
     }
 
     public function addUser(Request $request) {
@@ -84,8 +92,26 @@ class UserController extends Controller
         return back()->with('success', 'Data Anggota Berhasil Diubah!');
     }
 
-    public function updateProfile(Request $request, User $user){
+    public function updateProfile(Request $request){
+        $user = User::find(Auth::user()->id);
 
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $extension = $file->getClientOriginalExtension();
+            $name = $user->nik . '.' . $extension;
+            $file->move(public_path(). '/img/profile/', $name);
+            $user->foto = $name;
+        }
+
+        $user->name = $request->input('name');
+        $user->nik = $request->input('nik');
+        $user->no_hp = $request->input('no_hp');
+        $user->alamat = $request->input('alamat');
+        $user->email = $request->input('email');
+
+        $user->save();
+
+        return response()->json(['success' => 'Profil berhasil diperbarui']);
     }
 
     public function deleteUser($id) {
@@ -93,5 +119,6 @@ class UserController extends Controller
         $dataUser->delete();
         return redirect()->route('get-anggota')->with('success', 'Data Anggota Berhasil Dihapus!');
     }
+
 
 }

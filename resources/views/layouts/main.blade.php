@@ -25,7 +25,6 @@
 </head>
 
 <body>
-
     <!-- start: Sidebar -->
     <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
         <div class="d-flex align-items-center p-3">
@@ -43,8 +42,8 @@
             @yield('data_prediksi')
 
             @yield('data_akurasi_fuzzy')
-            <hr>
-            <p class="master-text">Master Fuzzy</p>
+
+            @yield('textMasterFuzzy')
 
             @yield('data-variabel')
 
@@ -54,8 +53,7 @@
 
             @yield('kriteria')
 
-            <hr>
-            <p class="master-text">Master User</p>
+            @yield('textMasterUser')
 
             @yield('data-anggota')
 
@@ -98,7 +96,6 @@
     <script src="{{ asset('Template-Dashboard/js/jquery.min.js') }}"></script>
     <script src="{{ asset('Template-Dashboard/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('Template-Dashboard/js/script.js') }}"></script>
-
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

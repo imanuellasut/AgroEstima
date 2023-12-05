@@ -34,6 +34,7 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
 
     // CRUD DATA PERTANIAN
     Route::get('/admin/pertanian', [DataPertanianController::class, 'v_pertanian'])->name('d_pertanian_admin');
+    Route::post('/admin/perbarui-pertanian', [DataPertanianController::class, 'editPertanian'])->name('perbarui_pertanian');
 
     // CRUD DATA PREDIKSI
     Route::get('/admin/prediksi', [DataPertanianController::class, 'v_prediksi'])->name('d_prediksi_admin');
@@ -76,15 +77,24 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
 
     //DATA PROFILE
     Route::get('/admin/profile', [AdminController::class, 'v_profile'])->name('profil_admin');
+    Route::post('/admin/perbarui-profile', [UserController::class, 'updateProfile'])->name('update_profile_admin');
 });
 
 //Route Untuk Anggota
 Route::middleware(['auth', 'check-role:anggota'])->group(function(){
-    Route::get('/anggota/dashboard', [AnggotaController::class, 'index'])->name('dashboard-anggota');
+    Route::get('/anggota/dashboard', [AnggotaController::class, 'indexAnggota'])->name('dashboard-anggota');
     Route::get('/anggota/pertanian', [AnggotaController::class, 'v_pertanian'])->name('pertanian-anggota');
+    Route::post('/anggota/perbarui-pertanian', [DataPertanianController::class, 'editPertanian'])->name('perbarui_pertanian_anggota');
 
     // CRUD DATA PREDIKSI
     Route::get('/anggota/prediksi', [AnggotaController::class, 'v_prediksi'])->name('prediksi-anggota');
+    Route::post('/anggota/tambah-prediksi', [DataPertanianController::class, 'tambahPrediksi'])->name('tambah_prediksi_anggota');
+    Route::post('/anggota/perbarui-prediksi', [DataPertanianController::class, 'updatePrediksi'])->name('perbarui_prediksi_anggota');
+    Route::delete('/anggota/hapus-prediksi', [DataPertanianController::class, 'deletePrediksi'])->name('hapus_prediksi_anggota');
+    Route::post('/anggota/hitung-prediksi', [PerhitunganFuzzyController::class, 'calculateFuzzyAnggota'])->name('hitung_prediks_anggota');
+
+    //Akurasi Fuzzy Tsukamoto
+    Route::get('/anggota/akurasi-fuzzy', [AnggotaController::class, 'v_akurasi_fuzzy'])->name('d_akurasi_fuzzy_anggota');
 
     // DATA PROFILE
     Route::get('/anggota/profile', [AnggotaController::class, 'v_profile'])->name('profile-anggota');
