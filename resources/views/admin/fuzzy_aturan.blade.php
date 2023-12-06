@@ -195,7 +195,7 @@
                         <tr style="color: white;" class="justify-center align-content-center">
                             <th scope="col" style="text-align: center; width: 5%; vertical-align: middle;" rowspan="2">Kode</th>
                             <th scope="col" style="text-align: center; vertical-align: middle;" colspan="{{ $jumlahVariabel }}">Aturan</th>
-                            <th scope="col" style="text-align: center; vertical-align: middle;" rowspan="2">Hasil Panen</th>
+                            <th scope="col" style="text-align: center; vertical-align: middle;" rowspan="2">Hasil Prediksi</th>
                             <th scope="col" style="text-align: center; vertical-align: middle;" rowspan="2">Aksi</th>
                         </tr>
                         <tr  style="color: white; "class="justify-center align-content-center">

@@ -178,6 +178,7 @@ class PerhitunganFuzzyController extends Controller {
             $minValues = [];
             $aturanValues = [];
 
+            // Cari nilai minimum dari setiap aturan
             for ($i = 0; $i < count($id_variabel); $i++) {
                 if (isset($hasilFuzzifikasi[$nama_variabel[$i]][$nama_himpunan[$i]])) {
                     foreach ($hasilFuzzifikasi[$nama_variabel[$i]][$nama_himpunan[$i]] as $value) {
@@ -206,6 +207,7 @@ class PerhitunganFuzzyController extends Controller {
         $totalMin = 0;
         $totalAZ = 0;
 
+        // Hitung nilai z untuk setiap aturan
         foreach ($hasilInferensi as $kodeAturan => $inferensi) {
             $min = $inferensi['min'];
 
@@ -272,21 +274,9 @@ class PerhitunganFuzzyController extends Controller {
 
         // Hitung nilai z berdasarkan jenis kurva dan nilai min
         if ($jenis_kurva == 'Linier Turun') {
-            if ($min == 1) {
-                $nilaiZ = $kep_nilai_atas;
-            } elseif ($min == 0) {
-                $nilaiZ = $kep_nilai_bawah;
-            } else {
-                $nilaiZ = $kep_nilai_atas - ($min * ($kep_nilai_atas - $kep_nilai_bawah));
-            }
+            $nilaiZ = $kep_nilai_atas - ($min * ($kep_nilai_atas - $kep_nilai_bawah));
         } elseif ($jenis_kurva == 'Linier Naik') {
-            if ($min == 0) {
-                $nilaiZ = $kep_nilai_bawah;
-            } elseif ($min == 1) {
-                $nilaiZ = $kep_nilai_atas;
-            } else {
-                $nilaiZ = $min * ($kep_nilai_atas - $kep_nilai_bawah) + $kep_nilai_bawah;
-            }
+            $nilaiZ = $min * ($kep_nilai_atas - $kep_nilai_bawah) + $kep_nilai_bawah;
         } else {
             $nilaiZ = null;
         }

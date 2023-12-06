@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Auth;
 
 class LoginController extends Controller
 {
@@ -45,13 +46,15 @@ class LoginController extends Controller
         $this->validate($request,
         [
             'email' => 'required|email',
-            'password' => 'unique:users',
+            'password' => 'required',
         ],
         [
             'email.required' => 'Email tidak boleh kosong',
             'email.email' => 'Email tidak valid',
             'password.required' => 'Password tidak boleh kosong',
         ]);
+
+        // dd($input);
 
         if (Auth::attempt(['email' => $input["email"], 'password' => $input["password"]])) {
             if (Auth::user()->role == "admin") {
@@ -64,9 +67,7 @@ class LoginController extends Controller
         } else {
             return redirect()
             ->route('login')
-            ->with('error','Email-Address And Password Are Wrong.');
+            ->with('error','Tidak dapat login, silahkan cek Email dan password anda');
         }
-
     }
-
 }

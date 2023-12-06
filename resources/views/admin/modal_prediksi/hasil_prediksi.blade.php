@@ -228,7 +228,7 @@
                 @endforeach
                 @endforeach
 
-                <small>Nilai a/a*z = ( {{ rtrim($displayMin, ' + ') }} )/( {{ rtrim($displayZ, ' + ') }} )</small>
+                <small>Nilai a*Z/a = ( {{ rtrim($displayZ, ' + ') }} )/( {{ rtrim($displayMin, ' + ') }} )</small>
             </div>
             <div class="mt-2">
                 <p>Prediksi: {{ number_format($prediksi, 2, ',', '.' ) }}</p>
