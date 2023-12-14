@@ -91,6 +91,17 @@ class DataPertanianController extends Controller
             session(['perPage' => $request->get('perPage')]);
         }
 
+        $tgl_tanam = Data_Pertanian::join('users', 'users.id', '=', 'data_pertanian.id_user')
+        ->join('variabel_himpunan', 'variabel_himpunan.id', '=', 'data_pertanian.id_variabel')
+        ->join('hasil_fuzzy', 'hasil_fuzzy.kode_pertanian', '=', 'data_pertanian.kode_pertanian')
+        ->select(
+                DB::raw('GROUP_CONCAT(DISTINCT YEAR(data_pertanian.tgl_tanam)) as tahun_tanam'))
+        ->get();
+
+        $tgl_tanam = explode(',', $tgl_tanam[0]->tahun_tanam);
+
+        // dd($tgl_tanam);
+
         $dataPertanian = Data_Pertanian::join('users', 'users.id', '=', 'data_pertanian.id_user')
         ->join('variabel_himpunan', 'variabel_himpunan.id', '=', 'data_pertanian.id_variabel')
         ->join('hasil_fuzzy', 'hasil_fuzzy.kode_pertanian', '=', 'data_pertanian.kode_pertanian')
@@ -110,7 +121,7 @@ class DataPertanianController extends Controller
 
         // dd($dataPertanian);
 
-        return view('admin.d_prediksi', ['perPage' => $perPage, 'tahun_tanam' => $tahun_tanam], compact('dataPertanian', 'variabels'));
+        return view('admin.d_prediksi', ['perPage' => $perPage, 'tahun_tanam' => $tahun_tanam], compact('dataPertanian', 'variabels' ,'tgl_tanam'));
     }
 
     //-----------------------Tambah Data Pertanian dan Hasil Fuzzy-----------------------//

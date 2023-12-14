@@ -132,7 +132,7 @@
 
 <!-- Start: Content -->
 @section('content')
-<div class="card">
+<div class="card dataCard">
     <div class="card-header d-lg-flex justify-content-between" style="align-items: center">
         <div class="d-flex">
             <iconify-icon icon="icon-park-solid:data-file" class="sidebar-menu-item-icon"></iconify-icon>
@@ -160,18 +160,21 @@
                     </form>
                 </div>
                 <div class="">
-                    <small>Data per halaman</small>
+                    <small>Data</small>
                 </div>
             </div>
-            <div class="d-flex justify-content-end">
-                <div class="mr-5" style="margin-right: 4px">
-                    <form method="GET" action="{{ route('d_prediksi_admin') }}">
+            <div class="d-flex justify-content-end align-items-center">
+                <div class="">
+                    <span>Filter : </span>
+                </div>
+                <div class=" d-flex"  style="margin-left: 4px">
+                    <form method="GET" action="{{ route('d_prediksi_admin') }}" class="ml-2">
                         <select name="tahun_tanam" onchange="this.form.submit()" class="form-select">
                             <option value="" disabled selected>Tahun Tanam</option>
                             <option value="">Semua Data</option>
-                            <option value="2021" {{ (old('tahun_tanam') ? old('tahun_tanam') : $tahun_tanam) == 2021 ? 'selected' : '' }}>2021</option>
-                            <option value="2022" {{ (old('tahun_tanam') ? old('tahun_tanam') : $tahun_tanam) == 2022 ? 'selected' : '' }}>2022</option>
-                            <option value="2023" {{ (old('tahun_tanam') ? old('tahun_tanam') : $tahun_tanam) == 2023 ? 'selected' : '' }}>2023</option>
+                            @foreach ($tgl_tanam as $tahun )
+                                <option value="{{ $tahun }}" {{ (old('tahun_tanam') ? old('tahun_tanam') : $tahun_tanam) == $tahun ? 'selected' : '' }}>{{ $tahun }}</option>
+                            @endforeach
                         </select>
                     </form>
                 </div>

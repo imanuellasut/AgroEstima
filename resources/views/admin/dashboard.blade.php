@@ -135,11 +135,8 @@
     <!-- start: Summary -->
     <div class="row g-3">
         <div class="col-12 col-sm-6 col-lg-3">
-            <a href="#"
-                class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
-                <div>
-                    <i class="ri-plant-fill summary-icon bg-danger mb-2"></i>
-                </div>
+            <a href="#"  class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
+                <div> <i class="ri-plant-fill summary-icon bg-danger mb-2"></i> </div>
                 <div class="info-card">
                     <p>Total Tanam</p>
                     <div class="info-card-satuan">
@@ -150,11 +147,8 @@
             </a>
         </div>
         <div class="col-12 col-sm-6 col-lg-3">
-            <a href="#"
-                class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
-                <div>
-                    <i class="ri-bar-chart-2-fill summary-icon bg-indigo mb-2"></i>
-                </div>
+            <a href="#"  class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
+                <div> <i class="ri-bar-chart-2-fill summary-icon bg-indigo mb-2"></i> </div>
                 <div class="info-card">
                     <p>Total Panen</p>
                     <div class="info-card-satuan">
@@ -175,8 +169,7 @@
             </a>
         </div>
         <div class="col-12 col-sm-6 col-lg-3">
-            <a href="#"
-                class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+            <a href="#" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                 <div>
                     <i class="ri-database-2-fill summary-icon bg-primary mb-2"></i>
                 </div>
@@ -186,7 +179,7 @@
                         // $ton = round($ton, 2);
                         $ton = number_format($ton, 2, ',' , '.');
                     @endphp
-                    <p>Total Prediksi</p>
+                    <p class="text-end">Total Prediksi</p>
                     <div class="info-card-satuan">
                         @if($totalPrediksi > 100000)
                         <h4>{{ $ton }}</h4>
@@ -200,8 +193,7 @@
             </a>
         </div>
         <div class="col-12 col-sm-6 col-lg-3 card-dashboard">
-            <a href="#"
-                class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
+            <a href="#"  class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
                 <div>
                     <i class="ri-line-chart-fill summary-icon bg-success mb-2"></i>
                 </div>
@@ -240,7 +232,7 @@
     </div>
     <!-- end: Graph -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

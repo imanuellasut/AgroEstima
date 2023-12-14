@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
@@ -120,5 +121,18 @@ class UserController extends Controller
         return redirect()->route('get-anggota')->with('success', 'Data Anggota Berhasil Dihapus!');
     }
 
+    public function cariData(Request $request){
+        $query = $request->input('query');
+
+        $dataUser = DB::table('users')
+        ->where('name', 'LIKE', '%' . $query . '%')
+        ->orWhere('nik', 'LIKE', '%' . $query . '%')
+        ->orWhere('no_hp', 'LIKE', '%' . $query . '%')
+        ->orWhere('email', 'LIKE', '%' . $query . '%')
+        ->orWhere('role', 'LIKE', '%' . $query . '%')
+        ->paginate(10);
+
+        return response()->json($dataUser);
+    }
 
 }

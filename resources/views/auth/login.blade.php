@@ -102,7 +102,7 @@
             "progressBar": true,
         }
         @if (Session::has('error'))
-            toastr.success('{{ Session::get('error') }}')
+            toastr.error('{{ Session::get('error') }}')
         @endif
     </script>
 </html>

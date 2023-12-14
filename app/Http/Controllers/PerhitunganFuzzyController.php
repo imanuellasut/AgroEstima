@@ -112,7 +112,7 @@ class PerhitunganFuzzyController extends Controller {
             ->first();
     }
 
-    private function fuzzifikasi($dataPertanian){
+    private function fuzzifikasi($dataPertanian) {
         $id_variabel = explode(',', $dataPertanian->id_variabel);
         $nilai_inputan = explode(',', $dataPertanian->nilai_inputan);
         $hasilFuzzifikasi = [];
@@ -122,7 +122,6 @@ class PerhitunganFuzzyController extends Controller {
             $himpunan = Fuzzy_Himpunan::where('id_variabel', $id_variabel[$i])->get();
 
             foreach ($himpunan as $h) {
-
                 $jenis_kurva = $h->jenis_kurva;
                 $nilai_bawah = $h->nilai_bawah;
                 $nilai_atas = $h->nilai_atas;
@@ -163,7 +162,7 @@ class PerhitunganFuzzyController extends Controller {
                 DB::raw('GROUP_CONCAT(fuzzy_keputusan.id_keputusan ORDER BY fuzzy_aturan.id)  as id_keputusan'))
             ->groupBy('fuzzy_aturan.kode_aturan')
             ->get()
-            ->toArray(); // Menambahkan ini untuk mengubah hasil menjadi array
+            ->toArray(); // Untuk mengubah hasil menjadi array
     }
 
     private function inferensi($aturanFuzzy, $hasilFuzzifikasi) {

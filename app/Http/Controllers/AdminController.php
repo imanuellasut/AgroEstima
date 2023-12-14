@@ -124,18 +124,18 @@ class AdminController extends Controller
 
         for($i = 0; $i < $n; $i++){
             if ($Produksi[$i] != 0) {
-                $mape += abs(($Produksi[$i] - $Prediksi[$i]) / $Produksi[$i]);
+                $mape += abs(($Produksi[$i] - $Prediksi[$i]) / $Produksi[$i])*100;
             }
         }
 
         if ($n != 0) {
-            $hasilMape = ($mape / $n) * 100;
+            $hasilMape = $mape / $n;
         } else {
             $hasilMape = 0;
         }
 
         $akurasiPrediksi = round($hasilMape, 2);
-
+        // dd($mape, $n, $hasilMape);
 
         return view('admin.d_akurasi_fuzzy', ['akurasiPrediksi' => $akurasiPrediksi], compact('dataVariabel', 'dataPertanian', 'dataP'));
     }
