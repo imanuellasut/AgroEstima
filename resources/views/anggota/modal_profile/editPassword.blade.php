@@ -1,4 +1,4 @@
-<div class="modal fade" id="editPasswrod_{{ Auth::user()->nik }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="editPasswrodAnggota_{{ Auth::user()->nik }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="clickPass">Ubah Password</button>
+                    <button type="button" class="tombolEdit" id="clickPassAnggota">Perbaharui</button>
                     <button type="button" class="tombolBatal" data-bs-dismiss="modal">Kembali</button>
                 </div>
             </form>

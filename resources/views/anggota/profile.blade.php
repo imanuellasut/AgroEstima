@@ -89,13 +89,13 @@
     <div class="card m-1">
         <div class="card-body" style="width: 250px">
             <li class="mb-2 menu-profile">
-                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editProfile">
+                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editProfileAnggota_{{ Auth::user()->nik }}">
                     <i class="ri-settings-3-fill"></i>
                     Ubah Profile
                 </a>
             </li>
             <li class="menu-profile">
-                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editPasswrod">
+                <a href="" class="" data-bs-toggle="modal" data-bs-target="#editPasswrodAnggota_{{ Auth::user()->nik }}">
                     <i class="ri-lock-password-fill"></i>
                     Ubah Password
                 </a>
@@ -104,9 +104,15 @@
     </div>
     <div class="card m-1">
         <div class="card-body d-lg-flex align-items-center justify-content-center">
+            @if(Auth::user()->foto != null)
             <div class="image-profile" style="margin-right: 10px;">
-                <img src="{{ asset('Template-Dashboard/img/profile-reggy.jpg') }}" class="rounded-2" alt="" style="width: 200px">
+                <img src="{{ asset('img/profile/' .Auth::user()->foto ) }}" class="rounded-2" alt="" style="width: 200px; height: auto; aspect-ratio: 1 / 1; object-fit: cover">
             </div>
+            @else
+            <div class="image-profile" style="margin-right: 10px;">
+                <img src="{{ asset('Template-Dashboard/img/default-profile.jpg' ) }}" class="rounded-2" alt="" style="width: 200px; height: auto; aspect-ratio: 1 / 1; object-fit: cover">
+            </div>
+            @endif
         </div>
             <hr>
         <div class="card-body d-lg-flex justify-content-center">
@@ -140,14 +146,107 @@
     </div>
 </div>
 
+@include('anggota.modal_profile.editProfile')
+@include('anggota.modal_profile.editPassword')
 
-@section('script')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
 <script>
     $(document).ready(function () {
-        $('#example').DataTable();
+        $(document).on('submit', '#formEditProfileAnggota', function(e){
+            e.preventDefault();
+
+            var data = new FormData(this);
+            for (var pair of data.entries()) {
+                console.log(pair[0]+ ', ' + pair[1]);
+            }
+
+            $.ajax({
+                url: '{{ route('update_profile_anggota') }}',
+                type: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    $('.btn-close').click();
+                    //AutoReload
+                    setTimeout(function() {
+                        location.reload();
+                    }, 500);
+                    // tampilkan pesan success
+                    toastr["success"]("Profil berhasil diubah")
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                    };
+                },
+                error: function(error){
+                    console.log(error);
+                    // tampilkan pesan error
+                    toastr["success"]("Profil tidak berhasil diubah")
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                    };
+                }
+            });
+        });
+
+        $(document).on('click', '#clickPassAnggota', function(e){
+            e.preventDefault();
+
+            let newPassword = $('#new_password').val();
+            let confirmPassword = $('#confirm_new_password').val();
+
+            if (newPassword !== confirmPassword) {
+                toastr["error"]("Password tidak sama")
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                };
+                return;
+            }
+
+            console.log(newPassword, confirmPassword);
+
+            $.ajax({
+                url: '{{ route('update_password_anggota') }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    new_password: newPassword,
+                    new_password_confirmation: confirmPassword
+                },
+                success: function(response){
+                    $('.btn-close').click();
+                    //AutoReload
+                    setTimeout(function() {
+                        location.reload();
+                    }, 500);
+                    // tampilkan pesan success
+                    toastr["success"]("Password berhasil diubah")
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                    };
+                },
+                error: function(error){
+                    console.log(error);
+                    // tampilkan pesan error
+                    toastr["error"]("Password tidak berhasil diubah dikarenakan jumlah password kurang dari 8 karakter")
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                    };
+                }
+            });
+        });
     });
 </script>
-@endsection
 
 @endsection
 <!--End: Content -->

@@ -135,4 +135,16 @@ class UserController extends Controller
         return response()->json($dataUser);
     }
 
+    public function ubahPassword(Request $request){
+        $request->validate([
+            'new_password' => 'required|min:8|confirmed',
+        ]);
+
+        $user = User::find(Auth::user()->id);
+        $user->password = Hash::make($request->input('new_password'));
+        $user->save();
+
+        return response()->json(['success' => 'Password berhasil diperbarui']);
+    }
+
 }

@@ -295,16 +295,78 @@
                 contentType: false,
                 processData: false,
                 success: function(response){
-                    // tampilkan pesan sukses
-                    alert('Profil berhasil diperbarui');
+                    $('.btn-close').click();
+                    //AutoReload
+                    setTimeout(function() {
+                        location.reload();
+                    }, 500);
+                    // tampilkan pesan success
+                    toastr["success"]("Profil berhasil diubah")
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                    };
                 },
                 error: function(error){
                     console.log(error);
                     // tampilkan pesan error
-                    alert('Gagal memperbarui profil');
+                    toastr["success"]("Profil tidak berhasil diubah")
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                    };
                 }
             });
+        });
 
+        $(document).on('click', '#clickPass', function(e){
+            e.preventDefault();
+
+            let newPassword = $('#new_password').val();
+            let confirmPassword = $('#confirm_new_password').val();
+
+            if (newPassword !== confirmPassword) {
+                toastr["error"]("Password tidak sama")
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                };
+                return;
+            }
+
+            console.log(newPassword, confirmPassword);
+
+            $.ajax({
+                url: '{{ route('update_password_admin') }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    new_password: newPassword,
+                    new_password_confirmation: confirmPassword
+                },
+                success: function(response){
+                    $('.btn-close').click();
+                    //AutoReload
+                    setTimeout(function() {
+                        location.reload();
+                    }, 500);
+                    // tampilkan pesan success
+                    toastr["success"]("Password berhasil diubah")
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                    };
+                },
+                error: function(error){
+                    console.log(error);
+                    // tampilkan pesan error
+                    toastr["error"]("Password tidak berhasil diubah")
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true,
+                    };
+                }
+            });
         });
     });
 </script>

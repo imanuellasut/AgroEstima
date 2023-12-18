@@ -78,7 +78,8 @@ Route::middleware(['auth', 'check-role:admin'])->group(function(){
 
     //DATA PROFILE
         Route::get('/admin/profile', [AdminController::class, 'v_profile'])->name('profil_admin');
-        Route::post('/admin/perbarui-profile', [UserController::class, 'updateProfile'])->name('update_profile_admin');
+        Route::post('/admin/profile/perbarui-profile', [UserController::class, 'updateProfile'])->name('update_profile_admin');
+        Route::post('admin/profile/perbarui-password', [UserController::class, 'ubahPassword'])->name('update_password_admin');
 });
 
 //Route Untuk Anggota
@@ -99,6 +100,8 @@ Route::middleware(['auth', 'check-role:anggota'])->group(function(){
 
     // DATA PROFILE
         Route::get('/anggota/profile', [AnggotaController::class, 'v_profile'])->name('profile-anggota');
+        Route::post('/admin/profile/perbarui-profile', [UserController::class, 'updateProfile'])->name('update_profile_anggota');
+        Route::post('admin/profile/perbarui-password', [UserController::class, 'ubahPassword'])->name('update_password_anggota');
 });
 
 
